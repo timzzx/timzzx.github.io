@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 淡淡忧愁</title>
-    <link>https://timzzx.github.io/tags/</link>
+    <link>https://timx.cn/tags/</link>
     <description>Recent content in Tags on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 03 Jul 2018 17:41:40 +0800</lastBuildDate>
     
-	<atom:link href="https://timzzx.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://timx.cn/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Four</title>
-      <link>https://timzzx.github.io/tags/four/</link>
+      <link>https://timx.cn/tags/four/</link>
       <pubDate>Tue, 03 Jul 2018 17:41:40 +0800</pubDate>
       
-      <guid>https://timzzx.github.io/tags/four/</guid>
+      <guid>https://timx.cn/tags/four/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Three</title>
-      <link>https://timzzx.github.io/tags/three/</link>
+      <link>https://timx.cn/tags/three/</link>
       <pubDate>Tue, 03 Jul 2018 17:41:40 +0800</pubDate>
       
-      <guid>https://timzzx.github.io/tags/three/</guid>
+      <guid>https://timx.cn/tags/three/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Two</title>
-      <link>https://timzzx.github.io/tags/two/</link>
+      <link>https://timx.cn/tags/two/</link>
       <pubDate>Tue, 03 Jul 2018 17:41:40 +0800</pubDate>
       
-      <guid>https://timzzx.github.io/tags/two/</guid>
+      <guid>https://timx.cn/tags/two/</guid>
       <description></description>
     </item>
     

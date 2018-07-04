@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 淡淡忧愁</title>
-    <link>https://timzzx.github.io/categories/</link>
+    <link>https://timx.cn/categories/</link>
     <description>Recent content in Categories on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="https://timzzx.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://timx.cn/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>One</title>
-      <link>https://timzzx.github.io/categories/one/</link>
+      <link>https://timx.cn/categories/one/</link>
       <pubDate>Tue, 03 Jul 2018 17:41:40 +0800</pubDate>
       
-      <guid>https://timzzx.github.io/categories/one/</guid>
+      <guid>https://timx.cn/categories/one/</guid>
       <description></description>
     </item>
     
