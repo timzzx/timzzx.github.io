@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>淡淡忧愁</title>
-    <link>https://timx.cn/</link>
-    <description>Recent content on 淡淡忧愁</description>
+    <title>Posts on 淡淡忧愁</title>
+    <link>https://timx.cn/post/</link>
+    <description>Recent content in Posts on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 04 Jul 2018 17:44:01 +0800</lastBuildDate>
     
-	<atom:link href="https://timx.cn/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://timx.cn/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>https://timx.cn/post/new/</guid>
       <description>第一次用github的Pages来做自己的博客感觉挺有意思，希望自己能坚持写下去吧！</description>
-    </item>
-    
-    <item>
-      <title>关于</title>
-      <link>https://timx.cn/about/</link>
-      <pubDate>Tue, 03 Jul 2018 17:41:40 +0800</pubDate>
-      
-      <guid>https://timx.cn/about/</guid>
-      <description>这是我的第N个博客了！！</description>
     </item>
     
   </channel>
