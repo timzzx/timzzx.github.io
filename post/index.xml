@@ -12,12 +12,14 @@
     
     
     <item>
-      <title>New</title>
+      <title>博客开通</title>
       <link>https://timx.cn/post/new/</link>
       <pubDate>Wed, 04 Jul 2018 17:44:01 +0800</pubDate>
       
       <guid>https://timx.cn/post/new/</guid>
-      <description>第一次用github的Pages来做自己的博客感觉挺有意思，希望自己能坚持写下去吧！</description>
+      <description>第一次用github的Pages来做自己的博客感觉挺有意思，希望自己能坚持写下去吧！
+测试代码展示
+package main import &amp;quot;fmt&amp;quot; func main() { fmt.Println(&amp;quot;Hello World&amp;quot;) }  </description>
     </item>
     
   </channel>
