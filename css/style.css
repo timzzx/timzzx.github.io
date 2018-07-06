@@ -729,6 +729,55 @@ img.alignright {
     border-radius: 100%;
     padding: 6px;
 }
+.card {
+    width:250px;
+    margin:0px auto;
+    background-color:white;
+    box-shadow:0px 5px 20px #999;
+}
+.card a {
+    color:#333;
+    text-decoration:none;
+}
+.card:hover .card-image img {
+    width:160%;
+    filter:grayscale(0);
+}
+.card-image {
+    height:250px;
+    position:relative;
+    overflow:hidden;
+}
+.card-image img {
+    width:150%;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    filter:grayscale(1);
+    transition-property:filter width;
+    transition-duration:.3s;
+    transition-timing-function:ease;
+}
+.card-body {
+    text-align:center;
+    padding: 15px 20px;
+    box-sizing: border-box;
+}
+.card-date {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.card-title, .card-excerpt {
+    font-family: 'Playfair Display', serif;
+}
+.card-date, .card-title {
+    text-align:center;
+    text-transform:uppercase;
+    font-weight: bold;
+}
+.card-date, .card-excerpt {
+    color: #777;
+}
  @media print, screen and (max-width:1290px) {
     .container {
         width:auto;
@@ -784,7 +833,12 @@ img.alignright {
         margin-right:0;
     }
     #secondary {
-        display:none;
+        width:100%;
+        margin-right:0;
+        border-left:none;
+    }
+    .card {
+        margin-left:0;
     }
 }
 @media print, screen and (max-width:680px) {
@@ -892,52 +946,4 @@ img.alignright {
     border-width: 0.5px;
 }
 
-.card {
-    width:250px;
-    margin:0px auto;
-    background-color:white;
-    box-shadow:0px 5px 20px #999;
-}
-.card a {
-    color:#333;
-    text-decoration:none;
-}
-.card:hover .card-image img {
-    width:160%;
-    filter:grayscale(0);
-}
-.card-image {
-    height:250px;
-    position:relative;
-    overflow:hidden;
-}
-.card-image img {
-    width:150%;
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    filter:grayscale(1);
-    transition-property:filter width;
-    transition-duration:.3s;
-    transition-timing-function:ease;
-}
-.card-body {
-    text-align:center;
-    padding: 15px 20px;
-    box-sizing: border-box;
-}
-.card-date {
-    font-family: 'Source Sans Pro', sans-serif;
-}
-.card-title, .card-excerpt {
-    font-family: 'Playfair Display', serif;
-}
-.card-date, .card-title {
-    text-align:center;
-    text-transform:uppercase;
-    font-weight: bold;
-}
-.card-date, .card-excerpt {
-    color: #777;
-}
+
