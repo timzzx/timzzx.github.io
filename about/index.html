@@ -21,9 +21,11 @@
     <meta name="author" content="">
     <meta property="og:url" content="https://timx.cn/about/">
 
-    <link rel="stylesheet" href="/css/normalize.css">
+    <link href="https://cdn.bootcss.com/normalize/8.0.0/normalize.min.css" rel="stylesheet">
     
-    <link rel="stylesheet" href="/css/prism.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.css" />
     
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/dmaku.css">
@@ -169,7 +171,7 @@
         <div class="card">
             <a href="#.">
                 <div class="card-image">
-                    <img src="https://timx.cn/img/fj.jpg" />
+                    <img class="lazy" data-original="https://timx.cn/img/fj.jpg" />
                 </div>
                 <div class="card-body">
                     <div class="card-title">
@@ -225,14 +227,24 @@
     </div>
 </footer>
 
-<script type="text/javascript" src="/js/jquery.min.js"  ></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
 <script type="text/javascript" src="/js/calendar.js" ></script>
 <script type="text/javascript" src="/js/point.js" ></script>
 
-<script type="text/javascript" src="/js/prism.js" async="true"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.js"></script>
 <script type="text/javascript">
   $('pre').addClass("line-numbers").css("white-space", "pre-wrap");
 </script>
 
+<script>
+$("img.lazy").lazyload({
+    effect : "fadeIn"
+});
+</script>
 </body>
 </html>
