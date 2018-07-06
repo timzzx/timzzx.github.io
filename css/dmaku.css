@@ -123,3 +123,9 @@
   font-size: 14px;
   line-height: 24px;
 }
+@media print, screen and (max-width:860px) {
+    .calendar{
+        margin-left:0;
+        zoom:1.4;
+    }
+}

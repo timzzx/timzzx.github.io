@@ -839,7 +839,9 @@ img.alignright {
     }
     .card {
         margin-left:0;
+        zoom:1.5;
     }
+    
 }
 @media print, screen and (max-width:680px) {
     .container {
