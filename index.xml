@@ -26,9 +26,7 @@
       <pubDate>Wed, 04 Jul 2018 17:44:01 +0800</pubDate>
       
       <guid>https://timx.cn/post/new/</guid>
-      <description>第一次用github的Pages来做自己的博客感觉挺有意思，希望自己能坚持写下去吧！
-测试代码展示
-package main import &amp;quot;fmt&amp;quot; func main() { fmt.Println(&amp;quot;Hello World&amp;quot;) }  </description>
+      <description> 第一次用github的Pages来做自己的博客感觉挺有意思，希望自己能坚持写下去吧！ 测试代码展示 package main import &amp;quot;fmt&amp;quot; func main() { fmt.Println(&amp;quot;Hello World&amp;quot;) }  </description>
     </item>
     
     <item>
@@ -38,6 +36,15 @@ package main import &amp;quot;fmt&amp;quot; func main() { fmt.Println(&amp;quot;
       
       <guid>https://timx.cn/about/</guid>
       <description>这是我的第N个博客了！！</description>
+    </item>
+    
+    <item>
+      <title>搜索</title>
+      <link>https://timx.cn/search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://timx.cn/search/</guid>
+      <description></description>
     </item>
     
   </channel>
