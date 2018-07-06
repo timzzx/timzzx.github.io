@@ -180,6 +180,8 @@ $(function() {
         e_dist: 20000,//鼠标吸附加速距离
         max_conn: 10//点到点最大连接数
     }
-    //调用
-    CanvasParticle(config);
+    if($(window).width() > 700) {
+        //调用
+        CanvasParticle(config);
+    }
 });
