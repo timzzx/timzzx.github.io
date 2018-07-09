@@ -21,7 +21,7 @@
     <meta name="author" content="">
     <meta property="og:url" content="https://timx.cn/post/new/">
 
-    <link href="https://cdn.bootcss.com/normalize/8.0.0/normalize.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.css" />
@@ -77,7 +77,6 @@
                         <date class="post-meta meta-date">
                             2018年7月4日
                             17:44 | 
-                            字数12个 | 
                             阅读时间1分钟
                         </date>
                         
@@ -162,11 +161,11 @@ func main() {
             　　}
                   
                   var gitalk = new Gitalk({
-                  clientID: '5b5fde7475577bcb14fc',
-                  clientSecret: '5a75bf2c7de61ecfb836987ddb5889433044a464',
-                  owner: 'timzzx',
-                  repo: 'timx.cn',
-                  admin: ['timzzx'],
+                  clientID: '',
+                  clientSecret: '',
+                  owner: '',
+                  repo: '',
+                  admin: [''],
                     id: GetUrlRelativePath(),  
                   distractionFreeMode: false  
                 })
@@ -298,6 +297,9 @@ func main() {
 <script type="text/javascript" src="/js/point.js" ></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-go.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-php.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-javascript.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
