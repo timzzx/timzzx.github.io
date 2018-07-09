@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://timx.cn/post/markdown/</loc>
+    <lastmod>2018-07-04T17:44:01+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://timx.cn/post/new/</loc>
     <lastmod>2018-07-04T17:44:01+08:00</lastmod>
   </url>
@@ -23,6 +28,18 @@
   </url>
   
   <url>
+    <loc>https://timx.cn/tags/markdown/</loc>
+    <lastmod>2018-07-04T17:44:01+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://timx.cn/categories/markdown/</loc>
+    <lastmod>2018-07-04T17:44:01+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://timx.cn/post/</loc>
     <lastmod>2018-07-04T17:44:01+08:00</lastmod>
     <priority>0</priority>
@@ -30,6 +47,7 @@
   
   <url>
     <loc>https://timx.cn/tags/</loc>
+    <lastmod>2018-07-04T17:44:01+08:00</lastmod>
     <priority>0</priority>
   </url>
   
