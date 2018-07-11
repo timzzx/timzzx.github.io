@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://timx.cn/post/maupassant/</loc>
+    <lastmod>2018-07-11T11:05:03+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://timx.cn/post/markdown/</loc>
     <lastmod>2018-07-09T18:17:05+08:00</lastmod>
   </url>
@@ -41,7 +46,7 @@
   
   <url>
     <loc>https://timx.cn/post/</loc>
-    <lastmod>2018-07-09T18:17:05+08:00</lastmod>
+    <lastmod>2018-07-11T11:05:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -64,8 +69,14 @@
   </url>
   
   <url>
+    <loc>https://timx.cn/categories/%E6%A8%A1%E6%9D%BF/</loc>
+    <lastmod>2018-07-11T11:05:03+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://timx.cn/</loc>
-    <lastmod>2018-07-09T18:17:05+08:00</lastmod>
+    <lastmod>2018-07-11T11:05:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   

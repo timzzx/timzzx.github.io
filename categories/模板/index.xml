@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>模板 on 淡淡忧愁</title>
+    <link>https://timx.cn/categories/%E6%A8%A1%E6%9D%BF/</link>
+    <description>Recent content in 模板 on 淡淡忧愁</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 11 Jul 2018 11:05:03 +0800</lastBuildDate>
+    
+	<atom:link href="https://timx.cn/categories/%E6%A8%A1%E6%9D%BF/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>hugo的模板Maupassant</title>
+      <link>https://timx.cn/post/maupassant/</link>
+      <pubDate>Wed, 11 Jul 2018 11:05:03 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/maupassant/</guid>
+      <description> maupassant-hugo Maupassant theme, ported to Hugo. 这个模板基于 https://github.com/JokerQyou/maupassant-hugo
+用模板做的个人blog https://timx.cn/
+模板下载地址 https://github.com/timzzx/maupassant-hugo
+1.添加了右侧卡片式的个人介绍 2.添加了右侧日历显示 3.添加了gittalk评论（之前加了gitment，后来发现gittalk更优秀就替换成gittalk） 4.原模板中手机端显示右侧栏会被隐藏，修改后在手机端让右侧栏显示在文章的下方。 5.添加了背景动画 6.修改了hugo的TableOfContents的样式 由于hugo的文章目录是根据标题的#自动设置ul li的层次。所以如果标题用的#号过多显示会比较难看。
+6.修改了表格展示的样式 6.增加了fontawesome icons 注意事项 1.要增加菜单在md文件中加入type: standalone
+2.文章要有评论在md文件中加入gitment: true
+3.文章要有目录在md文件中加入TableOfContents: true
+--- title: &amp;quot;博客开通&amp;quot; date: 2018-07-04T17:44:01+08:00 categories: [其他] tags: [其他] gitment: true TableOfContents: true ---  4.配置gitment在config.toml加入以下配置
+[params] clientID=&#39;&#39; clientSecret=&#39;&#39; owner=&#39;&#39; repo=&#39;&#39; admin=&#39;&#39;  </description>
+    </item>
+    
+  </channel>
+</rss>
