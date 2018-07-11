@@ -6,10 +6,20 @@
     <description>Recent content in Posts on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 11 Jul 2018 11:05:03 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 11 Jul 2018 16:31:53 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TCP/IP学习理解(一)</title>
+      <link>https://timx.cn/post/tcp_1/</link>
+      <pubDate>Wed, 11 Jul 2018 16:31:53 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/tcp_1/</guid>
+      <description>Transmission Control Protocol/Internet Protocol的简写，中译名为传输控制协议/因特网互联协议，又名网络通讯协议，是Internet最基本的协议、Internet国际互联网络的基础，由网络层的IP协议和传输层的TCP协议组成。TCP/IP 定义了电子设备如何连入因特网，以及数据如何在它们之间传输的标准。协议采用了4层的层级结构，每一层都呼叫它的下一层所提供的协议来完成自己的需求。通俗而言：TCP负责发现传输的问题，一有问题就发出信号，要求重新传输，直到所有数据安全正确地传输到目的地。而IP是给因特网的每一台电脑规定一个地址。
+ TCP/IP四层模型    应用层    HTTP      运输层    TCP、UDP     网络层（互联网层）    IP      链路层（数据链路层/网络接口层）    设备驱动程序、计算机中对应的网络接口卡    OSI七层模型    应用层     表示层     会话层     传输层     网络层     数据链路层     物理层    OSI七层模式简单通俗理解  这个模型推出的最开始，是是因为美国人有两台机器之间进行通信的需求。</description>
+    </item>
     
     <item>
       <title>hugo的模板Maupassant</title>
