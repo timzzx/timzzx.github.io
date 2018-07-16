@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.42.2" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <link rel="shortcut icon" href="/img/favicon.ico" >
+    <title>TCP/IP学习理解(三) - 淡淡忧愁</title>
+    <meta property="og:title" content="TCP/IP学习理解(三) - 淡淡忧愁">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2018-07-16T16:13:50&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2018-07-16T16:13:50&#43;08:00">
+        
+    <meta name="description" content="TCP/IP学习理解(三)">
+        
+    <meta name="author" content="Tim Zhang">
+    <meta property="og:url" content="https://timx.cn/post/tcp_3/">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dmaku.css">
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <img src="https://timx.cn/img/favicon.ico" />
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://timx.cn/">
+                        淡淡忧愁
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://timx.cn/">博客</a>
+                    
+                    <a  href="https://timx.cn/wall/" title="留言板">
+                        留言板
+                    </a>
+                    
+                    <a  href="https://timx.cn/about/" title="关于">
+                        关于
+                    </a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+            
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">TCP/IP学习理解(三)</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                            2018年7月16日
+                            16:13 | 
+                            阅读时间1分钟
+                        </date>
+                        <div class="post-meta">
+                            | <i class="fa fa-user-o" aria-hidden="true"></i>
+                            <a href="/about">Tim Zhang</a>
+                        </div>
+                        
+                        <div class="post-meta">
+                         | <i class="fa fa-folder-o" aria-hidden="true"></i>
+                            
+                                <a href="/categories/tcp/ip">TCP/IP</a>
+                            
+                        </div>
+                        
+                        <br />
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+                </div>
+                
+                <aside>
+                    <div class="tablelist">
+                    <nav id="TableOfContents">
+<ul>
+<li><a href="#以太网帧格式">以太网帧格式</a>
+<ul>
+<li><a href="#类型">类型</a>
+<ul>
+<li><a href="#ethernet-ii通常是用于ip协议-包括的字段">Ethernet II通常是用于IP协议,包括的字段</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#ip头部报文">IP头部报文</a>
+<ul>
+<li><a href="#ip包头字段说明">IP包头字段说明</a>
+<ul>
+<li><a href="#版本-4位-指定ip协议的版本号">版本：4位，指定IP协议的版本号。</a></li>
+<li><a href="#包头长度-ihl">包头长度(IHL)：</a></li>
+<li><a href="#服务类型">服务类型：</a></li>
+<li><a href="#长度">长度：</a></li>
+<li><a href="#标识">标识：</a></li>
+<li><a href="#标志">标志：</a></li>
+<li><a href="#段偏移量">段偏移量：</a></li>
+<li><a href="#ttl">TTL：</a></li>
+<li><a href="#协议">协议：</a></li>
+<li><a href="#校验和">校验和：</a></li>
+<li><a href="#源地址-source-address-sa">源地址（Source Address，SA）</a></li>
+<li><a href="#目的地址-destination-address">目的地址（Destination Address）</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                </aside>
+                 
+                        <div class="post-content">
+                            <article>
+                            
+
+<h1 id="以太网帧格式">以太网帧格式</h1>
+
+<h2 id="类型">类型</h2>
+
+<ul>
+<li><b>Ethernet II:</b>以太网第二版或者称之为Ethernet II帧，DIX帧，是最常见的帧类型。并通常直接被IP协议使用。</li>
+<li><b>IEEE 802.3:</b>Novell的非标准IEEE 802.3帧变种。</li>
+<li><b>IEEE 802.2:</b>逻辑链路控制 (LLC) 帧</li>
+<li><b>SNAP:</b>子网接入协议(SNAP)帧</li>
+</ul>
+
+<h3 id="ethernet-ii通常是用于ip协议-包括的字段">Ethernet II通常是用于IP协议,包括的字段</h3>
+
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>长度</th>
+<th>备注</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>目的MAC地址</td>
+<td>6个字节</td>
+<td><i>因为后来源IP 目的IP 源端口 目的端口信息中，源始终是放在前面的，而这里目的MAC放在了前面，原因在于现在转发形式为存储转发，而在这里还有一条转发方式叫做快速转发，即只查找目的MAC地址，即直接转发，所以将目的MAC放在前面查找的过程中速度会加快</i></td>
+</tr>
+
+<tr>
+<td>源MAC地址</td>
+<td>6个字节</td>
+<td>-</td>
+</tr>
+
+<tr>
+<td>协议类型</td>
+<td>2个字节</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+
+<p><br /></p>
+
+<table>
+<thead>
+<tr>
+<th>协议</th>
+<th>标识</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>IPv4</td>
+<td>0x0800</td>
+</tr>
+
+<tr>
+<td>IPX</td>
+<td>0x8137</td>
+</tr>
+
+<tr>
+<td>ARP</td>
+<td>0x0806</td>
+</tr>
+
+<tr>
+<td>Pause Control</td>
+<td>0x8808</td>
+</tr>
+
+<tr>
+<td>IPv6</td>
+<td>0x86DD</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<h1 id="ip头部报文">IP头部报文</h1>
+
+<table style="zoom:0.8" > <thead> <tr> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> </tr> </thead> <tbody> <tr> <td colspan="4"> <b>版本</b> <i>4位</i> </td> <td colspan="4"> <b>包头长度</b> <i>4位</i> </td> <td colspan="8"> <b>服务类型</b> <i>8位</i> </td> <td colspan="16"> <b>长度</b> <i>16位</i> </td> </tr> <tr> <td colspan="16"> <b>标识</b> <i>16位</i> </td> <td colspan="3"> <b>标志</b> <i>3位</i> </td> <td colspan="13"> <b>段偏移量</b> <i>13位</i> </td> </tr> <tr> <td colspan="8"> <b>TTL</b> <i>4位</i> </td> <td colspan="8"> <b>协议</b> <i>4位</i> </td> <td colspan="16"> <b>校验和</b> <i>16位</i> </td> </tr> </tr> <tr> <td colspan="32"> <b>源IP地址</b> <i>32位</i> </td> </tr> <tr> <td colspan="32"> <b>目的IP地址</b> <i>32位</i> </td> </tr> </tbody> </table>
+
+<h2 id="ip包头字段说明">IP包头字段说明</h2>
+
+<h3 id="版本-4位-指定ip协议的版本号">版本：4位，指定IP协议的版本号。</h3>
+
+<h3 id="包头长度-ihl">包头长度(IHL)：</h3>
+
+<blockquote>
+<p>4位，IP协议包头的长度，指明IPv4协议包头长度的字节数包含多少个32位。</p>
+
+<p>由于IPv4的包头可能包含可变数量的可选项，所以这 个字段可以用来确定IPv4数据报中数据部分的偏移位置。</p>
+
+<p>IPv4包头的最小长度是20个字节，因此IHL这个字段的最小值用十进制表示就是5 (5x4 = 20字节)。就是说，它表示的是包头的总字节数是4字节的倍数。</p>
+
+<p>可以表示的范围是0到65535之间。这里的总长度字段不包括帧头和帧尾，只是IP报文的总长度（包括IP头部）。</p>
+</blockquote>
+
+<h3 id="服务类型">服务类型：</h3>
+
+<blockquote>
+<p>定义IP协议包的处理方法，它包含如下子字段</p>
+
+<p>过程字段：3位，设置了数据包的重要性，取值越大数据越重要，取值范围为：0（正常）~ 7（网络控制）</p>
+
+<p>延迟字段：1位，取值：0（正常）、1（期特低的延迟）</p>
+
+<p>流量字段：1位，取值：0（正常）、1（期特高的流量）</p>
+
+<p>可靠性字段：1位，取值：0（正常）、1（期特高的可靠性）</p>
+
+<p>成本字段：1位，取值：0（正常）、1（期特最小成本）</p>
+
+<p>未使用：1位</p>
+</blockquote>
+
+<h3 id="长度">长度：</h3>
+
+<blockquote>
+<p>IP包的总长</p>
+</blockquote>
+
+<h3 id="标识">标识：</h3>
+
+<blockquote>
+<p>该字段的表示范围是0到65535之间，标识在长报文分片后，该报文位于分片中的第几片信息</p>
+
+<h3 id="标志">标志：</h3>
+
+<p>是一个3位的控制字段，包含：</p>
+
+<p>保留位：1位</p>
+
+<p>不分段位：1位，取值：0（允许数据报分段）、1（数据报不能分段）</p>
+
+<p>更多段位：1位，取值：0（数据包后面没有包，该包为最后的包）、1（数据包后面有更多的包）</p>
+</blockquote>
+
+<h3 id="段偏移量">段偏移量：</h3>
+
+<blockquote>
+<p>当数据分组时，它和更多段位（MF, More fragments）进行连接，帮助目的主机将分段的包组合。</p>
+</blockquote>
+
+<h3 id="ttl">TTL：</h3>
+
+<blockquote>
+<p>表示数据包在网络上生存多久，每通过一个路由器该值减一，为0时将被路由器丢弃。
+同时向源地址发送错误报告，促使重新发送。默认值为64，在某些特殊的报文中，如组播报文，该位会被置1。</p>
+</blockquote>
+
+<h3 id="协议">协议：</h3>
+
+<blockquote>
+<p>8位，这个字段定义了IP数据报的数据部分使用的协议类型。常用的协议及其十进制数值包括ICMP(1)、TCP(6)、UDP(17)。</p>
+</blockquote>
+
+<h3 id="校验和">校验和：</h3>
+
+<blockquote>
+<p>16位，是IPv4数据报包头的校验和。</p>
+</blockquote>
+
+<h3 id="源地址-source-address-sa">源地址（Source Address，SA）</h3>
+
+<blockquote>
+<p>发送IP数据包的IP地址，占32位。</p>
+</blockquote>
+
+<h3 id="目的地址-destination-address">目的地址（Destination Address）</h3>
+
+<blockquote>
+<p>接收IP数据包的IP地址，也占32位。</p>
+</blockquote>
+
+                            </article>
+                        </div>
+                
+                <div id="git-comments"></div>
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+                <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+                <script>
+                
+                function GetUrlRelativePath()
+            　　{
+            　　　　var url = document.location.toString();
+            　　　　var arrUrl = url.split("//");
+
+            　　　　var start = arrUrl[1].indexOf("/");
+            　　　　var relUrl = arrUrl[1].substring(start);
+
+            　　　　if(relUrl.indexOf("?") != -1){
+            　　　　　　relUrl = relUrl.split("?")[0];
+            　　　　}
+            　　　　return relUrl;
+            　　}
+                  
+                  var gitalk = new Gitalk({
+                  clientID: "5b5fde7475577bcb14fc",
+                  clientSecret: "5a75bf2c7de61ecfb836987ddb5889433044a464",
+                  owner: "timzzx",
+                  repo: "timx.cn",
+                  admin: ["timzzx"],
+                    id: GetUrlRelativePath(),  
+                  distractionFreeMode: false  
+                })
+
+                gitalk.render('git-comments')
+                </script>
+                
+                        
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        
+<form id="search" method="POST" action="https://duckduckgo.com/">
+      
+      <input type="text" name="q" maxlength="255" placeholder="搜索...">
+      
+      <input type="hidden" name="sites" value="https://timx.cn/">
+      
+      <input type="hidden" name="kp" value="-2">
+      
+      <input type="hidden" name="kh" value="1">
+      
+      <input type="hidden" name="kl" value="wt-wt">
+      
+      <input type="hidden" name="kg" value="p">
+      
+      <input type="hidden" name="kaf" value="1">
+      
+      
+      <input type="hidden" name="k1" value="-1">
+
+      
+
+      
+      
+      <input type="hidden" name="k7" value="#ffffff">
+      
+      <input type="hidden" name="kj" value="#ffffff">
+      
+      <input type="hidden" name="ky" value="#eaeaea">
+      
+      <input type="hidden" name="kx" value="#6E7173">
+      
+      <input type="hidden" name="k8" value="#444">
+      
+      <input type="hidden" name="k9" value="#6E7173">
+      
+      <input type="hidden" name="kaa" value="#6E7173">
+      
+      <input type="hidden" name="kae" value="#6E7173">
+
+      
+      <input type="hidden" name="ko" value="1">
+      
+      <input type="hidden" name="kt" value="n">
+      
+      <input type="hidden" name="ka" value="g">
+      
+      <input type="hidden" name="ks" value="l">
+      
+      <input type="hidden" name="kv" value="1">
+
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    <section class="widget">
+        <div class="card">
+            <a href="#.">
+                <div class="card-image">
+                    <img class="lazy" data-original="https://timx.cn/img/fj.jpg" />
+                </div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3>
+                            Tim zhang
+                        </h3>
+                    </div>
+                    <div class="card-date">
+                        <time>
+                        </time>
+                    </div>
+                    
+                    <div class="card-exceprt">
+                        <p>
+                            
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section class="widget">
+        <div id="calendar" class="calendar"></div>
+    </section>
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            
+            <li>
+                <a href="/categories/markdown">markdown</a>
+            </li>
+            
+            <li>
+                <a href="/categories/tcp/ip">tcp/ip</a>
+            </li>
+            
+            <li>
+                <a href="/categories/%E5%85%B6%E4%BB%96">其他</a>
+            </li>
+            
+            <li>
+                <a href="/categories/%E6%A8%A1%E6%9D%BF">模板</a>
+            </li>
+            
+        </ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2018 <a rel="nofollow" href="https://timx.cn/">淡淡忧愁</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io">Hugo</a>.
+        <a rel="nofollow noreferer noopener" href="https://github.com/timzzx/maupassant-hugo">Theme</a> based on <a rel="nofollow noreferer noopener" href="https://github.com/pagecho/maupassant">maupassant</a>.
+    </div>
+</footer>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="/js/calendar.js" ></script>
+<script type="text/javascript" src="/js/point.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-go.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-php.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script type="text/javascript">
+  $('pre').addClass("line-numbers").css("white-space", "pre-wrap");
+</script>
+
+<script>
+$("img.lazy").lazyload({
+    effect : "fadeIn"
+});
+</script>
+</body>
+</html>
