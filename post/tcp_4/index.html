@@ -7,19 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="shortcut icon" href="/img/favicon.ico" >
-    <title>TCP/IP学习理解(三) - 淡淡忧愁</title>
-    <meta property="og:title" content="TCP/IP学习理解(三) - 淡淡忧愁">
+    <title>TCP/IP学习理解(四) - 淡淡忧愁</title>
+    <meta property="og:title" content="TCP/IP学习理解(四) - 淡淡忧愁">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-07-16T16:13:50&#43;08:00">
+    <meta property="article:published_time" content="2018-07-17T10:41:26&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2018-07-16T16:13:50&#43;08:00">
+    <meta property="article:modified_time" content="2018-07-17T10:41:26&#43;08:00">
         
-    <meta name="description" content="TCP/IP学习理解(三)">
+    <meta name="description" content="TCP/IP学习理解(四)">
         
     <meta name="author" content="Tim Zhang">
-    <meta property="og:url" content="https://timx.cn/post/tcp_3/">
+    <meta property="og:url" content="https://timx.cn/post/tcp_4/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
     
@@ -73,13 +73,13 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title">TCP/IP学习理解(三)</h1>
+                            <h1 class="post-title">TCP/IP学习理解(四)</h1>
                         </header>
                         <date class="post-meta meta-date">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                            2018年7月16日
-                            16:13 | 
-                            阅读时间1分钟
+                            2018年7月17日
+                            10:41 | 
+                            阅读时间0分钟
                         </date>
                         <div class="post-meta">
                             | <i class="fa fa-user-o" aria-hidden="true"></i>
@@ -105,225 +105,13 @@
                 
                 <aside>
                     <div class="tablelist">
-                    <nav id="TableOfContents">
-<ul>
-<li><a href="#以太网帧格式">以太网帧格式</a>
-<ul>
-<li><a href="#类型">类型</a>
-<ul>
-<li><a href="#ethernet-ii通常是用于ip协议-包括的字段">Ethernet II通常是用于IP协议,包括的字段</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#ip头部报文">IP头部报文</a>
-<ul>
-<li><a href="#ip包头字段说明">IP包头字段说明</a>
-<ul>
-<li><a href="#版本-4位-指定ip协议的版本号">版本：4位，指定IP协议的版本号。</a></li>
-<li><a href="#包头长度-ihl">包头长度(IHL)：</a></li>
-<li><a href="#服务类型">服务类型：</a></li>
-<li><a href="#长度">长度：</a></li>
-<li><a href="#标识">标识：</a></li>
-<li><a href="#标志">标志：</a></li>
-<li><a href="#段偏移量">段偏移量：</a></li>
-<li><a href="#ttl">TTL：</a></li>
-<li><a href="#协议">协议：</a></li>
-<li><a href="#校验和">校验和：</a></li>
-<li><a href="#源地址-source-address-sa">源地址（Source Address，SA）</a></li>
-<li><a href="#目的地址-destination-address">目的地址（Destination Address）</a></li>
-<li><a href="#选项">选项</a></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
+                    
                     </div>
                 </aside>
                  
                         <div class="post-content">
                             <article>
                             
-
-<h1 id="以太网帧格式">以太网帧格式</h1>
-
-<h2 id="类型">类型</h2>
-
-<ul>
-<li><b>Ethernet II:</b>以太网第二版或者称之为Ethernet II帧，DIX帧，是最常见的帧类型。并通常直接被IP协议使用。</li>
-<li><b>IEEE 802.3:</b>Novell的非标准IEEE 802.3帧变种。</li>
-<li><b>IEEE 802.2:</b>逻辑链路控制 (LLC) 帧</li>
-<li><b>SNAP:</b>子网接入协议(SNAP)帧</li>
-</ul>
-
-<h3 id="ethernet-ii通常是用于ip协议-包括的字段">Ethernet II通常是用于IP协议,包括的字段</h3>
-
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>长度</th>
-<th>备注</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>目的MAC地址</td>
-<td>6个字节</td>
-<td><i>因为后来源IP 目的IP 源端口 目的端口信息中，源始终是放在前面的，而这里目的MAC放在了前面，原因在于现在转发形式为存储转发，而在这里还有一条转发方式叫做快速转发，即只查找目的MAC地址，即直接转发，所以将目的MAC放在前面查找的过程中速度会加快</i></td>
-</tr>
-
-<tr>
-<td>源MAC地址</td>
-<td>6个字节</td>
-<td>-</td>
-</tr>
-
-<tr>
-<td>协议类型</td>
-<td>2个字节</td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-
-<p><br /></p>
-
-<table>
-<thead>
-<tr>
-<th>协议</th>
-<th>标识</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>IPv4</td>
-<td>0x0800</td>
-</tr>
-
-<tr>
-<td>IPX</td>
-<td>0x8137</td>
-</tr>
-
-<tr>
-<td>ARP</td>
-<td>0x0806</td>
-</tr>
-
-<tr>
-<td>Pause Control</td>
-<td>0x8808</td>
-</tr>
-
-<tr>
-<td>IPv6</td>
-<td>0x86DD</td>
-</tr>
-</tbody>
-</table>
-
-<hr />
-
-<h1 id="ip头部报文">IP头部报文</h1>
-
-<table style="zoom:0.8" > <thead> <tr> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> <th colspan="1"> 1 </th> </tr> </thead> <tbody> <tr> <td colspan="4"> <b>版本</b> <i>4位</i> </td> <td colspan="4"> <b>包头长度</b> <i>4位</i> </td> <td colspan="8"> <b>服务类型</b> <i>8位</i> </td> <td colspan="16"> <b>长度</b> <i>16位</i> </td> </tr> <tr> <td colspan="16"> <b>标识</b> <i>16位</i> </td> <td colspan="3"> <b>标志</b> <i>3位</i> </td> <td colspan="13"> <b>段偏移量</b> <i>13位</i> </td> </tr> <tr> <td colspan="8"> <b>TTL</b> <i>4位</i> </td> <td colspan="8"> <b>协议</b> <i>4位</i> </td> <td colspan="16"> <b>校验和</b> <i>16位</i> </td> </tr> </tr> <tr> <td colspan="32"> <b>源IP地址</b> <i>32位</i> </td> </tr> <tr> <td colspan="32"> <b>目的IP地址</b> <i>32位</i> </td> </tr> <tr> <td colspan="32"> <b>选项</b> <i>32位</i> </td> </tr></tbody> </table>
-
-<h2 id="ip包头字段说明">IP包头字段说明</h2>
-
-<h3 id="版本-4位-指定ip协议的版本号">版本：4位，指定IP协议的版本号。</h3>
-
-<h3 id="包头长度-ihl">包头长度(IHL)：</h3>
-
-<blockquote>
-<p>4位，IP协议包头的长度，指明IPv4协议包头长度的字节数包含多少个32位。<br />
-• 由于IPv4的包头可能包含可变数量的可选项，所以这 个字段可以用来确定IPv4数据报中数据部分的偏移位置。<br />
-• IPv4包头的最小长度是20个字节，因此IHL这个字段的最小值用十进制表示就是5 (5x4 = 20字节)。就是说，它表示的是包头的总字节数是4字节的倍数。<br />
-• 可以表示的范围是0到65535之间。这里的总长度字段不包括帧头和帧尾，只是IP报文的总长度（包括IP头部）。</p>
-</blockquote>
-
-<h3 id="服务类型">服务类型：</h3>
-
-<blockquote>
-<p>定义IP协议包的处理方法，它包含如下子字段<br />
-• 过程字段：3位，设置了数据包的重要性，取值越大数据越重要，取值范围为：0（正常）~ 7（网络控制）<br />
-• 延迟字段：1位，取值：0（正常）、1（期特低的延迟）<br />
-• 流量字段：1位，取值：0（正常）、1（期特高的流量）<br />
-• 可靠性字段：1位，取值：0（正常）、1（期特高的可靠性）<br />
-• 成本字段：1位，取值：0（正常）、1（期特最小成本）<br />
-• 未使用：1位</p>
-</blockquote>
-
-<h3 id="长度">长度：</h3>
-
-<blockquote>
-<p>IP包的总长</p>
-</blockquote>
-
-<h3 id="标识">标识：</h3>
-
-<blockquote>
-<p>该字段的表示范围是0到65535之间，标识在长报文分片后，该报文位于分片中的第几片信息</p>
-</blockquote>
-
-<h3 id="标志">标志：</h3>
-
-<blockquote>
-<p>• 是一个3位的控制字段，包含：<br />
-• 保留位：1位<br />
-• 不分段位：1位，取值：0（允许数据报分段）、1（数据报不能分段）<br />
-• 更多段位：1位，取值：0（数据包后面没有包，该包为最后的包）、1（数据包后面有更多的包）</p>
-</blockquote>
-
-<h3 id="段偏移量">段偏移量：</h3>
-
-<blockquote>
-<p>当数据分组时，它和更多段位（MF, More fragments）进行连接，帮助目的主机将分段的包组合。</p>
-</blockquote>
-
-<h3 id="ttl">TTL：</h3>
-
-<blockquote>
-<p>表示数据包在网络上生存多久，每通过一个路由器该值减一，为0时将被路由器丢弃。
-同时向源地址发送错误报告，促使重新发送。默认值为64，在某些特殊的报文中，如组播报文，该位会被置1。</p>
-</blockquote>
-
-<h3 id="协议">协议：</h3>
-
-<blockquote>
-<p>8位，这个字段定义了IP数据报的数据部分使用的协议类型。常用的协议及其十进制数值包括ICMP(1)、TCP(6)、UDP(17)。</p>
-</blockquote>
-
-<h3 id="校验和">校验和：</h3>
-
-<blockquote>
-<p>• 16位，是IPv4数据报包头的校验和。<br />
-• 为了计算一份数据报的IP检验和，首先把检验和字段置为0。然后，对首部中每个16 bit进行二进制反码求和（整个首部看成是由一串16 bit的字组成），结果存在检验和字段中。当收到一份IP数据报后，同样对首部中每个16 bit进行二进制反码的求和。由于接收方在计算过程中包含了发送方存在首部中的检验和，因此，如果首部在传输过程中没有发生任何差错，那么接收方计算的结果应该为全1。如果结果不是全1（即检验和错误），那么IP就丢弃收到的数据报。但是不生成差错报文，由上层去发现丢失的数据报并进行重传。</p>
-</blockquote>
-
-<h3 id="源地址-source-address-sa">源地址（Source Address，SA）</h3>
-
-<blockquote>
-<p>发送IP数据包的IP地址，占32位。</p>
-</blockquote>
-
-<h3 id="目的地址-destination-address">目的地址（Destination Address）</h3>
-
-<blockquote>
-<p>接收IP数据包的IP地址，也占32位。</p>
-</blockquote>
-
-<h3 id="选项">选项</h3>
-
-<blockquote>
-<p>数据报中的一个可变长的可选信息。<br />
-• 安全和处理限制（用于军事领域）<br />
-• 记录路径（让每个路由器都记下它的IP地址）<br />
-• 时间戳（让每个路由器都记下它的IP地址和时间）<br />
-• 宽松的源站选路（为数据报指定一系列必须经过的IP地址）<br />
-• 严格的源站选路（与宽松的源站选路类似，但是要求只能经过指定的这些地址，不能经过其他的地址）。<br /></p>
-</blockquote>
-
                             </article>
                         </div>
                 
