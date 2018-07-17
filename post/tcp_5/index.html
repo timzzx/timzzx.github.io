@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.42.2" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <link rel="shortcut icon" href="/img/favicon.ico" >
+    <title>TCP/IP学习理解(五) - 淡淡忧愁</title>
+    <meta property="og:title" content="TCP/IP学习理解(五) - 淡淡忧愁">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2018-07-17T16:09:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2018-07-17T16:09:00&#43;08:00">
+        
+    <meta name="description" content="TCP/IP学习理解(五)">
+        
+    <meta name="author" content="Tim Zhang">
+    <meta property="og:url" content="https://timx.cn/post/tcp_5/">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dmaku.css">
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <img src="https://timx.cn/img/favicon.ico" />
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://timx.cn/">
+                        淡淡忧愁
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://timx.cn/">博客</a>
+                    
+                    <a  href="https://timx.cn/wall/" title="留言板">
+                        留言板
+                    </a>
+                    
+                    <a  href="https://timx.cn/about/" title="关于">
+                        关于
+                    </a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+            
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">TCP/IP学习理解(五)</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                            2018年7月17日
+                            16:09 | 
+                            阅读时间1分钟
+                        </date>
+                        <div class="post-meta">
+                            | <i class="fa fa-user-o" aria-hidden="true"></i>
+                            <a href="/about">Tim Zhang</a>
+                        </div>
+                        
+                        <div class="post-meta">
+                         | <i class="fa fa-folder-o" aria-hidden="true"></i>
+                            
+                                <a href="/categories/tcp/ip">TCP/IP</a>
+                            
+                        </div>
+                        
+                        <br />
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+                </div>
+                
+                <aside>
+                    <div class="tablelist">
+                    <nav id="TableOfContents">
+<ul>
+<li><a href="#icmp协议">ICMP协议</a>
+<ul>
+<li><a href="#icmp报文是在ip数据报内部">ICMP报文是在IP数据报内部</a></li>
+<li><a href="#icmp报文">ICMP报文</a></li>
+<li><a href="#icmp类型的列表">ICMP类型的列表</a></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                </aside>
+                 
+                        <div class="post-content">
+                            <article>
+                            
+
+<h1 id="icmp协议">ICMP协议</h1>
+
+<blockquote>
+<p>ICMP是（Internet Control Message Protocol）Internet控制报文协议。它是TCP/IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息。控制消息是指网络通不通、主机是否可达、路由是否可用等网络本身的消息。这些控制消息虽然并不传输用户数据，但是对于用户数据的传递起着重要的作用。<br />
+IP 协议并不是一个可靠的协议,它不保证数据被送达,那么,自然的,保证数据送达的工作应该由其他的模块来完 成。其中一个重要的模块就是 ICMP(网络控制报文)协议。</p>
+</blockquote>
+
+<hr />
+
+<h2 id="icmp报文是在ip数据报内部">ICMP报文是在IP数据报内部</h2>
+
+<table> <tr> <td> 长度20字节 </td> <td> - </td> </tr> <tr> <td> <b>IP首部</b> </td> <td> <b>ICMP报文</b> </td> </tr> </table>
+
+<hr />
+
+<h2 id="icmp报文">ICMP报文</h2>
+
+<table> <tr> <td> 类型 <b>TYPE</b> <i>8位</i> </td> <td> 代码 <b>CODE</b> <i>8位</i> </td> <td> 检验和 <b>Description</b> <i>16位</i> </td> </tr> </table>
+
+<hr />
+
+<h2 id="icmp类型的列表">ICMP类型的列表</h2>
+
+<blockquote>
+<p>当传送 IP 数据包发生错误&ndash;比如主机不可达,路由不可达等等,ICMP 协议将会把错误信息封包,然后传送回给主机。给主机 一个处理错误的机会,这 也就是为什么说建立在 IP 层以上的协议是可能做到安全的原因。ICMP 数据包由8bit 的错误类型和8bit 的代 码和16bit 的校验和组成。而前 16bit 就组成了 ICMP 所要传递的信息。</p>
+</blockquote>
+
+<table><thead><tr><th>TYPE</th><th>CODE</th><th>Description</th><th>Query</th><th>Error</th></tr></thead><tr><td align="middle" valign="top">0</td><td align="middle" valign="top">0</td><td align="left" valign="top">Echo Reply——回显应答（Ping应答）</td><td align="middle" valign="top">x</td><td align="middle" valign="top">　</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">0</td><td align="left" valign="top">Network Unreachable——网络不可达</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">1</td><td align="left" valign="top">Host Unreachable——主机不可达</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">2</td><td align="left" valign="top">Protocol Unreachable——协议不可达</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">3</td><td align="left" valign="top">Port Unreachable——端口不可达</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">4</td><td align="left" valign="top">Fragmentation needed but no frag. bit set——需要进行分片但设置不分片比特</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">5</td><td align="left" valign="top">Source routing failed——源站选路失败</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">6</td><td align="left" valign="top">Destination network unknown——目的网络未知</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">7</td><td align="left" valign="top">Destination host unknown——目的主机未知</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">8</td><td align="left" valign="top">Source host isolated (obsolete)——源主机被隔离（作废不用）</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">9</td><td align="left" valign="top">Destination network administratively prohibited——目的网络被强制禁止</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">10</td><td align="left" valign="top">Destination host administratively prohibited——目的主机被强制禁止</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">11</td><td align="left" valign="top">Network unreachable for TOS——由于服务类型TOS，网络不可达</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">12</td><td align="left" valign="top">Host unreachable for TOS——由于服务类型TOS，主机不可达</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">13</td><td align="left" valign="top">Communication administratively prohibited by filtering——由于过滤，通信被强制禁止</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">14</td><td align="left" valign="top">Host precedence violation——主机越权</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">3</td><td align="middle" valign="top">15</td><td align="left" valign="top">Precedence cutoff in effect——优先中止生效</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">4</td><td align="middle" valign="top">0</td><td align="left" valign="top">Source quench——源端被关闭（基本流控制）</td><td align="middle" valign="top">　</td><td align="middle" valign="top">　</td></tr><tr><td align="middle" valign="top">5</td><td align="middle" valign="top">0</td><td align="left" valign="top">Redirect for network——对网络重定向</td><td align="middle" valign="top">　</td><td align="middle" valign="top">　</td></tr><tr><td align="middle" valign="top">5</td><td align="middle" valign="top">1</td><td align="left" valign="top">Redirect for host——对主机重定向</td><td align="middle" valign="top">　</td><td align="middle" valign="top">　</td></tr><tr><td align="middle" valign="top">5</td><td align="middle" valign="top">2</td><td align="left" valign="top">Redirect for TOS and network——对服务类型和网络重定向</td><td align="middle" valign="top">　</td><td align="middle" valign="top">　</td></tr><tr><td align="middle" valign="top">5</td><td align="middle" valign="top">3</td><td align="left" valign="top">Redirect for TOS and host——对服务类型和主机重定向</td><td align="middle" valign="top">　</td><td align="middle" valign="top">　</td></tr><tr><td align="middle" valign="top">8</td><td align="middle" valign="top">0</td><td align="left" valign="top">Echo request——回显请求（Ping请求）</td><td align="middle" valign="top">x</td><td align="middle" valign="top">　</td></tr><tr><td align="middle" valign="top">9</td><td align="middle" valign="top">0</td><td align="left" valign="top">Router advertisement——路由器通告</td><td align="middle" valign="top">　</td><td align="middle" valign="top">　</td></tr><tr><td align="middle" valign="top">10</td><td align="middle" valign="top">0</td><td align="left" valign="top">Route solicitation——路由器请求</td><td align="middle" valign="top">　</td><td align="middle" valign="top">　</td></tr><tr><td align="middle" valign="top">11</td><td align="middle" valign="top">0</td><td align="left" valign="top">TTL equals 0 during transit——传输期间生存时间为0</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">11</td><td align="middle" valign="top">1</td><td align="left" valign="top">TTL equals 0 during reassembly——在数据报组装期间生存时间为0</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">12</td><td align="middle" valign="top">0</td><td align="left" valign="top">IP header bad (catchall error)——坏的IP首部（包括各种差错）</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">12</td><td align="middle" valign="top">1</td><td align="left" valign="top">Required options missing——缺少必需的选项</td><td align="middle" valign="top">　</td><td align="middle" valign="top">x</td></tr><tr><td align="middle" valign="top">13</td><td align="middle" valign="top">0</td><td align="left" valign="top">Timestamp request (obsolete)——时间戳请求（作废不用）</td><td align="middle" valign="top">x</td><td align="middle" valign="top">　</td></tr><tr><td align="middle" valign="top">14</td><td align="middle" valign="top">　</td><td align="left" valign="top">Timestamp reply (obsolete)——时间戳应答（作废不用）</td><td align="middle" valign="top">x</td><td align="middle" valign="top">　</td></tr><tr><td align="middle" valign="top">15</td><td align="middle" valign="top">0</td><td align="left" valign="top">Information request (obsolete)——信息请求（作废不用）</td><td align="middle" valign="top">x</td><td align="middle" valign="top">　</td></tr><tr><td align="middle" valign="top">16</td><td align="middle" valign="top">0</td><td align="left" valign="top">Information reply (obsolete)——信息应答（作废不用）</td><td align="middle" valign="top">x</td><td align="middle" valign="top">　</td></tr><tr><td align="middle" valign="top">17</td><td align="middle" valign="top">0</td><td align="left" valign="top">Address mask request——地址掩码请求</td><td align="middle" valign="top">x</td><td align="middle" valign="top">　</td></tr><tr><td align="middle" valign="top">18</td><td align="middle" valign="top">0</td><td align="left" valign="top">Address mask reply——地址掩码应答</td><td align="left" valign="top">　</td><td align="left" valign="top">　</td></tr></table>
+
+<hr />
+
+<p><b>尽管在大多数情况下,错误的包传送应该给出 ICMP 报文,但是在特殊情况下,是不产生 ICMP 错误报文的。如下:</b><br /><br />
+1 ICMP 差错报文不会产生 ICMP 差错报文(出 IMCP 查询报文)(防止 IMCP 的无限产生和传送)<br />
+2 目的地址是广播地址或多播地址的IP数据报。<br />
+3 作为链路层广播的数据报。<br />
+4 不是IP分片的第一片。<br />
+5 源地址不是单个主机的数据报。这就是说,源地址不能为零地址、环回地址、广播地址或多播地址。 虽然里面的一些规定现在还不是很明白,但是所有的这一切规定,都是为了防止产生 ICMP 报文的无限传播而定义的。<br />
+6 ICMP 协议大致分为两类,一种是查询报文,一种是差错报文。其中查询报文有以下几种用途:<br />
+7 ping 查询(不要告诉我你不知道 ping 程序)<br />
+8 子网掩码查询(用于无盘工作站在初始化自身的时候初始化子网掩码)<br />
+9 时间戳查询(可以用来同步时间)<br />
+<hr /></p>
+
+                            </article>
+                        </div>
+                
+                <div id="git-comments"></div>
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+                <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+                <script>
+                
+                function GetUrlRelativePath()
+            　　{
+            　　　　var url = document.location.toString();
+            　　　　var arrUrl = url.split("//");
+
+            　　　　var start = arrUrl[1].indexOf("/");
+            　　　　var relUrl = arrUrl[1].substring(start);
+
+            　　　　if(relUrl.indexOf("?") != -1){
+            　　　　　　relUrl = relUrl.split("?")[0];
+            　　　　}
+            　　　　return relUrl;
+            　　}
+                  
+                  var gitalk = new Gitalk({
+                  clientID: "5b5fde7475577bcb14fc",
+                  clientSecret: "5a75bf2c7de61ecfb836987ddb5889433044a464",
+                  owner: "timzzx",
+                  repo: "timx.cn",
+                  admin: ["timzzx"],
+                    id: GetUrlRelativePath(),  
+                  distractionFreeMode: false  
+                })
+
+                gitalk.render('git-comments')
+                </script>
+                
+                        
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        
+<form id="search" method="POST" action="https://duckduckgo.com/">
+      
+      <input type="text" name="q" maxlength="255" placeholder="搜索...">
+      
+      <input type="hidden" name="sites" value="https://timx.cn/">
+      
+      <input type="hidden" name="kp" value="-2">
+      
+      <input type="hidden" name="kh" value="1">
+      
+      <input type="hidden" name="kl" value="wt-wt">
+      
+      <input type="hidden" name="kg" value="p">
+      
+      <input type="hidden" name="kaf" value="1">
+      
+      
+      <input type="hidden" name="k1" value="-1">
+
+      
+
+      
+      
+      <input type="hidden" name="k7" value="#ffffff">
+      
+      <input type="hidden" name="kj" value="#ffffff">
+      
+      <input type="hidden" name="ky" value="#eaeaea">
+      
+      <input type="hidden" name="kx" value="#6E7173">
+      
+      <input type="hidden" name="k8" value="#444">
+      
+      <input type="hidden" name="k9" value="#6E7173">
+      
+      <input type="hidden" name="kaa" value="#6E7173">
+      
+      <input type="hidden" name="kae" value="#6E7173">
+
+      
+      <input type="hidden" name="ko" value="1">
+      
+      <input type="hidden" name="kt" value="n">
+      
+      <input type="hidden" name="ka" value="g">
+      
+      <input type="hidden" name="ks" value="l">
+      
+      <input type="hidden" name="kv" value="1">
+
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    <section class="widget">
+        <div class="card">
+            <a href="#.">
+                <div class="card-image">
+                    <img class="lazy" data-original="https://timx.cn/img/fj.jpg" />
+                </div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3>
+                            Tim zhang
+                        </h3>
+                    </div>
+                    <div class="card-date">
+                        <time>
+                        </time>
+                    </div>
+                    
+                    <div class="card-exceprt">
+                        <p>
+                            
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section class="widget">
+        <div id="calendar" class="calendar"></div>
+    </section>
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            
+            <li>
+                <a href="/categories/markdown">markdown</a>
+            </li>
+            
+            <li>
+                <a href="/categories/tcp/ip">tcp/ip</a>
+            </li>
+            
+            <li>
+                <a href="/categories/%E5%85%B6%E4%BB%96">其他</a>
+            </li>
+            
+            <li>
+                <a href="/categories/%E6%A8%A1%E6%9D%BF">模板</a>
+            </li>
+            
+        </ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2018 <a rel="nofollow" href="https://timx.cn/">淡淡忧愁</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io">Hugo</a>.
+        <a rel="nofollow noreferer noopener" href="https://github.com/timzzx/maupassant-hugo">Theme</a> based on <a rel="nofollow noreferer noopener" href="https://github.com/pagecho/maupassant">maupassant</a>.
+    </div>
+</footer>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="/js/calendar.js" ></script>
+<script type="text/javascript" src="/js/point.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-go.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-php.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script type="text/javascript">
+  $('pre').addClass("line-numbers").css("white-space", "pre-wrap");
+</script>
+
+<script>
+$("img.lazy").lazyload({
+    effect : "fadeIn"
+});
+</script>
+</body>
+</html>

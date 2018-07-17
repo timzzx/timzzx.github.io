@@ -6,10 +6,21 @@
     <description>Recent content on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Jul 2018 10:41:26 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 17 Jul 2018 16:09:00 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TCP/IP学习理解(五)</title>
+      <link>https://timx.cn/post/tcp_5/</link>
+      <pubDate>Tue, 17 Jul 2018 16:09:00 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/tcp_5/</guid>
+      <description>ICMP协议  ICMP是（Internet Control Message Protocol）Internet控制报文协议。它是TCP/IP协议族的一个子协议，用于在IP主机、路由器之间传递控制消息。控制消息是指网络通不通、主机是否可达、路由是否可用等网络本身的消息。这些控制消息虽然并不传输用户数据，但是对于用户数据的传递起着重要的作用。
+IP 协议并不是一个可靠的协议,它不保证数据被送达,那么,自然的,保证数据送达的工作应该由其他的模块来完 成。其中一个重要的模块就是 ICMP(网络控制报文)协议。
+ ICMP报文是在IP数据报内部    长度20字节   -     IP首部   ICMP报文    ICMP报文    类型 TYPE 8位   代码 CODE 8位   检验和 Description 16位    ICMP类型的列表  当传送 IP 数据包发生错误&amp;ndash;比如主机不可达,路由不可达等等,ICMP 协议将会把错误信息封包,然后传送回给主机。给主机 一个处理错误的机会,这 也就是为什么说建立在 IP 层以上的协议是可能做到安全的原因。ICMP 数据包由8bit 的错误类型和8bit 的代 码和16bit 的校验和组成。而前 16bit 就组成了 ICMP 所要传递的信息。</description>
+    </item>
     
     <item>
       <title>TCP/IP学习理解(四)</title>
