@@ -6,10 +6,36 @@
     <description>Recent content on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Jul 2018 16:09:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 18 Jul 2018 11:14:14 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TCP/IP学习理解(六)</title>
+      <link>https://timx.cn/post/tcp_6/</link>
+      <pubDate>Wed, 18 Jul 2018 11:14:14 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/tcp_6/</guid>
+      <description>RFC791中文-IP协议RFC 791 - 互联网协议
+RFC:791
+互联网协议
+DARPA互联网程序
+协议规范
+1981.9
+防御高级研究计划结构
+信息处理技术办公室
+1400 Wilson Boulevard
+Arlington, Virginia 22209
+南吉利福尼亚大学信息科研所
+ 前言  本文档详细说明叻国防部(DoD)的标准互联网协议.文档基于APRA互联网协议的前六个早期版本.很多人对规范的概念以及正文作出过贡献.这个版本对寻址(addressing),错误处理(error handling ),选项编码(option codes),以及互联网的安全(security)、优先(predence),划分(compartments)、处理限制的特性作出了修订。
+Jon Postel
+Editor
+September 1981
+ 1.介绍 1.1 出发点(Motivation) Internet协议是为了在包交换(packet-switched)计算机通讯网络的互联系统中使用而设计的。我们称这样的系统为“catener”【1】。Internet协议提供从发起者(source)到目的地(destination)的块数据(数据报)的传输,发起者和目的地都是由固定长度的地址标识的主机(host)。如果需要, Internet协议也提供长数据报的分片(fragmentation)和重组(reassembly),以通过“小包”(small packet)网络传输大数据报。
+1.2 范围(Scope) internet协议仅限于提供在互联网络系统上从发起者到目的地投递一个internet数据报所需的功能。不提供增强端到端(end-to-end)的可靠性,流程控制(flow control),排序(sequencing),和其它主机到主机协议上常有的服务。internet协议可以支持网络提供不同类型和不同质量的服务(The internet protocol can capitalize on the services of its supporting networks to provide various types and qualities of service.)。
+1.3 接口(Interfaces) 在internet环境中,本协议被视为主机到主机(host-to-host)的协议。本协议调用本地网络协议来携带internet数据报到下一个网关或者目的主机。 比如,TCP模块调用internet模块携带一个TCP分片(该分片包含了TCP头部和用户数据)作为一个internet数据报的数据部分。TCP模块会在internet头部中提供地址(addresses)和其他参数作为调用Internet模块的参数。然后internet模块会创建一个internet数据报并且调用本地网络接口来传输internet数据报。 比如,对于ARPANET,internet模块会调用一个本地网络模块(local net module),该模块会给internet数据报添加一个1822个字节的前导字符,创建一条传输给IMP的ARPANET消息。ARPANET 地址将通过本地网络接口从internet地址中获取,该地址是ARPANET中的某些主机的地址,该主机可能是个到其他网络的网关。</description>
+    </item>
     
     <item>
       <title>TCP/IP学习理解(五)</title>
