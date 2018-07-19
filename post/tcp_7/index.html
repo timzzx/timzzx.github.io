@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.42.2" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <link rel="shortcut icon" href="/img/favicon.ico" >
+    <title>TCP/IP学习理解(七) - 淡淡忧愁</title>
+    <meta property="og:title" content="TCP/IP学习理解(七) - 淡淡忧愁">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2018-07-19T10:56:09&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2018-07-19T10:56:09&#43;08:00">
+        
+    <meta name="description" content="TCP/IP学习理解(七)">
+        
+    <meta name="author" content="Tim Zhang">
+    <meta property="og:url" content="https://timx.cn/post/tcp_7/">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dmaku.css">
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <img src="https://timx.cn/img/favicon.ico" />
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://timx.cn/">
+                        淡淡忧愁
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://timx.cn/">博客</a>
+                    
+                    <a  href="https://timx.cn/wall/" title="留言板">
+                        留言板
+                    </a>
+                    
+                    <a  href="https://timx.cn/about/" title="关于">
+                        关于
+                    </a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+            
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">TCP/IP学习理解(七)</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                            2018年7月19日
+                            10:56 | 
+                            阅读时间1分钟
+                        </date>
+                        <div class="post-meta">
+                            | <i class="fa fa-user-o" aria-hidden="true"></i>
+                            <a href="/about">Tim Zhang</a>
+                        </div>
+                        
+                        <div class="post-meta">
+                         | <i class="fa fa-folder-o" aria-hidden="true"></i>
+                            
+                                <a href="/categories/tcp/ip">TCP/IP</a>
+                            
+                        </div>
+                        
+                        <br />
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+                </div>
+                
+                <aside>
+                    <div class="tablelist">
+                    <nav id="TableOfContents">
+<ul>
+<li><a href="#udp用户数据报协议">UDP用户数据报协议</a>
+<ul>
+<li><a href="#udp封装的ip数据报的格式">UDP封装的IP数据报的格式</a></li>
+<li><a href="#udp首部">UDP首部</a></li>
+<li><a href="#udp伪首部">UDP伪首部</a></li>
+<li><a href="#ip分片">IP分片</a></li>
+<li><a href="#udp-和-arp-之间的交互式用">UDP 和 ARP 之间的交互式用</a></li>
+<li><a href="#icmp-源站抑制差错">ICMP 源站抑制差错</a></li>
+<li><a href="#udp-服务器设计">UDP 服务器设计</a></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                </aside>
+                 
+                        <div class="post-content">
+                            <article>
+                            
+
+<blockquote>
+<p>UDP是一个简单的面向数据报的运输层协议：进程的每个输出操作都正好产生一个UDP数据报，并组装成一份待发送的IP数据报。这与面向流字符的协议不同，如TCP，应用程序产生的全体数据与真正发送的单个IP数据报可能没有什么联系。</p>
+</blockquote>
+
+<h1 id="udp用户数据报协议">UDP用户数据报协议</h1>
+
+<h2 id="udp封装的ip数据报的格式">UDP封装的IP数据报的格式</h2>
+
+<p><center><table> <tr> <td> IP首部 </td> <td> UDP首部 </td> <td> UDP数据 </td> </tr> </table> <i>UDP封装</i> </center>
+<br />
+1:<b>UDP</b>不提供可靠性：它把应用程序传给<b>IP层</b>的数据发送出去，但是并不保证它们能到达目的地。<br /><br />
+2.应用程序必须关心<b>IP数据报的长度</b>。如果它超过网络的<b>MTU</b>，那么就要对<b>IP数据报</b>进行<b>分片</b>。如果需要，源端到目的端之间的每个网络都要进行<b>分片</b>，并不只是发送端主机连接第一个网络才这样做.
+<hr /></p>
+
+<h2 id="udp首部">UDP首部</h2>
+
+<p><center> <table> <tr> <td> 16位源端口号 </td> <td> 16位目的端口号 </td> </tr> <tr> <td> 16位UDP长度 </td> <td> 16位UDP检验和 </td> </tr> <tr> <td colspan="2"> 数据（如果有） </td> </tr> </table> </center><br /></p>
+
+<p><b>UDP长度</b>字段指的是UDP首部和UDP数据的字节长度。该字段的最小值为8字节（发送一份0字节的UDP数据报是OK）。这个UDP长度是有冗余的。IP数据报长度指的是数据报全长，因此UDP数据报长度是全长减去IP首部的长度<br /></p>
+
+<p>UDP数据报和TCP段都包含一个12字节长的伪首部，它是为了计算检验和而设置的。伪首部包含IP首部一些字段。其目的是让UDP两次检查数据是否已经正确到达目的地<br /></p>
+
+<p><b>UDP检验和</b>覆盖UDP首部和UDP数据。回想IP首部的检验和，它只覆盖IP的首部—并不覆盖IP数据报中的任何数据。<br /></p>
+
+<p>UDP和TCP在首部中都有覆盖它们首部和数据的检验和。UDP的检验和是可选的，而TCP的检验和是必需的。<br /></p>
+
+<p>尽管UDP检验和的基本计算方法与我们在IP首部检验和计算方法相类似（16 bit字的二进制反码和），但是它们之间存在不同的地方。首先，UDP数据报的长度可以为奇数字节，但是检验和算法是把若干个16 bit字相加。解决方法是必要时在最后增加填充字节0，这只是为了检验和的计算（也就是说，可能增加的填充字节不被传送）。<br /></p>
+
+<p>其次，UDP数据报和TCP段都包含一个12字节长的伪首部，它是为了计算检验和而设置的。伪首部包含IP首部一些字段。其目的是让UDP两次检查数据是否已经正确到达目的地（例如，IP没有接受地址不是本主机的数据报，以及IP没有把应传给另一高层的数据报传给UDP）。<br />
+<hr /></p>
+
+<h2 id="udp伪首部">UDP伪首部</h2>
+
+<p><center> <table> <tr> <td colspan="4"> 32位源IP地址 </td></tr><tr> <td colspan="4"> 32位目的IP地址 </td></tr>
+<tr> <td colspan="1" > 0 </td><td colspan="1" > 8位协议（17） </td><td colspan="2"> 16位UDP长度 </td></tr>
+<tr> <td colspan="2"> 16位源端口号 </td> <td colspan="2"> 16位目的端口号 </td> </tr> <tr> <td colspan="2"> 16位UDP长度 </td> <td colspan="2"> 16位UDP检验和 </td> </tr> <tr> <td colspan="4"> 数据 </td> </tr> <tr> <td colspan="1"> 填充字段0 </td> </tr></table> </center><br /><hr /></p>
+
+<h2 id="ip分片">IP分片</h2>
+
+<blockquote>
+<p>物理网络层一般要限制每次发送数据帧的最大长度。任何时候IP层接收到一份要发送的IP数据报时，它要判断向本地哪个接口发送数据（选路），并查询该接口获得其MTU。IP把MTU与数据报长度进行比较，如果需要则进行分片。分片可以发生在原始发送端主机上，也可以发生在中间路由器上。<br />
+把一份IP数据报分片以后，只有到达目的地才进行重新组装（这里的重新组装与其他网络协议不同，它们要求在下一站就进行进行重新组装，而不是在最终的目的地）。重新组装由目的端的IP层来完成，其目的是使分片和重新组装过程对运输层（TCP和UDP）是透明的，除了某些可能的越级操作外。已经分片过的数据报有可能会再次进行分片（可能不止一次）。IP首部中包含的数据为分片和重新组装提供了足够的信息。</p>
+</blockquote>
+
+<p>IP在从上层接到数据以后,要根据IP地址来判断从那个接口发送数据(通过选路),并进行MTU的查询,如果数据大小超过MTU 就进行数据分片。数 据的分片是对上层和下层透明,而数据也只是到达目的地还会被重新组装,不过不用担心,IP 层提供了足够的信 息进行数据的再组装。<br /></p>
+
+<p>在 IP 头里面,16bit 识别号唯一记录了一个 IP 包的 ID,具有同一个 ID 的 IP 片将会被重新组装;而13位片偏移则记录了某 IP 片相对整个包的 位置;而这两个表示中间的3bit 标志则标示着该分片后面是否还有新的分片。这三个标示就组成了 IP 分片的所有信息,接 受方就可以利用这些信息对 IP 数据 进行重新组织(就算是后面的分片比前面的分片先到,这些信息也是足够了)。<br />
+<hr /></p>
+
+<h2 id="udp-和-arp-之间的交互式用">UDP 和 ARP 之间的交互式用</h2>
+
+<p>这是不常被人注意到的一个细节,这是针对一些系统地实现来说的。当 ARP 缓存还是空的时候。UDP 在被发送之前一定要发送一个 ARP 请求来获得目的 主机的 MAC 地址,如果这个 UDP 的数据包足够大,大到 IP 层一定要对其进行分片的时候,想象中,该 UDP 数据包的第一个分片会发出一个 ARP 查询请求, 所有的分片都辉等到这个查询完成以后再发送。事实上是这样吗?<br /></p>
+
+<p>结果是,某些系统会让每一个分片都发送一个 ARP 查询,所有的分片都在等待,但是接受到第一个回应的时候,主机却只发送了 最后一个数据片而抛弃了其 他,这实在是让人匪夷所思。这样,因为分片的数据不能被及时组装,接受主机将会在一段时间内将永远 无法组装的 IP 数据包抛弃,并且发送组装超时的 ICMP 报文(其实很多系统不产生这个差错),以保证接受主机自己的接收端缓存不 被那些永远得不到组装的分片满。<br />
+<hr /></p>
+
+<h2 id="icmp-源站抑制差错">ICMP 源站抑制差错</h2>
+
+<p>当目标主机的处理速度赶不上数据接收的速度,因为接受主机的 IP 层缓存会被占满,所以主机就会发出一个“我受不了”的一个 ICMP 报文。<br />
+<hr /></p>
+
+<h2 id="udp-服务器设计">UDP 服务器设计</h2>
+
+<p>UDP 协议的某些特性将会影响我们的服务器程序设计,大致总结如下:<br /></p>
+
+<p>1 关于客户IP和地址:服务器必须有根据客户IP地址和端口号判断数据包是否合法的能力(这似乎要求每一个服务器都要具备)<br />
+2 关于目的地址:服务器必须要有过滤广播地址的能力。<br />
+3 关于数据输入:通常服务器系统的每一个端口号都会和一块输入缓冲区对应,进来的输入根据先来后到的原则等待服务器的处理,所以难免会出现缓冲区溢出的问题,这种情况下,UDP 数据包可能会被丢弃,而应用服务器程序本身并不知道这个问题。<br />
+4 服务器应该限制本地IP地址,就是说它应该可以把自己绑定到某一个网络接口的某一个端口上。<br /></p>
+
+<hr />
+
+                            </article>
+                        </div>
+                
+                <div id="git-comments"></div>
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+                <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+                <script>
+                
+                function GetUrlRelativePath()
+            　　{
+            　　　　var url = document.location.toString();
+            　　　　var arrUrl = url.split("//");
+
+            　　　　var start = arrUrl[1].indexOf("/");
+            　　　　var relUrl = arrUrl[1].substring(start);
+
+            　　　　if(relUrl.indexOf("?") != -1){
+            　　　　　　relUrl = relUrl.split("?")[0];
+            　　　　}
+            　　　　return relUrl;
+            　　}
+                  
+                  var gitalk = new Gitalk({
+                  clientID: "5b5fde7475577bcb14fc",
+                  clientSecret: "5a75bf2c7de61ecfb836987ddb5889433044a464",
+                  owner: "timzzx",
+                  repo: "timx.cn",
+                  admin: ["timzzx"],
+                    id: GetUrlRelativePath(),  
+                  distractionFreeMode: false  
+                })
+
+                gitalk.render('git-comments')
+                </script>
+                
+                        
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        
+<form id="search" method="POST" action="https://duckduckgo.com/">
+      
+      <input type="text" name="q" maxlength="255" placeholder="搜索...">
+      
+      <input type="hidden" name="sites" value="https://timx.cn/">
+      
+      <input type="hidden" name="kp" value="-2">
+      
+      <input type="hidden" name="kh" value="1">
+      
+      <input type="hidden" name="kl" value="wt-wt">
+      
+      <input type="hidden" name="kg" value="p">
+      
+      <input type="hidden" name="kaf" value="1">
+      
+      
+      <input type="hidden" name="k1" value="-1">
+
+      
+
+      
+      
+      <input type="hidden" name="k7" value="#ffffff">
+      
+      <input type="hidden" name="kj" value="#ffffff">
+      
+      <input type="hidden" name="ky" value="#eaeaea">
+      
+      <input type="hidden" name="kx" value="#6E7173">
+      
+      <input type="hidden" name="k8" value="#444">
+      
+      <input type="hidden" name="k9" value="#6E7173">
+      
+      <input type="hidden" name="kaa" value="#6E7173">
+      
+      <input type="hidden" name="kae" value="#6E7173">
+
+      
+      <input type="hidden" name="ko" value="1">
+      
+      <input type="hidden" name="kt" value="n">
+      
+      <input type="hidden" name="ka" value="g">
+      
+      <input type="hidden" name="ks" value="l">
+      
+      <input type="hidden" name="kv" value="1">
+
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    <section class="widget">
+        <div class="card">
+            <a href="#.">
+                <div class="card-image">
+                    <img class="lazy" data-original="https://timx.cn/img/fj.jpg" />
+                </div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3>
+                            Tim zhang
+                        </h3>
+                    </div>
+                    <div class="card-date">
+                        <time>
+                        </time>
+                    </div>
+                    
+                    <div class="card-exceprt">
+                        <p>
+                            
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section class="widget">
+        <div id="calendar" class="calendar"></div>
+    </section>
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            
+            <li>
+                <a href="/categories/markdown">markdown</a>
+            </li>
+            
+            <li>
+                <a href="/categories/tcp/ip">tcp/ip</a>
+            </li>
+            
+            <li>
+                <a href="/categories/%E5%85%B6%E4%BB%96">其他</a>
+            </li>
+            
+            <li>
+                <a href="/categories/%E6%A8%A1%E6%9D%BF">模板</a>
+            </li>
+            
+        </ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2018 <a rel="nofollow" href="https://timx.cn/">淡淡忧愁</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io">Hugo</a>.
+        <a rel="nofollow noreferer noopener" href="https://github.com/timzzx/maupassant-hugo">Theme</a> based on <a rel="nofollow noreferer noopener" href="https://github.com/pagecho/maupassant">maupassant</a>.
+    </div>
+</footer>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="/js/calendar.js" ></script>
+<script type="text/javascript" src="/js/point.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-go.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-php.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script type="text/javascript">
+  $('pre').addClass("line-numbers").css("white-space", "pre-wrap");
+</script>
+
+<script>
+$("img.lazy").lazyload({
+    effect : "fadeIn"
+});
+</script>
+</body>
+</html>
