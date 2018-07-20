@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://timx.cn/post/tcp_8/</loc>
+    <lastmod>2018-07-20T13:25:46+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://timx.cn/post/tcp_7/</loc>
     <lastmod>2018-07-19T10:56:09+08:00</lastmod>
   </url>
@@ -81,7 +86,7 @@
   
   <url>
     <loc>https://timx.cn/post/</loc>
-    <lastmod>2018-07-19T10:56:09+08:00</lastmod>
+    <lastmod>2018-07-20T13:25:46+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -93,7 +98,7 @@
   
   <url>
     <loc>https://timx.cn/categories/tcp/ip/</loc>
-    <lastmod>2018-07-19T10:56:09+08:00</lastmod>
+    <lastmod>2018-07-20T13:25:46+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -117,7 +122,7 @@
   
   <url>
     <loc>https://timx.cn/</loc>
-    <lastmod>2018-07-19T10:56:09+08:00</lastmod>
+    <lastmod>2018-07-20T13:25:46+08:00</lastmod>
     <priority>0</priority>
   </url>
   

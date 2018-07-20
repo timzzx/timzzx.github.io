@@ -6,10 +6,22 @@
     <description>Recent content in Tcp/Ip on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Jul 2018 10:56:09 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 20 Jul 2018 13:25:46 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/categories/tcp/ip/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TCP/IP学习理解(八)</title>
+      <link>https://timx.cn/post/tcp_8/</link>
+      <pubDate>Fri, 20 Jul 2018 13:25:46 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/tcp_8/</guid>
+      <description>广播和多播、IGMP协议 单播,多播,广播 单播(unicast)  单播是说,对特定的主机进行数据传送。例如给某一个主机发送 IP 数据包。这时候,数据链路层给出的数据头里面是非常具体的 目的地址,对于以太网来 说,就是网卡的 MAC 地址(不是 FF-FF-FF-FF-FF-FF 这样的地址)。现在的具有路由功能的主机应该可以将 单播数据定向转发,而目的主机的网 络接口则可以过滤掉和自己 MAC 地址不一致的数据。
+ 广播(unicast)  广播是主机针对某一个网络上的所有主机发送数据包。这个网络可能是网络,可能是子网,还可能是所有的子网。如果是网络, 例如 A 类网址的广播就是 netid.255.255.255,如果是子网,则是 netid.netid.subnetid.255;如果是所有的子网(B 类 IP)则是则是 netid.netid.255.255。广播所用的 MAC 地址 FF-FF-FF-FF-FF-FF。网络内所有的主机都会收到这个广播数据,网卡只要把 MAC 地址为 FF-FF-FF-FF-FF-FF 的数据交给内核就可以了。一般说来 ARP,或者路由协议 RIP 应该是以广播的形式播发的。
+ 多播(multicast)  可以说广播是多播的特例,多播就是给一组特定的主机(多播组)发送数据,这样,数据的播发范围会小一些(实际上播发的范围 一点也没有变小),多播的 MAC 地址是最高字节的低位为一,例 如01-00-00-00-00-00。多播组的地址是 D 类 IP,规定是 224.0.0.0-239.255.255.255。
+虽然多播比较特殊,但是究其原理,多播的数据还是要通过数据链路层进行 MAC 地址绑定然后进行发送。所以一个以太网卡在 绑定了一个多播 IP 地址之 后,必 定还要绑定一个多播的 MAC 地址,才能使得其可以像单播那样工作。这个多播的 IP 和多播 MAC 地址有一个对应的算法,在书的 p133到 p134之间。可以 看到 这个对应不是一一对应的,主机还是要对多播数据进行过滤。</description>
+    </item>
     
     <item>
       <title>TCP/IP学习理解(七)</title>
