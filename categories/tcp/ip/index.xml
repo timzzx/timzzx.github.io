@@ -6,10 +6,25 @@
     <description>Recent content in Tcp/Ip on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Jul 2018 13:25:46 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 23 Jul 2018 13:34:57 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/categories/tcp/ip/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TCP/IP学习理解(九)</title>
+      <link>https://timx.cn/post/tcp_9/</link>
+      <pubDate>Mon, 23 Jul 2018 13:34:57 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/tcp_9/</guid>
+      <description>DNS域名系统、TFTP简单文件传送协议、BOOTP引导程序协议 DNS域名系统  域名系统（英文：Domain Name System，缩写：DNS）是互联网的一项服务。它作为将域名和IP地址相互映射的一个分布式数据库，能够使人更方便地访问互联网。
+ DNS 报文定义了一个既可以查询也可以响应的报文格式。 1.最前面的16个 bit 唯一的标示了问题号码,用于查询端区别自己的查询。
+2.紧接着的16个 bit 又可以做进一步的细分,标示了报文的性质和一些细节,比如说是查询报文还是响应报文,需要递归 查询与否(一般服务器都支持递归查询,而且不需要任何设置,BIND 就是这样)
+3.查询问题后面有查询类型,包括 A,NS,CNAME,PTR,HINFO,MX,如果熟悉 BIND 的话,就知道在 zong 的配置 文件里面,每一条记录都记载了各自的类型,比如 A 就是 IP 地址,NS 就是名字服务器。
+4.响应报文可以回复多个 IP,也就是说,域名可以和多个 IP 地址对应,并且有很多 CNAME。
+反向查询 正向查询指的是通过域名得到 IP 的查询,而反向查询就是通过 IP 得到域名。例如用 host 命令,host ip 就可以得到服务器的域名, host domainName 就得到 IP。
+稍微知道一点数据结构的人都能意识到,在正向查询的域里面做反向查询,其做法只有遍历整个数据集合&amp;mdash;-对于 DNS 来说,那 就是遍历整个数据库, 这将带来巨大的负担,所以 DNS 采取了另一种方法,使用另一棵子树来维护 IP-〉域名的对应表。这个子树的根节点是 in-addr.arpa,而一个 IP 例如192.168.11.2)所具有的 DNS 地址就是 2.11.168.192.in-addr.arpa(ip 倒置)。在 DNS 系统里面,一个 反向地址对应一个 PTR 纪录(对应 A 纪录),所以反向查询又叫 做指针(PTR)查询。</description>
+    </item>
     
     <item>
       <title>TCP/IP学习理解(八)</title>
