@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.42.2" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <link rel="shortcut icon" href="/img/favicon.ico" >
+    <title>TCP/IP学习理解(十) - 淡淡忧愁</title>
+    <meta property="og:title" content="TCP/IP学习理解(十) - 淡淡忧愁">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2018-07-23T14:23:53&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2018-07-23T14:23:53&#43;08:00">
+        
+    <meta name="description" content="TCP/IP学习理解(十)">
+        
+    <meta name="author" content="Tim Zhang">
+    <meta property="og:url" content="https://timx.cn/post/tcp_10/">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dmaku.css">
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <img src="https://timx.cn/img/favicon.ico" />
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://timx.cn/">
+                        淡淡忧愁
+                    </a>
+                
+                
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="current" href="https://timx.cn/">博客</a>
+                    
+                    <a  href="https://timx.cn/wall/" title="留言板">
+                        留言板
+                    </a>
+                    
+                    <a  href="https://timx.cn/about/" title="关于">
+                        关于
+                    </a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+            
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">TCP/IP学习理解(十)</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                            2018年7月23日
+                            14:23 | 
+                            阅读时间1分钟
+                        </date>
+                        <div class="post-meta">
+                            | <i class="fa fa-user-o" aria-hidden="true"></i>
+                            <a href="/about">Tim Zhang</a>
+                        </div>
+                        
+                        <div class="post-meta">
+                         | <i class="fa fa-folder-o" aria-hidden="true"></i>
+                            
+                                <a href="/categories/tcp/ip">TCP/IP</a>
+                            
+                        </div>
+                        
+                        <br />
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+                </div>
+                
+                <aside>
+                    <div class="tablelist">
+                    <nav id="TableOfContents">
+<ul>
+<li><a href="#tcp-传输控制协议">TCP：传输控制协议</a>
+<ul>
+<li><a href="#tcp通过下列方式来提供可靠性">TCP通过下列方式来提供可靠性：</a></li>
+<li><a href="#tcp的首部">TCP的首部</a></li>
+</ul></li>
+<li><a href="#tcp连接的建立与终止">TCP连接的建立与终止</a></li>
+<li><a href="#tcp的交互数据流">TCP的交互数据流</a></li>
+<li><a href="#tcp的成块数据流">TCP的成块数据流</a></li>
+<li><a href="#tcp的超时与重传">TCP的超时与重传</a></li>
+<li><a href="#tcp的坚持定时器">TCP的坚持定时器</a></li>
+<li><a href="#tcp的保活定时器">TCP的保活定时器</a></li>
+<li><a href="#tcp的未来和性能">TCP的未来和性能</a></li>
+</ul>
+</nav>
+                    </div>
+                </aside>
+                 
+                        <div class="post-content">
+                            <article>
+                            
+
+<h1 id="tcp-传输控制协议">TCP：传输控制协议</h1>
+
+<blockquote>
+<p>尽管TCP和UDP都使用相同的网络层（IP），TCP却向应用层提供与UDP完全不同的服务。TCP提供一种面向连接的、可靠的字节流服务。<br />
+面向连接意味着两个使用TCP的应用（通常是一个客户和一个服务器）在彼此交换数据之前必须先建立一个TCP连接。这一过程与打电话很相似，先拨号振铃，等待对方摘机说“喂”，然后才说明是谁。在第18章我们将看到一个TCP连接是如何建立的，以及当一方通信结束后如何断开连接。</p>
+</blockquote>
+
+<h2 id="tcp通过下列方式来提供可靠性">TCP通过下列方式来提供可靠性：</h2>
+
+<p>1.应用数据被分割成TCP认为最适合发送的数据块。这和UDP完全不同，应用程序产生的数据报长度将保持不变。由TCP传递给IP的信息单位称为报文段或段（segment）（参见图1-7）。在18.4节我们将看到TCP如何确定报文段的长度。<br />
+2.当TCP发出一个段后，它启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段。在第21章我们将了解TCP协议中自适应的超时及重传策略。<br />
+3.当TCP收到发自TCP连接另一端的数据，它将发送一个确认。这个确认不是立即发送，通常将推迟几分之一秒，这将在19.3节讨论。<br />
+4.TCP将保持它首部和数据的检验和。这是一个端到端的检验和，目的是检测数据在传输过程中的任何变化。如果收到段的检验和有差错，TCP将丢弃这个报文段和不确认收到此报文段（希望发端超时并重发）。<br />
+5.既然TCP报文段作为IP数据报来传输，而IP数据报的到达可能会失序，因此TCP报文段的到达也可能会失序。如果必要，TCP将对收到的数据进行重新排序，将收到的数据以正确的顺序交给应用层。<br />
+6.既然IP数据报会发生重复，TCP的接收端必须丢弃重复的数据。<br />
+7.TCP还能提供流量控制。TCP连接的每一方都有固定大小的缓冲空间。TCP的接收端只允许另一端发送接收端缓冲区所能接纳的数据。这将防止较快主机致使较慢主机的缓冲区溢出。<br /></p>
+
+<h2 id="tcp的首部">TCP的首部</h2>
+
+<p><center><table> <tr> <td>IP首部 </td> <td>TCP首部 </td> <td>TCP数据 </td> </tr> </table></center>
+<br /></p>
+
+<p><center><table>  <tr> <td colspan="16">源端口 </td> <td colspan="16">目标端口 </td> </tr> <tr> <td colspan="32">32位序号 </td> </tr> <tr> <td colspan="32">32位确认序号 </td> </tr> <tr> <td colspan="4">4位首部长度 </td> <td colspan="6">保留（6位） </td> <td colspan="1">URG </td> <td colspan="1">ACK </td> <td colspan="1">PSH </td> <td colspan="1">PST </td> <td colspan="1">SYN </td> <td colspan="1">FIN </td> <td colspan="16">16位窗口大小 </td> </tr> <tr> <td colspan="16">16位检验和 </td> <td colspan="16">16位紧急指针 </td> </tr> <tr> <td colspan="32">选项 </td> </tr> <tr> <td colspan="32">数据 </td> </tr> </table></center></p>
+
+<p><b>源端口、目标端口：</b>计算机上的进程要和其他进程通信是要通过计算机端口的，而一个计算机端口某个时刻只能被一个进程占用，所以通过指定源端口和目标端口，就可以知道是哪两个进程需要通信。源端口、目标端口是用16位表示的，可推算计算机的端口个数为2^16个。<br /><br />
+<b>序列号：</b>表示本报文段所发送数据的第一个字节的编号。在TCP连接中所传送的字节流的每一个字节都会按顺序编号。由于序列号由32位表示，所以每2^32个字节，就会出现序列号回绕，再次从 0 开始。那如何区分两个相同序列号的不同TCP报文段就是一个问题了，后面会有答案，暂时可以不管。<br /><br />
+<b>确认号：</b>表示接收方期望收到发送方下一个报文段的第一个字节数据的编号。也就是告诉发送发：我希望你（指发送方）下次发送的数据的第一个字节数据的编号是这个确认号。也就是告诉发送方：我希望你（指发送方）下次发送给我的TCP报文段的序列号字段的值是这个确认号。<br /><br />
+<b>TCP首部长度：</b>由于TCP首部包含一个长度可变的选项部分，所以需要这么一个值来指定这个TCP报文段到底有多长。或者可以这么理解：就是表示TCP报文段中数据部分在整个TCP报文段中的位置。该字段的单位是32位字，即：4个字节。<br /><br />
+<b>URG：</b>表示本报文段中发送的数据是否包含紧急数据。URG=1，表示有紧急数据。后面的紧急指针字段只有当URG=1时才有效。<br /><br />
+<b>ACK：</b>表示是否前面的确认号字段是否有效。ACK=1，表示有效。只有当ACK=1时，前面的确认号字段才有效。TCP规定，连接建立后，ACK必须为1。<br /><br />
+<b>PSH：</b>告诉对方收到该报文段后是否应该立即把数据推送给上层。如果为1，则表示对方应当立即把数据提交给上层，而不是缓存起来。<br /><br />
+<b>RST：</b>只有当RST=1时才有用。如果你收到一个RST=1的报文，说明你与主机的连接出现了严重错误（如主机崩溃），必须释放连接，然后再重新建立连接。或者说明你上次发送给主机的数据有问题，主机拒绝响应。<br /><br />
+<b>SYN：</b>在建立连接时使用，用来同步序号。当SYN=1，ACK=0时，表示这是一个请求建立连接的报文段；当SYN=1，ACK=1时，表示对方同意建立连接。SYN=1，说明这是一个请求建立连接或同意建立连接的报文。只有在前两次握手中SYN才置为1。<br /><br />
+<b>FIN：</b>标记数据是否发送完毕。如果FIN=1，就相当于告诉对方：“我的数据已经发送完毕，你可以释放连接了”<br /><br />
+<b>窗口大小：</b>表示现在运行对方发送的数据量。也就是告诉对方，从本报文段的确认号开始允许对方发送的数据量。<br /><br />
+<b>校验和：</b>提供额外的可靠性。具体如何校验，参考其他资料。<br /><br />
+<b>紧急指针：</b>标记紧急数据在数据字段中的位置。<br /><br />
+<b>选项部分：</b>其最大长度可根据TCP首部长度进行推算。TCP首部长度用4位表示，那么选项部分最长为：(2^4-1)*4-20=40字节。<br /><br />
+<b>选项部分的应用：</b><br /><br />
+<b>MSS最大报文段长度(Maxium Segment Size)：</b>指明数据字段的最大长度，数据字段的长度加上TCP首部的长度才等于整个TCP报文段的长度。MSS值指示自己期望对方发送TCP报文段时那个数据字段的长度。通信双方可以有不同的MSS值。如果未填写，默认采用536字节。MSS只出现在SYN报文中。即：MSS出现在SYN=1的报文段中。<br /><br />
+<b>窗口扩大选项(Windows Scaling)：</b>由于TCP首部的窗口大小字段长度是16位，所以其表示的最大数是65535。但是随着时延和带宽比较大的通信产生（如卫星通信），需要更大的窗口来满足性能和吞吐率，所以产生了这个窗口扩大选项。<br /><br />
+<b>SACK选择确认项(Selective Acknowledgements)：</b>用来确保只重传缺少的报文段，而不是重传所有报文段。比如主机A发送报文段1、2、3，而主机B仅收到报文段1、3。那么此时就需要使用SACK选项来告诉发送方只发送丢失的数据。那么又如何指明丢失了哪些报文段呢？使用SACK需要两个功能字节。一个表示要使用SACK选项，另一个指明这个选项占用多少字节。描述丢失的报文段2，是通过描述它的左右边界报文段1、3来完成的。而这个1、3实际上是表示序列号，所以描述一个丢失的报文段需要64位即8个字节的空间。那么可以推算整个选项字段最多描述(40-2)/8=4个丢失的报文段。<br /><br />
+<b>时间戳选项（Timestamps）：</b>可以用来计算RTT(往返时间)，发送方发送TCP报文时，把当前的时间值放入时间戳字段，接收方收到后发送确认报文时，把这个时间戳字段的值复制到确认报文中，当发送方收到确认报文后即可计算出RTT。也可以用来防止回绕序号PAWS，也可以说可以用来区分相同序列号的不同报文。因为序列号用32为表示，每2^32个序列号就会产生回绕，那么使用时间戳字段就很容易区分相同序列号的不同报文。<br /><br />
+<b>NOP(NO-Operation)：</b>它要求选项部分中的每种选项长度必须是4字节的倍数，不足的则用NOP填充。同时也可以用来分割不同的选项字段。如窗口扩大选项和SACK之间用NOP隔开。<br /><br />
+<hr /></p>
+
+<h1 id="tcp连接的建立与终止">TCP连接的建立与终止</h1>
+
+<h1 id="tcp的交互数据流">TCP的交互数据流</h1>
+
+<h1 id="tcp的成块数据流">TCP的成块数据流</h1>
+
+<h1 id="tcp的超时与重传">TCP的超时与重传</h1>
+
+<h1 id="tcp的坚持定时器">TCP的坚持定时器</h1>
+
+<h1 id="tcp的保活定时器">TCP的保活定时器</h1>
+
+<h1 id="tcp的未来和性能">TCP的未来和性能</h1>
+
+                            
+                            <a href="https://timx.cn/post/tcp_9/">TCP/IP学习理解(九)</a>
+                            
+                            
+                            </article>
+                        </div>
+                
+                <div id="git-comments"></div>
+                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+                <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+                <script>
+                
+                function GetUrlRelativePath()
+            　　{
+            　　　　var url = document.location.toString();
+            　　　　var arrUrl = url.split("//");
+
+            　　　　var start = arrUrl[1].indexOf("/");
+            　　　　var relUrl = arrUrl[1].substring(start);
+
+            　　　　if(relUrl.indexOf("?") != -1){
+            　　　　　　relUrl = relUrl.split("?")[0];
+            　　　　}
+            　　　　return relUrl;
+            　　}
+                  
+                  var gitalk = new Gitalk({
+                  clientID: "5b5fde7475577bcb14fc",
+                  clientSecret: "5a75bf2c7de61ecfb836987ddb5889433044a464",
+                  owner: "timzzx",
+                  repo: "timx.cn",
+                  admin: ["timzzx"],
+                    id: GetUrlRelativePath(),  
+                  distractionFreeMode: false  
+                })
+
+                gitalk.render('git-comments')
+                </script>
+                
+                        
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        
+<form id="search" method="POST" action="https://duckduckgo.com/">
+      
+      <input type="text" name="q" maxlength="255" placeholder="搜索...">
+      
+      <input type="hidden" name="sites" value="https://timx.cn/">
+      
+      <input type="hidden" name="kp" value="-2">
+      
+      <input type="hidden" name="kh" value="1">
+      
+      <input type="hidden" name="kl" value="wt-wt">
+      
+      <input type="hidden" name="kg" value="p">
+      
+      <input type="hidden" name="kaf" value="1">
+      
+      
+      <input type="hidden" name="k1" value="-1">
+
+      
+
+      
+      
+      <input type="hidden" name="k7" value="#ffffff">
+      
+      <input type="hidden" name="kj" value="#ffffff">
+      
+      <input type="hidden" name="ky" value="#eaeaea">
+      
+      <input type="hidden" name="kx" value="#6E7173">
+      
+      <input type="hidden" name="k8" value="#444">
+      
+      <input type="hidden" name="k9" value="#6E7173">
+      
+      <input type="hidden" name="kaa" value="#6E7173">
+      
+      <input type="hidden" name="kae" value="#6E7173">
+
+      
+      <input type="hidden" name="ko" value="1">
+      
+      <input type="hidden" name="kt" value="n">
+      
+      <input type="hidden" name="ka" value="g">
+      
+      <input type="hidden" name="ks" value="l">
+      
+      <input type="hidden" name="kv" value="1">
+
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    <section class="widget">
+        <div class="card">
+            <a href="#.">
+                <div class="card-image">
+                    <img class="lazy" data-original="https://timx.cn/img/fj.jpg" />
+                </div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3>
+                            Tim zhang
+                        </h3>
+                    </div>
+                    <div class="card-date">
+                        <time>
+                        </time>
+                    </div>
+                    
+                    <div class="card-exceprt">
+                        <p>
+                            
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section class="widget">
+        <div id="calendar" class="calendar"></div>
+    </section>
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+        <ul class="widget-list">
+            
+            <li>
+                <a href="/categories/markdown">markdown</a>
+            </li>
+            
+            <li>
+                <a href="/categories/tcp/ip">tcp/ip</a>
+            </li>
+            
+            <li>
+                <a href="/categories/%E5%85%B6%E4%BB%96">其他</a>
+            </li>
+            
+            <li>
+                <a href="/categories/%E6%A8%A1%E6%9D%BF">模板</a>
+            </li>
+            
+        </ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2018 <a rel="nofollow" href="https://timx.cn/">淡淡忧愁</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io">Hugo</a>.
+        <a rel="nofollow noreferer noopener" href="https://github.com/timzzx/maupassant-hugo">Theme</a> based on <a rel="nofollow noreferer noopener" href="https://github.com/pagecho/maupassant">maupassant</a>.
+    </div>
+</footer>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="/js/calendar.js" ></script>
+<script type="text/javascript" src="/js/point.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-go.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-php.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script type="text/javascript">
+  $('pre').addClass("line-numbers").css("white-space", "pre-wrap");
+</script>
+
+<script>
+$("img.lazy").lazyload({
+    effect : "fadeIn"
+});
+</script>
+</body>
+</html>
