@@ -8,19 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="shortcut icon" href="https://s1.ax1x.com/2018/07/25/PtkTLd.png" >
-    <title>TCP/IP学习理解(九) - 淡淡忧愁</title>
-    <meta property="og:title" content="TCP/IP学习理解(九) - 淡淡忧愁">
+    <title>HTTP学习理解(一) - 淡淡忧愁</title>
+    <meta property="og:title" content="HTTP学习理解(一) - 淡淡忧愁">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-07-23T13:34:57&#43;08:00">
+    <meta property="article:published_time" content="2018-07-26T13:48:11&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2018-07-23T13:34:57&#43;08:00">
+    <meta property="article:modified_time" content="2018-07-26T13:48:11&#43;08:00">
         
-    <meta name="description" content="TCP/IP学习理解(九)">
+    <meta name="description" content="HTTP学习理解(一)">
         
     <meta name="author" content="Tim Zhang">
-    <meta property="og:url" content="https://timx.cn/post/tcp_9/">
+    <meta property="og:url" content="https://timx.cn/post/http_1/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
     
@@ -74,12 +74,12 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title">TCP/IP学习理解(九)</h1>
+                            <h1 class="post-title">HTTP学习理解(一)</h1>
                         </header>
                         <date class="post-meta meta-date">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                            2018年7月23日
-                            13:34 | 
+                            2018年7月26日
+                            13:48 | 
                             阅读时间1分钟
                         </date>
                         <div class="post-meta">
@@ -90,7 +90,7 @@
                         <div class="post-meta">
                          | <i class="fa fa-folder-o" aria-hidden="true"></i>
                             
-                                <a href="/categories/tcp/ip">TCP/IP</a>
+                                <a href="/categories/http">HTTP</a>
                             
                         </div>
                         
@@ -108,17 +108,10 @@
                     <div class="tablelist">
                     <nav id="TableOfContents">
 <ul>
-<li><a href="#dns域名系统-tftp简单文件传送协议-bootp引导程序协议">DNS域名系统、TFTP简单文件传送协议、BOOTP引导程序协议</a>
-<ul>
-<li><a href="#dns域名系统">DNS域名系统</a>
-<ul>
-<li><a href="#dns-报文定义了一个既可以查询也可以响应的报文格式">DNS 报文定义了一个既可以查询也可以响应的报文格式。</a></li>
-<li><a href="#反向查询">反向查询</a></li>
-<li><a href="#其他问题的讨论">其他问题的讨论</a></li>
-</ul></li>
-<li><a href="#tftp简单文件传送协议">TFTP简单文件传送协议</a></li>
-<li><a href="#bootp引导程序协议">BOOTP引导程序协议</a></li>
-</ul></li>
+<li><a href="#http基础">HTTP基础</a></li>
+<li><a href="#http方法">HTTP方法</a></li>
+<li><a href="#持久连接">持久连接</a></li>
+<li><a href="#使用cookie的状态管理">使用Cookie的状态管理</a></li>
 </ul>
 </nav>
                     </div>
@@ -128,103 +121,59 @@
                             <article>
                             
 
-<h1 id="dns域名系统-tftp简单文件传送协议-bootp引导程序协议">DNS域名系统、TFTP简单文件传送协议、BOOTP引导程序协议</h1>
-
-<h2 id="dns域名系统">DNS域名系统</h2>
+<h1 id="http基础">HTTP基础</h1>
 
 <blockquote>
-<p>域名系统（英文：Domain Name System，缩写：DNS）是互联网的一项服务。它作为将域名和IP地址相互映射的一个分布式数据库，能够使人更方便地访问互联网。</p>
+<p>两台计算机在使用HTTP通信在一条线路上的必须是一端为客户端， 一端为服务器；<br />
+HTTP协议规定请求从客户端发出， 最后服务器端响应该请求并返回；<br />
+HTTP是不保存状态， 即无状态协议， 于是为了实现保持状态功能引入了Cookie技术；<br /></p>
 </blockquote>
 
-<h3 id="dns-报文定义了一个既可以查询也可以响应的报文格式">DNS 报文定义了一个既可以查询也可以响应的报文格式。</h3>
+<h1 id="http方法">HTTP方法</h1>
 
-<p>1.最前面的16个 bit 唯一的标示了问题号码,用于查询端区别自己的查询。<br />
-2.紧接着的16个 bit 又可以做进一步的细分,标示了报文的性质和一些细节,比如说是查询报文还是响应报文,需要递归 查询与否(一般服务器都支持递归查询,而且不需要任何设置,BIND 就是这样)<br />
-3.查询问题后面有查询类型,包括 A,NS,CNAME,PTR,HINFO,MX,如果熟悉 BIND 的话,就知道在 zong 的配置 文件里面,每一条记录都记载了各自的类型,比如 A 就是 IP 地址,NS 就是名字服务器。<br />
-4.响应报文可以回复多个 IP,也就是说,域名可以和多个 IP 地址对应,并且有很多 CNAME。<br /></p>
-
-<h3 id="反向查询">反向查询</h3>
-
-<p>正向查询指的是通过域名得到 IP 的查询,而反向查询就是通过 IP 得到域名。例如用 host 命令,host ip 就可以得到服务器的域名, host domainName 就得到 IP。<br /></p>
-
-<p>稍微知道一点数据结构的人都能意识到,在正向查询的域里面做反向查询,其做法只有遍历整个数据集合&mdash;-对于 DNS 来说,那 就是遍历整个数据库, 这将带来巨大的负担,所以 DNS 采取了另一种方法,使用另一棵子树来维护 IP-〉域名的对应表。这个子树的根节点是 in-addr.arpa,而一个 IP 例如192.168.11.2)所具有的 DNS 地址就是 2.11.168.192.in-addr.arpa(ip 倒置)。在 DNS 系统里面,一个 反向地址对应一个 PTR 纪录(对应 A 纪录),所以反向查询又叫 做指针(PTR)查询。</p>
-
-<h3 id="其他问题的讨论">其他问题的讨论</h3>
-
-<p>1.DNS 服务器高速缓存<br /></p>
-
-<p>BIND9默认是作为一个高速缓存服务器,其将所有的查询都转交到根服务器去,然后得到结果并放在本地的缓冲区,以加快查询速度。如果有兴趣可以安装一个 BIND9来尝试一下。而自己定义的 zone 则可以规定其在缓存中的时间,一般是1天(就是配置文件中 的1D)。<br /></p>
-
-<p>2.用 UDP 还是 TCP<br /></p>
-
-<p>DNS 服务器支持 TCP 和 UDP 两种协议的查询方式,而且端口都是53。而大多数的查询都是 UDP 查询的,一般需要 TCP 查询的 有两种情况:<br /></p>
-
-<p>当查询数据多大以至于产生了数据截断(TC标志为1),这时,需要利用TCP的分片能力来进行数据传输。<br />
-当主(master)服务器和辅(slave)服务器之间通信,辅服务器要拿到主服务器的 zone 信息的时候。<br /></p>
-
-<h2 id="tftp简单文件传送协议">TFTP简单文件传送协议</h2>
-
-<blockquote>
-<p>TFTP(Trivial File Transfer Protocol)即简单文件传送协议，最初打算用于引导无盘系统（通常是工作站或X终端）。和使用TCP的文件传送协议（FTP）不同，为了保持简单和短小，TFTP将使用UDP。TFTP的代码（和它所需要的UDP、IP和设备驱动程序）都能适合只读存储器。</p>
-</blockquote>
-
-<p><img src="http://docs.52im.net/extend/docs/book/tcpip/vol1/15/images2/52im_net_1.png" alt="card" /></p>
-
-<p>TFTP是一个简单的协议，适合于只读存储器，仅用于无盘系统进行系统引导。它只使用几种报文格式，是一种停止等待协议。<br /></p>
-
-<p>为了允许多个客户端同时进行系统引导，TFTP服务器必须提供一定形式的并发。因为UDP在一个客户与一个服务器之间并不提供唯一连接（TCP也一样），TFTP服务器通过为每个客户提供一个新的UDP端口来提供并发。这允许不同的客户输入数据报，然后由服务器中的UDP模块根据目的端口号进行区分，而不是由服务器本身来进行区分。<br /></p>
-
-<p>TFTP协议没有提供安全特性。大多数执行指望TFTP服务器的系统管理员来限制客户的访问，只允许它们访问引导所必须的文件。<br /></p>
-
-<p>文件传输协议（FTP）是设计用于一般目的的、高吞吐量的文件传输。<br /></p>
-
-<h2 id="bootp引导程序协议">BOOTP引导程序协议</h2>
-
-<p>BOOTP使用UDP，它为引导无盘系统获得它的IP地址提供了除RARP外的另外一种选择。BOOTP还能返回其他的信息，如路由器的IP地址、客户的子网掩码和名字服务器的IP地址。<br />
-既然BOOTP用于系统引导过程，一个无盘系统需要下列协议才能在只读存储器中完成：BOOTP、TFTP、UDP、IP和一个局域网的驱动程序。<br />
-BOOTP服务器比RARP服务器更易于实现，因为BOOTP请求和应答是在UDP数据报中，而不是特殊的数据链路层帧。一个路由器还能作为真正BOOTP服务器的代理，向位于不同网络的真正BOOTP服务器转发客户的BOOTP请求。<br />
+<p><b>GET：</b>获取资源<br /><br />
+GET方法用来请求访问已被URI识别的资源， 制定的资源经服务器端解析后返回响应内容。<br /><br />
+<b>POST：</b>传输实体主体<br /><br />
+POST方法用来传输实体的主体， 虽然GET方法也可以但一般不用GET方法传输实体的主体。<br /><br />
+<b>PUT：</b>传输文件<br /><br />
+PUT方法用来传输文件。 就像FTP协议的文件上传一样， 要求在请求报文的主体中包含文件的内容， 然后保存到请求URI指定的位置。<br /><br />
+<b>HEAD：</b>获得报文首部<br /><br />
+HEAD方法和GET方法一样， 只是不返回报文主体部分， 用于确认URI的有效性及资源更新的日期时间。<br /><br />
+<b>DELETE：</b>删除文件<br /><br />
+DELETE方法用来删除文件， 是与PUT方法相反的方法。<br /><br />
+<b>OPTION：</b>询问支持的方法<br /><br />
+OPTION方法用来查询针对请求URI指定的资源支持的方法。<br /><br />
+<b>TRACE：</b>追踪路径<br /><br />
+TRACE方法是让WEB服务器端将之前的请求通信环回给客户端的方法。<br /><br />
+<b>CONNECT：</b>要求用隧道协议连接代理<br /><br />
+CONNECT方法要求在代理服务器通信时建立隧道， 实现隧道协议进行TCP通信。<br />
 <hr /></p>
 
+<h1 id="持久连接">持久连接</h1>
+
+<p><b>问题：</b><br /><br />
+初始的HTTP协议版本中， 每进行一次HTTP通信就要断开一次TCP连接， 随着HTTP的普及，文档中包含大量图片的情况多了起来以后， 每次请求都会造成无谓的TCP连接建立和断开，增加通信量的开销。<br /><br />
+<b>解决：</b><br /><br />
+使用持久连接的方法。 特点是：只要任意一端没有明确的提出断开连接， 则保持TCP的连接状态。<br /><br />
+<b>优点：</b><br /><br />
+减少了TCP连接的重复建立和断开造成的额外开销， 减轻了服务器的负载；另外，减少了开销的那部分时间， 使HTTP请求和响应不能够更早的结束， 这样WEB页面的显示速度也就相应的提高了。<br /><br />
+<hr /></p>
+
+<h1 id="使用cookie的状态管理">使用Cookie的状态管理</h1>
+
+<blockquote>
+<p>Cookie会根据从服务器端发送的响应报文内的一个叫做Set—Cookie的首部字段信息， 通知保存Cookie。 当下次客户端再往该服务器发送请求时， 客户端会自动在请求报文中加入Cookie值后发送出去。<br /><br />
+服务端发现客户端发送过来的Cookie后， 会去检查究竟是从哪一个客户端发来的连接请求，然后对比服务器上的记录， 最后得到之前的状态信息。<br /><br /></p>
+</blockquote>
+
+<hr />
+
                             
-                            <a href="https://timx.cn/post/tcp_8/">上一页</a>&nbsp;TCP/IP学习理解(八)<br /><br />
+                            <a href="https://timx.cn/post/tcp_11/">上一页</a>&nbsp;TCP/IP的题目和问答<br /><br />
                             
-                            
-                            <a href="https://timx.cn/post/tcp_10/">下一页</a>&nbsp;TCP/IP学习理解(十)
                             
                             </article>
                         </div>
-                
-                <div id="git-comments"></div>
-                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
-                <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-                <script>
-                
-                function GetUrlRelativePath()
-            　　{
-            　　　　var url = document.location.toString();
-            　　　　var arrUrl = url.split("//");
-
-            　　　　var start = arrUrl[1].indexOf("/");
-            　　　　var relUrl = arrUrl[1].substring(start);
-
-            　　　　if(relUrl.indexOf("?") != -1){
-            　　　　　　relUrl = relUrl.split("?")[0];
-            　　　　}
-            　　　　return relUrl;
-            　　}
-                  
-                  var gitalk = new Gitalk({
-                  clientID: "5b5fde7475577bcb14fc",
-                  clientSecret: "5a75bf2c7de61ecfb836987ddb5889433044a464",
-                  owner: "timzzx",
-                  repo: "timx.cn",
-                  admin: ["timzzx"],
-                    id: GetUrlRelativePath(),  
-                  distractionFreeMode: false  
-                })
-
-                gitalk.render('git-comments')
-                </script>
                 
                         
             </div>

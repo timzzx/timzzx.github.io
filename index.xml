@@ -6,10 +6,46 @@
     <description>Recent content on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Jul 2018 14:44:55 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 26 Jul 2018 13:48:11 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>HTTP学习理解(一)</title>
+      <link>https://timx.cn/post/http_1/</link>
+      <pubDate>Thu, 26 Jul 2018 13:48:11 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/http_1/</guid>
+      <description> HTTP基础  两台计算机在使用HTTP通信在一条线路上的必须是一端为客户端， 一端为服务器；
+HTTP协议规定请求从客户端发出， 最后服务器端响应该请求并返回；
+HTTP是不保存状态， 即无状态协议， 于是为了实现保持状态功能引入了Cookie技术；
+ HTTP方法 GET：获取资源
+GET方法用来请求访问已被URI识别的资源， 制定的资源经服务器端解析后返回响应内容。
+POST：传输实体主体
+POST方法用来传输实体的主体， 虽然GET方法也可以但一般不用GET方法传输实体的主体。
+PUT：传输文件
+PUT方法用来传输文件。 就像FTP协议的文件上传一样， 要求在请求报文的主体中包含文件的内容， 然后保存到请求URI指定的位置。
+HEAD：获得报文首部
+HEAD方法和GET方法一样， 只是不返回报文主体部分， 用于确认URI的有效性及资源更新的日期时间。
+DELETE：删除文件
+DELETE方法用来删除文件， 是与PUT方法相反的方法。
+OPTION：询问支持的方法
+OPTION方法用来查询针对请求URI指定的资源支持的方法。
+TRACE：追踪路径
+TRACE方法是让WEB服务器端将之前的请求通信环回给客户端的方法。
+CONNECT：要求用隧道协议连接代理
+CONNECT方法要求在代理服务器通信时建立隧道， 实现隧道协议进行TCP通信。
+持久连接 问题：
+初始的HTTP协议版本中， 每进行一次HTTP通信就要断开一次TCP连接， 随着HTTP的普及，文档中包含大量图片的情况多了起来以后， 每次请求都会造成无谓的TCP连接建立和断开，增加通信量的开销。
+解决：
+使用持久连接的方法。 特点是：只要任意一端没有明确的提出断开连接， 则保持TCP的连接状态。
+优点：
+减少了TCP连接的重复建立和断开造成的额外开销， 减轻了服务器的负载；另外，减少了开销的那部分时间， 使HTTP请求和响应不能够更早的结束， 这样WEB页面的显示速度也就相应的提高了。
+使用Cookie的状态管理  Cookie会根据从服务器端发送的响应报文内的一个叫做Set—Cookie的首部字段信息， 通知保存Cookie。 当下次客户端再往该服务器发送请求时， 客户端会自动在请求报文中加入Cookie值后发送出去。
+服务端发现客户端发送过来的Cookie后， 会去检查究竟是从哪一个客户端发来的连接请求，然后对比服务器上的记录， 最后得到之前的状态信息。
+ </description>
+    </item>
     
     <item>
       <title>TCP/IP的题目和问答</title>
