@@ -8,19 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="shortcut icon" href="https://s1.ax1x.com/2018/07/25/PtkTLd.png" >
-    <title>留言板 - 淡淡忧愁</title>
-    <meta property="og:title" content="留言板 - 淡淡忧愁">
+    <title>HTTP学习理解(二) - 淡淡忧愁</title>
+    <meta property="og:title" content="HTTP学习理解(二) - 淡淡忧愁">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-07-06T11:24:40&#43;08:00">
+    <meta property="article:published_time" content="2018-07-27T10:42:12&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2018-07-06T11:24:40&#43;08:00">
+    <meta property="article:modified_time" content="2018-07-27T10:42:12&#43;08:00">
         
-    <meta name="description" content="留言板">
+    <meta name="description" content="HTTP学习理解(二)">
         
     <meta name="author" content="Tim Zhang">
-    <meta property="og:url" content="https://timx.cn/wall/">
+    <meta property="og:url" content="https://timx.cn/post/http_2/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
     
@@ -48,9 +48,9 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix">
-                    <a class="" href="https://timx.cn/">博客</a>
+                    <a class="current" href="https://timx.cn/">博客</a>
                     
-                    <a class="current" href="https://timx.cn/wall/" title="留言板">
+                    <a  href="https://timx.cn/wall/" title="留言板">
                         留言板
                     </a>
                     
@@ -74,12 +74,12 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title">留言板</h1>
+                            <h1 class="post-title">HTTP学习理解(二)</h1>
                         </header>
                         <date class="post-meta meta-date">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                            2018年7月6日
-                            11:24 | 
+                            2018年7月27日
+                            10:42 | 
                             阅读时间1分钟
                         </date>
                         <div class="post-meta">
@@ -87,55 +87,189 @@
                             <a href="/about">Tim Zhang</a>
                         </div>
                         
+                        <div class="post-meta">
+                         | <i class="fa fa-folder-o" aria-hidden="true"></i>
+                            
+                                <a href="/categories/http">HTTP</a>
+                            
+                        </div>
+                        
                         <br />
                     </article>
                     
                 </div>
                 
+                <aside>
+                    <div class="tablelist">
+                    <nav id="TableOfContents">
+<ul>
+<li><a href="#http-报文">HTTP 报文</a></li>
+<li><a href="#请求报文及响应报文的结构">请求报文及响应报文的结构</a></li>
+<li><a href="#编码提升传输速率">编码提升传输速率</a>
+<ul>
+<li><a href="#报文主体和实体主体的差异">报文主体和实体主体的差异</a></li>
+<li><a href="#压缩传输的内容编码">压缩传输的内容编码</a></li>
+<li><a href="#分割发送的分块传输编码">分割发送的分块传输编码</a></li>
+</ul></li>
+<li><a href="#发送多种数据的多部分对象集合">发送多种数据的多部分对象集合</a></li>
+<li><a href="#获取部分内容的范围请求">获取部分内容的范围请求</a></li>
+<li><a href="#内容协商返回最合适的内容">内容协商返回最合适的内容</a></li>
+</ul>
+</nav>
+                    </div>
+                </aside>
+                 
                         <div class="post-content">
                             <article>
-                            <p>欢迎大家留言。</p>
+                            
+
+<h1 id="http-报文">HTTP 报文</h1>
+
+<blockquote>
+<p>用于 HTTP 协议交互的信息被称为 HTTP 报文。请求端（客户端）的 HTTP 报文叫做请求报文，响应端（服务器端）的叫做响应报文。 HTTP 报文本身是由多行（用 CR+LF 作换行符） 数据构成的字符串文本。</p>
+</blockquote>
+
+<p><center>
+<table>
+<tr>
+<td>
+报文首部
+</td>
+</tr>
+<tr>
+<td>
+空行CR+LF
+</td>
+</tr>
+<tr>
+<td>
+报文主体
+</td>
+</tr>
+</table>
+<i>HTTP报文的结构</i>
+</center>
+<b>报文首部:</b>服务器端或客户端需处理的请求或响应的内容及属性<br /><br />
+<b>CR+LF:</b>CR回车符，16进制0x0D；LF换行符，16进制0x0A<br /><br />
+<b>报文主体:</b>应被发送的数据
+<hr /></p>
+
+<h1 id="请求报文及响应报文的结构">请求报文及响应报文的结构</h1>
+
+<p><center>
+<table>
+<tr>
+<td>请求行
+</td>
+</tr>
+<tr>
+<td>请求首部字段
+</td>
+</tr>
+<tr>
+<td>通用首部字段
+</td>
+</tr>
+<tr>
+<td>实体首部字段
+</td>
+</tr>
+<tr>
+<td>其他
+</td>
+</tr>
+</table>
+<i>请求报文</i>
+</center></p>
+
+<p><center>
+<table>
+<tr>
+<td>状态行
+</td>
+</tr>
+<tr>
+<td>响应首部字段
+</td>
+</tr>
+<tr>
+<td>通用首部字段
+</td>
+</tr>
+<tr>
+<td>实体首部字段
+</td>
+</tr>
+<tr>
+<td>其他
+</td>
+</tr>
+</table>
+<i>响应报文</i>
+</center></p>
+
+<p><b>请求行:</b>包含用于请求的方法， 请求 URI 和 HTTP 版本<br /><br />
+<b>状态行:</b>包含表明响应结果的状态码， 原因短语和 HTTP 版本<br /><br />
+<b>首部字段:</b>包含表示请求和响应的各种条件和属性的各类首部。一般有 4 种首部， 分别是： 通用首部、 请求首部、 响应首部和实体首部。<br /><br />
+<b>其他:</b>可能包含 HTTP 的 RFC 里未定义的首部（Cookie 等）
+<hr /></p>
+
+<h1 id="编码提升传输速率">编码提升传输速率</h1>
+
+<blockquote>
+<p>HTTP 在传输数据时可以按照数据原貌直接传输， 但也可以在传输过程中通过编码提升传输速率。 通过在传输时编码， 能有效地处理大量的访问请求。 但是， 编码的操作需要计算机来完成， 因此会消耗更多的 CPU 等资源。</p>
+</blockquote>
+
+<h2 id="报文主体和实体主体的差异">报文主体和实体主体的差异</h2>
+
+<p><b>报文（message）</b><br /><br />
+是 HTTP 通信中的基本单位， 由 8 位组字节流（octet sequence， 其中 octet 为 8 个比特） 组成， 通过HTTP 通信传输。<br /><br />
+<b>实体（entity）</b><br /><br />
+作为请求或响应的有效载荷数据（补充项） 被传输， 其内容由实体首部和实体主体组成。<br /><br /></p>
+
+<h2 id="压缩传输的内容编码">压缩传输的内容编码</h2>
+
+<p>常用的内容编码有以下几种。<br /><br />
+gzip（GNU zip）<br /><br />
+compress（UNIX 系统的标准压缩）<br /><br />
+deflate（zlib）<br /><br />
+identity（不进行编码）<br /><br /></p>
+
+<h2 id="分割发送的分块传输编码">分割发送的分块传输编码</h2>
+
+<blockquote>
+<p>在 HTTP 通信过程中， 请求的编码实体资源尚未全部传输完成之前， 浏览器无法显示请求页面。 在传输大容量数据时， 通过把数据分割成多块， 能够让浏览器逐步显示页面。<br />
+分块传输编码会将实体主体分成多个部分（块） 。 每一块都会用十六进制来标记块的大小， 而实体主体的最后一块会使用“0(CR+LF)”来标记</p>
+</blockquote>
+
+<h1 id="发送多种数据的多部分对象集合">发送多种数据的多部分对象集合</h1>
+
+<p>多部分对象集合包含的对象如下。<br /><br />
+multipart/form-data<br /><br />
+在 Web 表单文件上传时使用。<br /><br />
+multipart/byteranges<br /><br />
+状态码 206（Partial Content， 部分内容） 响应报文包含了多个范围的内容时使用。<br /></p>
+
+<h1 id="获取部分内容的范围请求">获取部分内容的范围请求</h1>
+
+<h1 id="内容协商返回最合适的内容">内容协商返回最合适的内容</h1>
+
+<blockquote>
+<p>内容协商制是指客户端和服务器端就响应的资源进行交涉， 然后提供给客户最为合适的资源， 内容协商会以响应资源的语言、 字符集、 编码方式等作为判断 基准。</p>
+</blockquote>
+
+<p>内容协商技术的三种类型：<br /><br />
+服务器驱动协商<br /><br />
+客户端驱动协商<br /><br />
+透明协商（上面两种的结合）<br />
+<hr /></p>
 
                             
-                            <a href="https://timx.cn/post/new/">上一页</a>&nbsp;博客开通<br /><br />
+                            <a href="https://timx.cn/post/http_1/">上一页</a>&nbsp;HTTP学习理解(一)<br /><br />
                             
-                            
-                            <a href="https://timx.cn/post/markdown/">下一页</a>&nbsp;markdown基本写法
                             
                             </article>
                         </div>
-                
-                <div id="git-comments"></div>
-                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
-                <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-                <script>
-                
-                function GetUrlRelativePath()
-            　　{
-            　　　　var url = document.location.toString();
-            　　　　var arrUrl = url.split("//");
-
-            　　　　var start = arrUrl[1].indexOf("/");
-            　　　　var relUrl = arrUrl[1].substring(start);
-
-            　　　　if(relUrl.indexOf("?") != -1){
-            　　　　　　relUrl = relUrl.split("?")[0];
-            　　　　}
-            　　　　return relUrl;
-            　　}
-                  
-                  var gitalk = new Gitalk({
-                  clientID: "5b5fde7475577bcb14fc",
-                  clientSecret: "5a75bf2c7de61ecfb836987ddb5889433044a464",
-                  owner: "timzzx",
-                  repo: "timx.cn",
-                  admin: ["timzzx"],
-                    id: GetUrlRelativePath(),  
-                  distractionFreeMode: false  
-                })
-
-                gitalk.render('git-comments')
-                </script>
                 
                         
             </div>
