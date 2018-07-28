@@ -6,10 +6,24 @@
     <description>Recent content on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 27 Jul 2018 13:43:49 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 28 Jul 2018 13:18:11 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>HTTP学习理解(四)</title>
+      <link>https://timx.cn/post/http_4/</link>
+      <pubDate>Sat, 28 Jul 2018 13:18:11 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/http_4/</guid>
+      <description>与HTTP协作的Web服务器 用单台虚拟主机实现多个域名 HTTP/1.1规范允许一台HTTP服务器搭建多个Web站点。 即使物理层面只有一台服务器， 但只 要使用虚拟主机的功能， 则可以假想已具有多台服务器。
+通信数据转发程序 代理 接收客户端的请求并转发给服务器， 同时也接收服务器的响应返回给客户端。
+使用代理服务器的理由： 利用缓存技术减少带宽的流量， 组织内部针对网站的控制， 以获取访问日志为主要目的等。
+代理按照使用方法的分类： 缓存代理：代理转发响应式， 缓存代理会先将资源的副本保存在代理服务器上。 透明代理：转发请求或响应时， 不对报文做任何加工的代理类型称为透明代理， 反之则 称为非透明代理。
+网关 接收客户端发过来的请求并对其进行处理。 网关的工作机制和代理十分相似。 而且网关能使通信线路上的服务器提供非HTTP协议服务。 利用网关还能提高通信的安全性， 因为在客户端与网关之间的通信线路上加密以确保连接的 安全。
+隧道 在相隔甚远的客户端和服务器两者之间进行中转， 并保持双方通信连接的应用程序。 隧道可按照要求建立起一条与其他服务器的通信线路， 届时使用SSL等加密手段进行通信。 隧 道的目的是确保客户端能与服务器进行安全的通信。 隧道本身并不会去解析HTTP请求， 隧道 会在通信双方断开连接时结束。</description>
+    </item>
     
     <item>
       <title>HTTP学习理解(三)</title>
