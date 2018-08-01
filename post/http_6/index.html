@@ -96,7 +96,7 @@
                         
                         <br />
                         <div class="post-meta animated slower fadeInUp">
-                            <i class="fa fa-clock-o"></i>&nbsp;阅读时间0分钟
+                            <i class="fa fa-clock-o"></i>&nbsp;阅读时间1分钟
                         </div>
                         <br />
                     </article>
@@ -105,13 +105,34 @@
                 
                 <aside>
                     <div class="tablelist animated slower flipInX">
-                    
+                    <nav id="TableOfContents">
+<ul>
+<li><a href="#http-的缺点">HTTP 的缺点</a></li>
+</ul>
+</nav>
                     </div>
                 </aside>
                  
                         <div class="post-content animated slower fadeInLeftBig">
                             <article>
                             
+
+<h1 id="http-的缺点">HTTP 的缺点</h1>
+
+<p>到现在为止， 我们已了解到 HTTP 具有相当优秀和方便的一面，然而 HTTP 并非只有好的一面，事物皆具两面性，它也是有不足之处的。</p>
+
+<p>HTTP 主要有这些不足，例举如下。</p>
+
+<ul>
+<li>通信使用明文（不加密），内容可能会被窃听</li>
+<li>不验证通信方的身份， 因此有可能遭遇伪装</li>
+<li>无法证明报文的完整性， 所以有可能已遭篡改</li>
+</ul>
+
+<p>这些问题不仅在 HTTP 上出现， 其他未加密的协议中也会存在这类问题。</p>
+
+<p>除此之外，HTTP 本身还有很多缺点。而且，还有像某些特定的 Web 服务器和特定的 Web 浏览器在实际应用中存在的不足（也可以说成是脆弱性或安全漏洞），另外，用 Java 和 PHP 等编程语言开发的 Web 应用也可能存在安全漏洞。</p>
+
                             
                             <br />
                             <br />
