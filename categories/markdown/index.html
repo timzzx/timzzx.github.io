@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" />
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -29,17 +30,17 @@
 <header id="header" class="clearfix">
     <div class="container">
         <div class="col-group">
-            <img src="/img/favicon.ico" />
+            <img class="animated  zoomIn slow" src="/img/favicon.ico" />
             <div class="site-name ">
-                
-                    <a id="logo" href="https://timx.cn/">
-                        淡淡忧愁
-                    </a>
-                
+                    <h1 class="animated  flipInX slow">
+                        <a id="logo" href="https://timx.cn/" >
+                            <span >淡淡忧愁</span>
+                        </a>
+                    </h1>
                 
             </div>
             <div>
-                <nav id="nav-menu" class="clearfix">
+                <nav id="nav-menu" class="clearfix animated slower fadeInUp">
                     <a class="" href="https://timx.cn/"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;博客</a>
                     
                     <a  href="https://timx.cn/wall/" title="留言板">
@@ -74,29 +75,29 @@
                     
                         <article class="post">
                             <header>
-                                <h2 class="post-title">
+                                <h2 class="post-title animated slower flipInX">
                                     <i class="fa fa-file-text-o"></i>
                                     <a href="https://timx.cn/post/markdown/">markdown基本写法</a>
                                 </h2>
                             </header>
-                            <date class="post-meta meta-date">
+                            <date class="post-meta meta-date animated slower fadeInUp">
                                 <i class="fa fa-calendar" aria-hidden="true"></i>
                                 2018年7月9日
                                 18:17
                             </date>
-                            <div class="post-meta">
+                            <div class="post-meta animated slower fadeInUp">
                                 | <i class="fa fa-user-o" aria-hidden="true"></i>
                                 <a href="/about">Tim Zhang</a>
                             </div>
                             
-                            <div class="post-meta">
+                            <div class="post-meta animated slower fadeInUp">
                               | <i class="fa fa-folder-o" aria-hidden="true"></i>
                                 
                                     <a href="/categories/markdown">markdown</a>
                                 
                             </div>
                             
-                            <div class="post-content">
+                            <div class="post-content animated slower flipInY">
                                 <blockquote>
                                 <p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。 Markdown具有一系列衍生版本，用于扩展Markdown的功能（如表格、脚注、内嵌HTML等等），这些功能原初的Markdown尚不具备，它们能让Markdown转换成更多的格式，例如LaTeX，Docbook。Markdown增强版中比较有名的有Markdown …</p>
                                 </blockquote>
@@ -105,7 +106,7 @@
                             </div>
                         </article>
                         <br />
-                        <hr />
+                        <hr class="animated slower fadeInUp" />
                     
                     <p class="pull-right2"><a href="/" class="fa fa-home" ></a></p>
                     <p class="pull-right"><a href="#" class="fa fa-angle-double-up" ></a></p>
@@ -118,8 +119,8 @@
                 </div>
             </div>
 
-            <div id="secondary">
-    <section class="widget">
+            <div id="secondary" class="">
+    <section class="widget animated slower fadeInUp">
         
 <form id="search" method="POST" action="https://duckduckgo.com/">
       
@@ -174,7 +175,7 @@
       <button type="submit" class="submit fa fa-search"></button>
 </form>
     </section>
-    <section class="widget">
+    <section class="widget animated slower fadeInUp">
         <div class="card">
             <a href="https://github.com/timzzx">
                 <div class="card-image">
@@ -200,15 +201,15 @@
             </a>
         </div>
     </section>
-    <section class="widget">
+    <section class="widget animated slower fadeInUp">
         <div id="calendar" class="calendar"></div>
     </section>
-    <section class="widget">
+    <section class="widget animated slower fadeInUp">
         <h3 class="widget-title" ><i class="fa fa-folder-o"></i>&nbsp;分类</h3>
         <ul class="widget-list">
             
             <li class="fa fa-angle-right">
-                <a href="/categories/http">http (5)</a>
+                <a href="/categories/http">http (6)</a>
             </li><br />
             
             <li class="fa fa-angle-right">
@@ -229,7 +230,7 @@
             
         </ul>
     </section>
-    <section class="widget">
+    <section class="widget animated slower fadeInUp">
         <h3 class="widget-title"><i class="fa fa-calendar-check-o"></i>&nbsp;归档</h3>
         <ul class="widget-list">
             
@@ -237,11 +238,15 @@
                 <a href="/tags/2018-7">2018-7 (19)</a>
             </li><br />
             
+            <li class="fa fa-angle-right">
+                <a href="/tags/2018-8">2018-8 (1)</a>
+            </li><br />
+            
         </ul>
     </section>
     
 
-    <section class="widget">
+    <section class="widget animated slower fadeInUp">
         <h3 class="widget-title"><i class="fa fa-file-o"></i>&nbsp;其它</h3>
         <ul class="widget-list">
             <li class="fa fa-angle-right"><a href="/index.xml">&nbsp;本站RSS</a></li>
