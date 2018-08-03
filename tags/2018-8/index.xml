@@ -6,13 +6,30 @@
     <description>Recent content in 2018 8 on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Aug 2018 16:47:52 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 03 Aug 2018 10:20:36 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/tags/2018-8/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Unix编程艺术</title>
+      <title>Unix编程艺术(二)</title>
+      <link>https://timx.cn/post/unix_art_2/</link>
+      <pubDate>Fri, 03 Aug 2018 10:20:36 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/unix_art_2/</guid>
+      <description> 模块性  保持清晰，保持简洁
+Unix 重视模块化、正交性和紧凑性问题。
+ 封装与最佳模块大小  封装良好的模块不会过多的向外部暴露自身的细节，不会直接调用其他模块的实现码，也不会胡乱共享全局数据。 模块之间通过应用程序编写的接口（API）— 一组严密、定义良好的程序调用和数据结构来通信。 API在模块间扮演双重角色。在实现层面，作为模块间的滞塞点组织各自的内部细节被相邻模块知晓；在设计层面，API真正定义了整个体系。 模块最佳的物理行数在400-800行。  紧凑性  一个设计是否能装进人脑中的特性紧凑也不意味着“小巧”。即使一个设计良好的系统，对有经验的用户来说没什么特异之处、“一眼”就能看懂，但仍然可能包含很多部分。—Ken Arnold
+ 正交性  只做好一件事。纯粹的正交设计中，任何操作均无副作用：每个动作只改变一件事，不会影响其他。
+ SPOT原则  Don&amp;rsquo;t Repeat Yourself !任何一个知识点在系统内都应当有一个唯一、明确、权威的表述。这个原则也叫“真理的单点性（Single Point of Truth）”或者SPOT原则。
+ 软件层次设计  自底向上从具体到抽象，从问题确定具体操作向上进行。
+  自顶向下从抽象到具体，从最高层面描述整个项目的规格说明或应用逻辑开始，向下进行，直到各个具体操作。
+ 模块式编码 以下问题，有助于提高代码的模块性
+  有多少全局变量  全局变量对模块化是毒药，很容易使各模块轻率、混乱的互相泄露信息  单个模块的大小是否在“最佳范围”内？  “不，很多都超过”，就可能产生长期的维护问题。 不知道自己或合作者的最佳范围是多少，那么保持最佳范围的下限-400行。  模块内的单个函数是不是太大了？  与其说这是一个行数问题，不如说是一个内部复杂度问题。如果不能用一句话来简单描述一个函数与其调用程序之间的约定，这个函数可能太大了.  代码是不是有内部API 可作为单元向其他人描述的函数调用集合数据结构集，并且每个单元都封装某一层次函数，不受其他代码的影响？ API的入口点是不是超过七个？有没有类有七个以上的方法？数据结构的成员是不是超过七个？ 整个项目中每个模块的入口点数量如何分布？是不是不均匀？   </description>
+    </item>
+    
+    <item>
+      <title>Unix编程艺术(一)</title>
       <link>https://timx.cn/post/unix_art_1/</link>
       <pubDate>Thu, 02 Aug 2018 16:47:52 +0800</pubDate>
       
