@@ -92,16 +92,100 @@
                         
                         <br />
                         <div class="post-meta animated slower fadeInUp">
-                            <i class="fa fa-clock-o"></i>&nbsp;阅读时间0分钟
+                            <i class="fa fa-clock-o"></i>&nbsp;阅读时间1分钟
                         </div>
                         <br />
                     </article>
                     
                 </div>
                 
+                <aside>
+                    <div class="tablelist animated slower flipInX">
+                    <nav id="TableOfContents">
+<ul>
+<li><a href="#多道程序设计-分离进程为独立的功能">多道程序设计：分离进程为独立的功能</a>
+<ul>
+<li><a href="#unix-ipc-方法的分类">UNIX IPC 方法的分类</a>
+<ul>
+<li><a href="#把任务转给专门的程序">把任务转给专门的程序</a></li>
+<li><a href="#管道-重定向和过滤器">管道、重定向和过滤器</a></li>
+<li><a href="#包装器">包装器</a></li>
+<li><a href="#安全性包装器和bernstein链">安全性包装器和Bernstein链</a></li>
+<li><a href="#从进程">从进程</a></li>
+<li><a href="#对等进程间通信">对等进程间通信</a></li>
+</ul></li>
+<li><a href="#要避免的问题和方法">要避免的问题和方法</a>
+<ul>
+<li><a href="#废弃的unixipc方法">废弃的UnixIPC方法</a></li>
+<li><a href="#远程过程调用">远程过程调用</a></li>
+<li><a href="#线程-恐吓或威胁">线程——恐吓或威胁</a></li>
+</ul></li>
+<li><a href="#在设计层次上的进程划分">在设计层次上的进程划分</a></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                </aside>
+                 
                         <div class="post-content animated slower fadeInLeftBig">
                             <article>
                             
+
+<h1 id="多道程序设计-分离进程为独立的功能">多道程序设计：分离进程为独立的功能</h1>
+
+<blockquote>
+<p>实现子进程方式：<hr />
++ 降低进程生成的开销。
++ 提供方法（shellout、I/O重定向、管道、消息传递和套接字）简化进程间通信。
++ 提倡使用能由管道和套接字传递的简单、透明的文本数据格式。</p>
+</blockquote>
+
+<h2 id="unix-ipc-方法的分类">UNIX IPC 方法的分类</h2>
+
+<h3 id="把任务转给专门的程序">把任务转给专门的程序</h3>
+
+<h3 id="管道-重定向和过滤器">管道、重定向和过滤器</h3>
+
+<blockquote>
+<p>管道依赖的约定，每个程序一开始有两个I/O数据流可用：标准输入和标准输出。许多程序都可写作过滤器，从标准输入顺序读取数据，并且只向标准输出写数据。</p>
+</blockquote>
+
+<h3 id="包装器">包装器</h3>
+
+<h3 id="安全性包装器和bernstein链">安全性包装器和Bernstein链</h3>
+
+<h3 id="从进程">从进程</h3>
+
+<h3 id="对等进程间通信">对等进程间通信</h3>
+
+<blockquote>
+<ul>
+<li>临时文件 最古老的IPC技法。</li>
+<li>信号 Unix的信号是一种软终端形式：每个信号都对接收进程产生默认作用。</li>
+<li>系统守护程序和常规信号</li>
+<li>套接字 封装网络数据访问的方法</li>
+<li>共享内存</li>
+</ul>
+</blockquote>
+
+<h2 id="要避免的问题和方法">要避免的问题和方法</h2>
+
+<h3 id="废弃的unixipc方法">废弃的UnixIPC方法</h3>
+
+<h3 id="远程过程调用">远程过程调用</h3>
+
+<h3 id="线程-恐吓或威胁">线程——恐吓或威胁</h3>
+
+<blockquote>
+<p>线程增加了复杂度，线程程序可移植性差</p>
+</blockquote>
+
+<h2 id="在设计层次上的进程划分">在设计层次上的进程划分</h2>
+
+<blockquote>
+<p>第一个要注意的是，临时文件、交互性更强的主/从进程关系、套接字、RPC和其它一些双向IPC方法在某种程度上是等价的——————它们都只不过是程序在生命期内交换程序的方法。我们通过使用套接字或共享内存在这种复杂方法所完成的任务，大多数都可以通过使用临时文件作为信箱和通知信号这种简单的方法来完成。差别很小，主要体现在程序如何建立通信、何时何地完成信息的列集和散集、可能产生何种缓冲问题，以及如何保证获取信息的原子性。</p>
+</blockquote>
+
                             
                             <br />
                             <br />
