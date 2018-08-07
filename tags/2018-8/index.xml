@@ -6,10 +6,46 @@
     <description>Recent content in 2018 8 on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 Aug 2018 15:00:31 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 07 Aug 2018 17:41:14 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/tags/2018-8/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Unix编程艺术(六)</title>
+      <link>https://timx.cn/post/unix_art_6/</link>
+      <pubDate>Tue, 07 Aug 2018 17:41:14 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/unix_art_6/</guid>
+      <description> Unix环境下的用户接口设计模式  在Unix接口设计的传统中，涉足两个主题。一个与其他程序通讯方式的前瞻性设计；另一个是最小立异原则
+ 最小立异原则  最小立异原则：“少来标新立异”是所有设计中的通用原则，且并非仅局限于软件设计。
+如果有可能，尽量允许用户将接口功能委派给熟悉的程序来完成。
+不能委派，那就效仿。目的减少用户在使用时必须学习的复杂过程。
+ 接口设计评估  简洁、表现力、易用、透明和脚本化能力。&amp;nbsp;能自动完成重复的任务
+ Unix接口设计模式  1.过滤器模式 过滤器程序接受标准输入的数据，转换成某种格式后，再将结果发送到标准输出端。过滤器不是交互的，也许会查询启动环境，并且通常由命令行选项控制，但是并不要求用户在输入流中输入命令或给出反馈。
+例子grep(1)
+定义过滤器的原则 牢记Postel原则：宽进严出。 过滤时，不需要的信息也决不丢弃。 在过滤时，绝不增加无用数据。  2.Cantrip模式 没有输入，没有输出，只被调用一次，产生退出状态数值。程序只能由启动条件控制，程序非常具有脚本能力。
+例子clear(1) 3.源模式
+类似过滤器程序，不需要输入，它的输出只能在启动条件中控制。
+例子ls(1)、ps(1)、who(1)
+4.接收器模式
+类似过滤器程序，只接纳标准输入而不发送任何东西到标准输出。它对输入端数据的作用行为只能在启动条件中控制。（这种用的比较少） 例子mail(1)
+5.编译器模式
+类似编译器程序既无标准输出也无标准输入，它们会将错误信息发送到标准错误端。
+6.ed模式
+最简单的交互设计模式
+例子gdb(1)
+7.Roguelike模式
+一种游戏发展而来的模式
+例子vi
+8.“引擎和接口分离”模式
+MVC模式
+9.CLI服务器模式
+类似PHP
+10.基于语言的接口模式
+配置（微语言）模式
+ </description>
+    </item>
     
     <item>
       <title>Unix编程艺术(五)</title>
