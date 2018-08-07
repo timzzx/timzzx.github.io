@@ -8,19 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="shortcut icon" href="/img/favicon.ico" >
-    <title>TCP/IP学习理解(八) - 淡淡忧愁</title>
-    <meta property="og:title" content="TCP/IP学习理解(八) - 淡淡忧愁">
+    <title>Unix编程艺术(五) - 淡淡忧愁</title>
+    <meta property="og:title" content="Unix编程艺术(五) - 淡淡忧愁">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-07-20T13:25:46&#43;08:00">
+    <meta property="article:published_time" content="2018-08-06T15:00:31&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2018-07-20T13:25:46&#43;08:00">
+    <meta property="article:modified_time" content="2018-08-06T15:00:31&#43;08:00">
         
-    <meta name="description" content="TCP/IP学习理解(八)">
+    <meta name="description" content="Unix编程艺术(五)">
         
     <meta name="author" content="Tim Zhang">
-    <meta property="og:url" content="https://timx.cn/post/tcp_8/">
+    <meta property="og:url" content="https://timx.cn/post/unix_art_5/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
     
@@ -70,12 +70,12 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;TCP/IP学习理解(八)</h1>
+                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;Unix编程艺术(五)</h1>
                         </header>
                         <date class="post-meta meta-date animated slower fadeInUp">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                            2018年7月20日
-                            13:25
+                            2018年8月6日
+                            15:00
                             
                         </date>
                         <div class="post-meta animated slower fadeInUp">
@@ -86,13 +86,13 @@
                         <div class="post-meta animated slower fadeInUp">
                          | <i class="fa fa-folder-o" aria-hidden="true"></i>
                             
-                                <a href="/categories/tcp/ip">TCP/IP</a>
+                                <a href="/categories/unix">UNIX</a>
                             
                         </div>
                         
                         <br />
                         <div class="post-meta animated slower fadeInUp">
-                            <i class="fa fa-clock-o"></i>&nbsp;阅读时间1分钟
+                            <i class="fa fa-clock-o"></i>&nbsp;阅读时间2分钟
                         </div>
                         <br />
                     </article>
@@ -103,15 +103,9 @@
                     <div class="tablelist animated slower flipInX">
                     <nav id="TableOfContents">
 <ul>
-<li><a href="#广播和多播-igmp协议">广播和多播、IGMP协议</a>
+<li><a href="#unix配置">Unix配置</a>
 <ul>
-<li><a href="#单播-多播-广播">单播,多播,广播</a>
-<ul>
-<li><a href="#单播-unicast">单播(unicast)</a></li>
-<li><a href="#广播-unicast">广播(unicast)</a></li>
-<li><a href="#多播-multicast">多播(multicast)</a></li>
-</ul></li>
-<li><a href="#igmp-协议">IGMP 协议</a></li>
+<li><a href="#unix命令行选项">unix命令行选项</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -122,47 +116,168 @@
                             <article>
                             
 
-<h1 id="广播和多播-igmp协议">广播和多播、IGMP协议</h1>
-
-<h2 id="单播-多播-广播">单播,多播,广播</h2>
-
-<h3 id="单播-unicast">单播(unicast)</h3>
+<h1 id="unix配置">Unix配置</h1>
 
 <blockquote>
-<p>单播是说,对特定的主机进行数据传送。例如给某一个主机发送 IP 数据包。这时候,数据链路层给出的数据头里面是非常具体的 目的地址,对于以太网来 说,就是网卡的 MAC 地址(不是 FF-FF-FF-FF-FF-FF 这样的地址)。现在的具有路由功能的主机应该可以将 单播数据定向转发,而目的主机的网 络接口则可以过滤掉和自己 MAC 地址不一致的数据。</p>
+<p>经验法则：<hr /></p>
+
+<ul>
+<li>提高适应能力，除非这样做会产生超过0.7秒的延迟。0.7秒是一个魔数，人们几乎察觉不到少于0.7秒的启动延迟。</li>
+<li>用户不应该看到优化开关。让程序经济运行时设计者的任务，不是用户的任务。与提高界面复杂度成本相比，让用户从优化开关来获取那点儿性能收益，换来界面复杂度的提升，往往得不偿失。</li>
+<li>能用脚本包装器或简单管道实现的任务，就不要用配置开关实现。能简单利用其它程序来完成的任务，就不要增加本程序的复杂度。</li>
+</ul>
 </blockquote>
-
-<hr />
-
-<h3 id="广播-unicast">广播(unicast)</h3>
 
 <blockquote>
-<p>广播是主机针对某一个网络上的所有主机发送数据包。这个网络可能是网络,可能是子网,还可能是所有的子网。如果是网络, 例如 A 类网址的广播就是 netid.255.255.255,如果是子网,则是 netid.netid.subnetid.255;如果是所有的子网(B 类 IP)则是则是 netid.netid.255.255。广播所用的 MAC 地址 FF-FF-FF-FF-FF-FF。网络内所有的主机都会收到这个广播数据,网卡只要把 MAC 地址为 FF-FF-FF-FF-FF-FF 的数据交给内核就可以了。一般说来 ARP,或者路由协议 RIP 应该是以广播的形式播发的。</p>
+<p>增加配置是要考虑的问题：<hr /></p>
+
+<ul>
+<li>能省掉这个功能吗？为什么在加厚手册之外还要加重用户负担？</li>
+<li>能否用某种无伤大雅的方式改变程序的常规行为从而无需这个选项？</li>
+<li>这个选项是否花哨没用？是否应该少考虑用户界面的可配置性而多考虑正确性？</li>
+<li>这个选项附加的行为是否应该用一个独立的程序来代替？</li>
+</ul>
+
+<p><hr />增加不必要的选项会产生很多不良后果。其中最严重的后果是对测试覆盖率的影响。</p>
 </blockquote>
 
-<hr />
+<h2 id="unix命令行选项">unix命令行选项</h2>
 
-<h3 id="多播-multicast">多播(multicast)</h3>
+<table>
+<thead>
+<tr>
+<th>&nbsp;&nbsp;参数</th>
+<th>说明</th>
+</tr>
+</thead>
 
-<blockquote>
-<p>可以说广播是多播的特例,多播就是给一组特定的主机(多播组)发送数据,这样,数据的播发范围会小一些(实际上播发的范围 一点也没有变小),多播的 MAC 地址是最高字节的低位为一,例 如01-00-00-00-00-00。多播组的地址是 D 类 IP,规定是 224.0.0.0-239.255.255.255。<br /></p>
+<tbody>
+<tr>
+<td>-a</td>
+<td>all : 全部，所有 (ls , lsattr , uname) archive : 存档 (cp , rsync) append : 附加 (tar -A , 7z)</td>
+</tr>
 
-<p>虽然多播比较特殊,但是究其原理,多播的数据还是要通过数据链路层进行 MAC 地址绑定然后进行发送。所以一个以太网卡在 绑定了一个多播 IP 地址之 后,必 定还要绑定一个多播的 MAC 地址,才能使得其可以像单播那样工作。这个多播的 IP 和多播 MAC 地址有一个对应的算法,在书的 p133到 p134之间。可以 看到 这个对应不是一一对应的,主机还是要对多播数据进行过滤。<br /></p>
+<tr>
+<td>-b</td>
+<td>blocksize : 块大小，带参数 (du , df) batch : 批处理模式 (交互模式的程序通常拥有此选项，如 top -b)</td>
+</tr>
 
-<p>个人的看法:广播和多播的性质是一样的,路由器会把数据放到局域网里面,然后网卡对这些数据进行过滤,只拿到自己打算要 的数据,比如自己感兴趣的多 播数据,自己感兴趣的组播数据。当一个主机运行了一个处理某一个多播 IP 的进程的时候,这个进程 会给网卡绑定一个虚拟的多播 mac 地址,并做出来一个多播 ip。这样,网卡就会让带有这个多播 mac 地址的数据进来,从而实现通信, 而那些没有监听这些数据的主机就会把这些数据过滤掉,换句话说,多播,是让主机 的内核轻松了,而网卡,对不起,您就累点吧。<br /></p>
-</blockquote>
+<tr>
+<td>-c</td>
+<td>commands : 执行命令，带参数 (bash , ksh , python) create : 创建 (tar)</td>
+</tr>
 
-<hr />
+<tr>
+<td>-d</td>
+<td>debug : 调试 delete : 删除 directory : 目录 (ls)</td>
+</tr>
 
-<h2 id="igmp-协议">IGMP 协议</h2>
+<tr>
+<td>-e</td>
+<td>execute : 执行，带参数 (xterm , perl) edit : 编辑 exclude : 排除</td>
+</tr>
 
-<blockquote>
-<p>IGMP 的作用在于,让其他所有需要知道自己处于哪个多播组的主机和路由器知道自己的状态。一般多播路由器根本不需要知道 某一个多播组里面有多少个 主机,而只要知道自己的子网内还有没有处于某个多播组的主机就可以了。只要某一个多播组还有一台主 机,多播路由器就会把数据传输出去,这样,接受方就会通 过网卡过滤功能来得到自己想要的数据。为了知道多播组的信息,多播路 由器需要定时的发送 IGMP 查询,IGMP 的格式可以看书,各个多播组里面的主机要根 据查询来回复自己的状态。路由器来决定有几 个多播组,自己要对某一个多播组发送什么样的数据。<br /></p>
+<tr>
+<td>-f</td>
+<td>force : 强制，不经确认(cp , rm ,mv) file : 文件，带参数 (tar) configuration file : 指定配置文件(有些守护进程拥有此选项，如 ssh , lighttpd)</td>
+</tr>
 
-<p>这种查询回应数据报的 TTL 一般是1,而且就算是出错也不产生 ICMP 差错(没必要)。<br /></p>
-</blockquote>
+<tr>
+<td>-g</td>
+<td></td>
+</tr>
 
-<hr />
+<tr>
+<td>-h</td>
+<td>&ndash;help : 帮助 human readable : 人性化显示(ls , du , df) headers : 头部</td>
+</tr>
+
+<tr>
+<td>-i</td>
+<td>interactive : 交互模式，提示(rm , mv) include : 包含</td>
+</tr>
+
+<tr>
+<td>-k</td>
+<td>keep : 保留 kill</td>
+</tr>
+
+<tr>
+<td>-l</td>
+<td>long listing format : 长格式(ls) list : 列表 load : 读取 (gcc , emacs)</td>
+</tr>
+
+<tr>
+<td>-m</td>
+<td>message : 消息 (cvs) manual : 手册 (whereis) create home : 创建 home 目录 (usermod , useradd)</td>
+</tr>
+
+<tr>
+<td>-n</td>
+<td>number : 行号、编号 (cat , head , tail , pstree , lspci) no : (useradd , make)</td>
+</tr>
+
+<tr>
+<td>-o</td>
+<td>output : 输出 (cc , sort) options : 选项 (mount)</td>
+</tr>
+
+<tr>
+<td>-p</td>
+<td>port : 端口，带参数 (很多网络工具拥有此选项，如 ssh , lftp ) protocol : 协议，带参数 passwd : 密码，带参数</td>
+</tr>
+
+<tr>
+<td>-q</td>
+<td>quiet : 静默</td>
+</tr>
+
+<tr>
+<td>-r</td>
+<td>reverse : 反转 recursive : 递归 (cp , rm , chmod -R)</td>
+</tr>
+
+<tr>
+<td>-s</td>
+<td>silent : 安静 size : 大小，带参数 subject</td>
+</tr>
+
+<tr>
+<td>-t</td>
+<td>tag type : 类型 (mount)</td>
+</tr>
+
+<tr>
+<td>-u</td>
+<td>user : 用户名、UID，带参数</td>
+</tr>
+
+<tr>
+<td>-v</td>
+<td>verbose : 冗长 version : 版本</td>
+</tr>
+
+<tr>
+<td>-w</td>
+<td>width : 宽度 warning : 警告</td>
+</tr>
+
+<tr>
+<td>-x</td>
+<td>exclude : 排除 (tar , zip)</td>
+</tr>
+
+<tr>
+<td>-y</td>
+<td>yes</td>
+</tr>
+
+<tr>
+<td>-z</td>
+<td>zip : 启用压缩 (bzip , tar , zcat , zip , cvs)</td>
+</tr>
+</tbody>
+</table>
 
                             
                             <br />
@@ -171,10 +286,8 @@
                             <hr />
                             
                             
-                            <a href="https://timx.cn/post/tcp_7/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;TCP/IP学习理解(七)<br /><br />
+                            <a href="https://timx.cn/post/unix_art_4/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;Unix编程艺术(四)<br /><br />
                             
-                            
-                            <a href="https://timx.cn/post/tcp_9/">下一页&nbsp;<i class="fa fa-angle-double-down" ></i></a>&nbsp;TCP/IP学习理解(九)
                             
                             <br />
                             <br />
@@ -185,38 +298,6 @@
                         <p class="pull-right2"><a href="/" class="fa fa-home" ></a></p>
                             <p class="pull-right"><a href="#" class="fa fa-angle-double-up" ></a></p>
                             <p class="pull-left"><a href="#" onclick="javascript:history.go(-1);return false;" class="fa fa-angle-double-left" ></a></p>
-                
-                <div id="git-comments"></div>
-                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
-                <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-                <script>
-                
-                function GetUrlRelativePath()
-            　　{
-            　　　　var url = document.location.toString();
-            　　　　var arrUrl = url.split("//");
-
-            　　　　var start = arrUrl[1].indexOf("/");
-            　　　　var relUrl = arrUrl[1].substring(start);
-
-            　　　　if(relUrl.indexOf("?") != -1){
-            　　　　　　relUrl = relUrl.split("?")[0];
-            　　　　}
-            　　　　return relUrl;
-            　　}
-                  
-                  var gitalk = new Gitalk({
-                  clientID: "5b5fde7475577bcb14fc",
-                  clientSecret: "5a75bf2c7de61ecfb836987ddb5889433044a464",
-                  owner: "timzzx",
-                  repo: "timx.cn",
-                  admin: ["timzzx"],
-                    id: GetUrlRelativePath(),  
-                  distractionFreeMode: false  
-                })
-
-                gitalk.render('git-comments')
-                </script>
                 
                         
             </div>
