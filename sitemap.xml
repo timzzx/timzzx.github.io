@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://timx.cn/post/unix_art_8/</loc>
+    <lastmod>2018-08-08T15:37:45+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://timx.cn/post/unix_art_7/</loc>
     <lastmod>2018-08-08T10:41:31+08:00</lastmod>
   </url>
@@ -155,7 +160,7 @@
   
   <url>
     <loc>https://timx.cn/tags/2018-8/</loc>
-    <lastmod>2018-08-08T10:41:31+08:00</lastmod>
+    <lastmod>2018-08-08T15:37:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -178,7 +183,7 @@
   
   <url>
     <loc>https://timx.cn/post/</loc>
-    <lastmod>2018-08-08T10:41:31+08:00</lastmod>
+    <lastmod>2018-08-08T15:37:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -196,7 +201,7 @@
   
   <url>
     <loc>https://timx.cn/categories/unix/</loc>
-    <lastmod>2018-08-08T10:41:31+08:00</lastmod>
+    <lastmod>2018-08-08T15:37:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -214,7 +219,7 @@
   
   <url>
     <loc>https://timx.cn/</loc>
-    <lastmod>2018-08-08T10:41:31+08:00</lastmod>
+    <lastmod>2018-08-08T15:37:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   

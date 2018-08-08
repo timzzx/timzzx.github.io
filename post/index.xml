@@ -6,10 +6,38 @@
     <description>Recent content in Posts on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Aug 2018 10:41:31 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 08 Aug 2018 15:37:45 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Unix编程艺术(八)</title>
+      <link>https://timx.cn/post/unix_art_8/</link>
+      <pubDate>Wed, 08 Aug 2018 15:37:45 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/unix_art_8/</guid>
+      <description>重用：论不要重新发明轮子  透明性是重用的关键
+从重用到开源
+ 可移植性 文档：向网络世界阐释代码 开放源码：在Unix新社区中编程  源码公开 尽早发布，经常发布 给贡献以表扬  未来：危机与机遇 附录：无根的根：无名师的Unix心传 无名师与万行码  无名师曾对来访的程序员说：“Unix传统上认为，一行shell脚本胜过万行C程序。”
+这个程序员自以为对C极其精通，说：“这不可能。UNIX内核正是用C实现的。”
+无名师回道：“确是如此。不过，UNIX传统上认为，一行shell脚本胜过万行C程序。“
+程序员颇为沮丧：”但是在C中我们可领会到尊者Ritchie的智慧。我们与操作系统和机器合而为一，可以获取无与伦比的性能。”
+无名师回道：“诚如你言。不过，Unix传统上认为，一行shell脚本胜过万行C程序。”
+程序员冷笑着想愤然离去。无名师向学生Nubi颔首示意，Nubi在黑板上写下一行shell脚本，问道：“尊敬的程序员，看看这行管道，用纯C实现，是不是要一万行C代码？”
+程序员沉吟念诵。最终他承认如此。
+“你需要多长时间来实现和调试那个C程序？”Nubi问道。
+“很长”，来访的程序员承认。“但傻子才会干这个而不去完成更有价值的任务。”
+“那么谁更了解Unix传统？”无名师问道。“是写一万行代码的，还是看到任务的无谓而不去编码的？”
+听到此，程序员眼中一亮。
+ 无名师与脚本狂  无名师和学生吃早饭时，从黑客大陆来了个陌生访客。
+“Ihear y00 are very l33t,”他说。“Pl33z teach m3 all y00 know”。（我听说你很牛，请把你会的都教给我。）
+无名师的学生面面相觑，都没听懂这类粗鄙言语。无名师微笑道：“你想弄懂Unix？”
+“I want to b3 a wizard hax0r”，陌生人回答，“and 0wn ever3one&amp;rsquo;s b0xen。”（我想当个顶尖黑客，能掌握所有人的机器。）
+“我不教这个”，无名师答道。
+陌生人很激动。“D00d， y00 r nothing but a p0ser。”，他说。“If y00 n00 anything, y00 wud t33ch m3。”（哥们儿，敢情你没真本事啊，你要知道点儿东西就教给我了。）
+“有条路，”无名师说，“可以将你带入真知。”他在纸上写了个IP地址。“黑掉这台机器，这对你来说应该不费什么力气，它的管理员不称职。回来后告诉我你发现了什么。“</description>
+    </item>
     
     <item>
       <title>Unix编程艺术(七)</title>
