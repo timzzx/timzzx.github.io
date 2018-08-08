@@ -108,6 +108,7 @@
 <li><a href="#最小立异原则">最小立异原则</a></li>
 <li><a href="#接口设计评估">接口设计评估</a></li>
 <li><a href="#unix接口设计模式">Unix接口设计模式</a></li>
+<li><a href="#多价程序模式">多价程序模式</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -194,6 +195,20 @@
 <p><strong>10.基于语言的接口模式</strong><br /></p>
 
 <p>配置（微语言）模式</p>
+</blockquote>
+
+<h2 id="多价程序模式">多价程序模式</h2>
+
+<blockquote>
+<p>多价程序（polyvalent，多角色程序）特征 <hr /></p>
+
+<ul>
+<li>程序的应用定义域逻辑封存在一个文档化的API库中，该库可被其它程序链接。程序同外部的接口逻辑是一个基于库的薄胶合层。或者有几个不同风格的UI层，每一个层都可以链接该库。</li>
+<li>一种UI方式是cantrip，类似编译器或以批处理方式执行交互命令的CLI模式。</li>
+<li>一种UI方式是GUI，可直接链接到核心库，或者作为一个独立进程来驱动CLI接口。</li>
+<li>一种UI方式是脚本接口，使用现代的通用脚本语言，如Perl、Python或Tcl。</li>
+<li>额外可选的一种UI方式是使用curses(3)的roguelike式接口。</li>
+</ul>
 </blockquote>
 
                             
