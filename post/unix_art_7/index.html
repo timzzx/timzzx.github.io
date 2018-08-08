@@ -8,19 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="shortcut icon" href="/img/favicon.ico" >
-    <title>Unix编程艺术(三) - 淡淡忧愁</title>
-    <meta property="og:title" content="Unix编程艺术(三) - 淡淡忧愁">
+    <title>Unix编程艺术(七) - 淡淡忧愁</title>
+    <meta property="og:title" content="Unix编程艺术(七) - 淡淡忧愁">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-08-03T15:08:36&#43;08:00">
+    <meta property="article:published_time" content="2018-08-08T10:41:31&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2018-08-03T15:08:36&#43;08:00">
+    <meta property="article:modified_time" content="2018-08-08T10:41:31&#43;08:00">
         
-    <meta name="description" content="Unix编程艺术(三)">
+    <meta name="description" content="Unix编程艺术(七)">
         
     <meta name="author" content="Tim Zhang">
-    <meta property="og:url" content="https://timx.cn/post/unix_art_3/">
+    <meta property="og:url" content="https://timx.cn/post/unix_art_7/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
     
@@ -70,12 +70,12 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;Unix编程艺术(三)</h1>
+                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;Unix编程艺术(七)</h1>
                         </header>
                         <date class="post-meta meta-date animated slower fadeInUp">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                            2018年8月3日
-                            15:08
+                            2018年8月8日
+                            10:41
                             
                         </date>
                         <div class="post-meta animated slower fadeInUp">
@@ -99,63 +99,70 @@
                     
                 </div>
                 
+                <aside>
+                    <div class="tablelist animated slower flipInX">
+                    <nav id="TableOfContents">
+<ul>
+<li><a href="#优化">优化</a>
+<ul>
+<li><a href="#什么也别做-就站在那儿">什么也别做，就站在那儿</a></li>
+<li><a href="#先估量-后优化">先估量，后优化</a></li>
+<li><a href="#非定域性之害">非定域性之害</a></li>
+<li><a href="#吞吐量和延迟">吞吐量和延迟</a></li>
+<li><a href="#批操作">批操作</a></li>
+<li><a href="#重叠操">重叠操</a></li>
+<li><a href="#缓存操作结果">缓存操作结果</a></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                </aside>
+                 
                         <div class="post-content animated slower fadeInLeftBig">
                             <article>
                             
 
-<h1 id="文本化">文本化</h1>
+<h1 id="优化">优化</h1>
 
 <blockquote>
-<p><strong><font color="#18516f">设计将应用数据存储在永久存储器中的文件格式</font></strong><hr />
-<strong><font color="#18516f">在协作程序中（可能通过网络）传递数据和命令的应用协议</font></strong></p>
+<p>关于性能优化，最重要就是如何知道何时不去优化。最有效的优化往往是优化之外的其他事情，比如<font color="#18516f"><strong>清晰干净的设计</strong></font></p>
 </blockquote>
 
-<h2 id="数据文件元格式">数据文件元格式</h2>
+<h2 id="什么也别做-就站在那儿">什么也别做，就站在那儿</h2>
 
 <blockquote>
-<p><strong><font color="#18516f">为了简化存储的序列化操作发展得来。</font></strong>
-<hr />
-DSV风格<br />
-RFC822格式<br />
-Cookie—Jar格式<br />
-Record—Jar格式<br />
-XML<br />
-WindowsINI格式<br />
-Unix文本文件格式的约定<br /></p>
+<p>别去优化一个工作中的系统，集中精力将时间复杂度或空间复杂度从指数级降到对数或常数集。<br />
+另一个建设性的“无为”方式就是不写代码。</p>
 </blockquote>
 
-<h2 id="应用协议元格式">应用协议元格式</h2>
+<h2 id="先估量-后优化">先估量，后优化</h2>
 
 <blockquote>
-<p><strong><font color="#18516f">简化网络间事物处理的序列化操作发展得来。</font></strong>
-<hr />
-HTTP<br />
-BEEP<br />
-XML—RPC，SOAP和Jabber<br /></p>
+<p>有真凭实据证明应用程序运行缓慢，这时候（仅当此时）才可以考虑优化代码。但付诸实施前，要先估量。<hr />
+<font color="#18516f"><strong>善用性能剖析程序</strong></font></p>
 </blockquote>
 
-<h1 id="透明性">透明性</h1>
-
-<h2 id="为透明性和可显性而编码">为透明性和可显性而编码</h2>
+<h2 id="非定域性之害">非定域性之害</h2>
 
 <blockquote>
-<ul>
-<li>程序调用层次中最大的静态深度是多少？也就是说，不考虑递归，为了建立心理模型来理解代码的操作，人们将要调用多少层？如果大于四层，就要当心。</li>
-<li>代码是否具有强大、明显的不变性质？不变性质帮助人们推演代码和发现有问题的情况。</li>
-<li>每个API中的各个函数调用是否正交？或者是否存在太多特征标志和模式位，使得一个调用要完成多个任务？完全避免模式标志会导致混乱的API，里面包括太多几乎一模一样的函数，但是频繁使用模式标志更容易产错误（很多易忘并且易混的模式标记）。</li>
-<li>是否存在一些顺手可用的关键数据结构或全局唯一的记录器，捕获了系统的高层级状态？这个状态是否容易被形象化和检验，还是分布在数目众多的各个全局变量或对象中，而难以找到？</li>
-<li>程序的数据结构或分类和它们所代表的外部实体之间，是否存在清晰的一对一映射？</li>
-<li>是否容易找到给定函数的代码部分？不仅单个函数、模块、还有整个代码，需要花多少精力才能读懂？</li>
-<li>代码增加了特殊情况还是避免了特殊情况？每一个特殊情况可能对任何其他特殊情况产生影响；所有隐含的冲突都是BUG滋生的温床。然而更重要的是，特殊情况使得代码更难理解。</li>
-<li>代码中有多少（意义含糊的常量）？通过审查是否很容易查出实现代码中的限制（比如关键缓冲区的大小）？</li>
-</ul>
+<p><font color="#18516f"><strong>最有效的代码优化方法就是保持代码短小简单</strong></font></p>
 </blockquote>
 
-<h2 id="透明性和避免过度保护">透明性和避免过度保护</h2>
+<h2 id="吞吐量和延迟">吞吐量和延迟</h2>
 
 <blockquote>
-<p><strong><font color="#18516f">调试和探测开关的存在是良好程序的标志</font></strong></p>
+<p>避免协议的往返，经验法则是尽可能低的时延设计，和忽略带宽成本，带宽问题可以在开发后期通过一些技巧，比如现场压缩协议来解决。<br />
+三种常规策略来减少时延<hr />
++ 对可以共享启动开销的事务进行批处理
++ 允许事务重叠
++ 缓存</p>
 </blockquote>
+
+<h2 id="批操作">批操作</h2>
+
+<h2 id="重叠操">重叠操</h2>
+
+<h2 id="缓存操作结果">缓存操作结果</h2>
 
                             
                             <br />
@@ -164,10 +171,8 @@ XML—RPC，SOAP和Jabber<br /></p>
                             <hr />
                             
                             
-                            <a href="https://timx.cn/post/unix_art_2/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;Unix编程艺术(二)<br /><br />
+                            <a href="https://timx.cn/post/unix_art_6/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;Unix编程艺术(六)<br /><br />
                             
-                            
-                            <a href="https://timx.cn/post/unix_art_4/">下一页&nbsp;<i class="fa fa-angle-double-down" ></i></a>&nbsp;Unix编程艺术(四)
                             
                             <br />
                             <br />

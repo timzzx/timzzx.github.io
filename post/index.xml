@@ -6,10 +6,26 @@
     <description>Recent content in Posts on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Aug 2018 17:41:14 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 08 Aug 2018 10:41:31 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Unix编程艺术(七)</title>
+      <link>https://timx.cn/post/unix_art_7/</link>
+      <pubDate>Wed, 08 Aug 2018 10:41:31 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/unix_art_7/</guid>
+      <description> 优化  关于性能优化，最重要就是如何知道何时不去优化。最有效的优化往往是优化之外的其他事情，比如清晰干净的设计
+ 什么也别做，就站在那儿  别去优化一个工作中的系统，集中精力将时间复杂度或空间复杂度从指数级降到对数或常数集。
+另一个建设性的“无为”方式就是不写代码。
+ 先估量，后优化  有真凭实据证明应用程序运行缓慢，这时候（仅当此时）才可以考虑优化代码。但付诸实施前，要先估量。善用性能剖析程序
+ 非定域性之害  最有效的代码优化方法就是保持代码短小简单
+ 吞吐量和延迟  避免协议的往返，经验法则是尽可能低的时延设计，和忽略带宽成本，带宽问题可以在开发后期通过一些技巧，比如现场压缩协议来解决。
+三种常规策略来减少时延+ 对可以共享启动开销的事务进行批处理 + 允许事务重叠 + 缓存
+ 批操作 重叠操 缓存操作结果 </description>
+    </item>
     
     <item>
       <title>Unix编程艺术(六)</title>
