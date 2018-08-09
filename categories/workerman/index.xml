@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Workerman on 淡淡忧愁</title>
+    <link>https://timx.cn/categories/workerman/</link>
+    <description>Recent content in Workerman on 淡淡忧愁</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Aug 2018 12:13:23 +0800</lastBuildDate>
+    
+	<atom:link href="https://timx.cn/categories/workerman/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Workerman写的geoip查询的HTTP服务</title>
+      <link>https://timx.cn/post/workerman_1/</link>
+      <pubDate>Thu, 09 Aug 2018 12:13:23 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/workerman_1/</guid>
+      <description> geoip2  基于workerman的HTTP协议写的ip查询功能
+ 安装  git clone https://github.com/timzzx/geoip2.git cd geoip2 composer install 自己加入GeoLite2-City.mmdb php index.php 浏览器访问http://127.0.0.1:2345/?ip=115.85.29.130 返回结果：  { errno: 200, isoCode: &amp;quot;PH&amp;quot;, country_name: &amp;quot;Philippines&amp;quot;, country_name_zh: &amp;quot;菲律宾&amp;quot;, mostSpecificSubdivisionname: &amp;quot;Metro Manila&amp;quot;, mostSpecificSubdivisionisoCode: &amp;quot;00&amp;quot;, city_name: &amp;quot;Las Pinas&amp;quot;, city_name_zh: null, postal_code: &amp;quot;1612&amp;quot;, latitude: 14.4506, longitude: 120.9828 }  </description>
+    </item>
+    
+  </channel>
+</rss>
