@@ -6,10 +6,19 @@
     <description>Recent content on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Aug 2018 12:13:23 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 10 Aug 2018 13:36:05 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>学习书单</title>
+      <link>https://timx.cn/booklist/</link>
+      <pubDate>Fri, 10 Aug 2018 13:36:05 +0800</pubDate>
+      
+      <guid>https://timx.cn/booklist/</guid>
+      <description> 计算机学习书单列表  Unix编程艺术 Unix网络编程卷一 Unix网络编程卷二 Unix环境高级编程 图解HTTP C Primer Plus  编程珠玑 计算机程序设计艺术 深入浅出设计模式 重构：改善既有代码的设计 代码大全 程序员修炼之道 计算机程序的构造和解释 设计模式 人月神话 哥德尔、艾舍尔、巴赫书：集异璧之大成 代码整洁之道 修改代码的艺术 编码：隐匿在计算机软硬件背后的语言 About Face 3 交互设计精髓 高效程序员的45个习惯：敏捷开发修炼之道 测试驱动开发   </description>
+    </item>
     
     <item>
       <title>Workerman写的geoip查询的HTTP服务</title>
