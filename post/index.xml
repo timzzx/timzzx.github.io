@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 09 Aug 2018 12:13:23 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 10 Aug 2018 14:25:05 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C Primer Plus阅读学习(一)</title>
+      <link>https://timx.cn/post/c_1/</link>
+      <pubDate>Fri, 10 Aug 2018 14:25:05 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_1/</guid>
+      <description>C 语言概述 多个函数实例 /* two_ func. c -- 一个文件中包含两个函数 */ #include &amp;lt;stdio.h&amp;gt; void butler(void); /* ANSI/ISO C函数原型 */ int main(void) { printf(&amp;quot;I will summon the butler function.\ n&amp;quot;); butler(); printf(&amp;quot;Yes.Bring me some tea and writeable DVDs.\ n&amp;quot;); return 0; } void butler(void) /* 函数 定义 开始 */ { printf(&amp;quot;You rang,sir?\ n&amp;quot;); }  关键字和保留标识符    &amp;mdash; &amp;mdash; &amp;mdash; &amp;mdash;     auto extern short while   break float signed _Alignas   case for sizeof _Alignof   char goto static _Atomic   const if struct _Bool   continue inline switch _Complex   default int typedef _Generic   do long union _Imaginary   double register unsigned _Noreturn   else restrict void _Static_assert   enum return volatile _Thread_local    数据与C C语言的数据类型关键字    最初K&amp;amp;R给出的关键字 C90标准添加的关键字 C99标准添加的关键字     int signed _Bool   long void _Complex   short  _Imaginary   unsigned     char     float     double      通过这些关键字创建的类型，按计算机的储存方式可分为两大基本类型：整数类型和浮点数类型。</description>
+    </item>
     
     <item>
       <title>Workerman写的geoip查询的HTTP服务</title>
