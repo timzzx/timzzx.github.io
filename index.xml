@@ -6,10 +6,19 @@
     <description>Recent content on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Aug 2018 13:46:01 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 14 Aug 2018 16:31:02 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C Primer Plus阅读学习(三)</title>
+      <link>https://timx.cn/post/c_3/</link>
+      <pubDate>Tue, 14 Aug 2018 16:31:02 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_3/</guid>
+      <description>字符串和格式化输入/输出 #include &amp;lt; stdio. h&amp;gt; #include &amp;lt; string. h&amp;gt; //提供 strlen() 函数 的 原型 #define DENSITY 62.4 //人体密度（单位：磅/ 立方英尺） int main() { float weight,volume; int size,letters; char name[40]; //name是一个可容纳40个字符的数组 printf(&amp;quot;Hi! What&#39; s your first name?\n&amp;quot;); scanf(&amp;quot;%s&amp;quot;, name); printf(&amp;quot;%s, what&#39;s your weight in pounds?\n&amp;quot;, name); scanf(&amp;quot;%f&amp;quot;, &amp;amp;weight); size = sizeof name; letters = strlen(name); volume = weight / DENSITY; printf(&amp;quot;Well, %s, your volume is %2.2f cubic feet.\n&amp;quot;, name, volume); printf(&amp;quot;Also, your first name has %d letters,\n&amp;quot;, letters); printf(&amp;quot;and we have %d bytes to store it.</description>
+    </item>
     
     <item>
       <title>C Primer Plus阅读学习(二)</title>
