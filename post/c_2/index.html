@@ -151,6 +151,116 @@
 计算机使用数字编码来处理字符，即用特定的整数表示特定的字符。</p>
 </blockquote>
 
+<h3 id="转义序列">转义序列</h3>
+
+<table>
+<thead>
+<tr>
+<th>转义序列</th>
+<th>含义</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>\a</td>
+<td>警报（ANSI C）</td>
+</tr>
+
+<tr>
+<td>\b</td>
+<td>退格</td>
+</tr>
+
+<tr>
+<td>\f</td>
+<td>换页</td>
+</tr>
+
+<tr>
+<td>\n</td>
+<td>换行</td>
+</tr>
+
+<tr>
+<td>\r</td>
+<td>回车</td>
+</tr>
+
+<tr>
+<td>\t</td>
+<td>水平制表符</td>
+</tr>
+
+<tr>
+<td>\v</td>
+<td>垂直制表符</td>
+</tr>
+
+<tr>
+<td>\</td>
+<td>反斜杠（\）</td>
+</tr>
+
+<tr>
+<td>\&rsquo;</td>
+<td>单引号</td>
+</tr>
+
+<tr>
+<td>\&rdquo;</td>
+<td>双引号</td>
+</tr>
+
+<tr>
+<td>\?</td>
+<td>问号</td>
+</tr>
+
+<tr>
+<td>\0oo</td>
+<td>八进制（oo必须使有效的八进制数，即每个o可表示0~7中的一个数）</td>
+</tr>
+
+<tr>
+<td>\xhh</td>
+<td>十六进制（hh必须使有效的十六进制数，即每个h可表示0~f中的一个数）</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>从C90开始，不仅可以用十进制、八进制形式表示字符常量，C语言还提供了第三种选择——用十六进制形式表示字符常量，即反斜杠后面跟一个x或X，再加上1~3位十六进制数字。</p>
+
+<table>
+    <thead> <th colspan="4"> 整型常量的例子 </th> </thead>
+    <tr> <td> 类型 </td> <td> 十六进制 </td> <td> 八进制 </td> <td> 十进制 </td> </tr>
+    <tr> <td> char </td> <td> \0x41 </td> <td> \0101 </td> <td> N.A. </td> </tr>
+    <tr> <td> int </td> <td> 0x41 </td> <td> 0101 </td> <td> 65 </td> </tr>
+    <tr> <td> unsigned int </td> <td> 0x41u </td> <td> 0101u </td> <td> 65u </td> </tr>
+    <tr> <td> long </td> <td> 0x41L </td> <td> 0101L </td> <td> 65L </td> </tr>
+    <tr> <td> unsigned long </td> <td> 0x41UL </td> <td> 0101UL </td> <td> 65UL </td> </tr>
+    <tr> <td> long long </td> <td> 0x41LL </td> <td> 0101LL </td> <td> 65LL </td> </tr>
+    <tr> <td> unsigned long long </td> <td> 0x41ULL </td> <td> 0101ULL </td> <td> 65ULL </td> </tr>
+</table>
+
+<h3 id="bool类型">_Bool类型</h3>
+
+<p>用于表示布尔值，即逻辑值true和false。</p>
+
+<h3 id="可移植类型-stdint-h和inttypes-h">可移植类型：stdint.h和inttypes.h</h3>
+
+<h3 id="float-double和long-double">float、double和long double</h3>
+
+<h3 id="复数和虚数类型">复数和虚数类型</h3>
+
+<h3 id="其他类型">其他类型</h3>
+
+<p>C语言还有一些从基本类型衍生的其他类型，包括数组、指针、结构和联合。</p>
+
+<h3 id="类型大小">类型大小</h3>
+
                             
                             <br />
                             <br />
