@@ -6,10 +6,24 @@
     <description>Recent content in 2018 8 on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Aug 2018 16:31:02 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 15 Aug 2018 10:15:30 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/tags/2018-8/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C Primer Plus阅读学习(四)</title>
+      <link>https://timx.cn/post/c_4/</link>
+      <pubDate>Wed, 15 Aug 2018 10:15:30 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_4/</guid>
+      <description>运算符、表达式和语句   关键字：while、typedef 运算符：=、-、*、/、%、++、&amp;ndash;、（类型名） C语言的各种运算符，包括用于普通数学运算的运算符 运算符优先级以及语句、表达式的含义 while循环 复合语句、自动类型转换和强制类型转换 如何编写带有参数的函数   运算符优先级（从高至低）    运算符 结合律     () 从左往右   +-(一元) 从右往左   */ 从左往右   +-(二元) 从左往右   = 从右往左    sizeof运算符和size_t类型  size_t intsize;
+intsize = sizeof(int)
+  typedef double real;
+real deal;
+ real就是double的别名。
+不要自作聪明   如果一个变量出现在一个函数的多个参数中，不要对该变量使用递增或递减运算符 如果一个变量多次出现在一个表达式中，不要对该变量使用递增或递减运算符   表达式和语句  表达式由运算符和运算对象组成。最简单的表达式是一个单独的运算对象，以此为基础可以建立复杂的表达式。</description>
+    </item>
     
     <item>
       <title>C Primer Plus阅读学习(三)</title>
@@ -17,7 +31,7 @@
       <pubDate>Tue, 14 Aug 2018 16:31:02 +0800</pubDate>
       
       <guid>https://timx.cn/post/c_3/</guid>
-      <description>字符串和格式化输入/输出 #include &amp;lt; stdio. h&amp;gt; #include &amp;lt; string. h&amp;gt; //提供 strlen() 函数 的 原型 #define DENSITY 62.4 //人体密度（单位：磅/ 立方英尺） int main() { float weight,volume; int size,letters; char name[40]; //name是一个可容纳40个字符的数组 printf(&amp;quot;Hi! What&#39; s your first name?\n&amp;quot;); scanf(&amp;quot;%s&amp;quot;, name); printf(&amp;quot;%s, what&#39;s your weight in pounds?\n&amp;quot;, name); scanf(&amp;quot;%f&amp;quot;, &amp;amp;weight); size = sizeof name; letters = strlen(name); volume = weight / DENSITY; printf(&amp;quot;Well, %s, your volume is %2.2f cubic feet.\n&amp;quot;, name, volume); printf(&amp;quot;Also, your first name has %d letters,\n&amp;quot;, letters); printf(&amp;quot;and we have %d bytes to store it.</description>
+      <description>字符串和格式化输入/输出   函数 strlen() 关键字 const 字符串 如何创建、存储字符串 如何使用strlen()函数获取字符串的长度 用C预处理器指令#define和ANSIC的const修饰符创建符号常量   #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;string.h&amp;gt; //提供 strlen() 函数 的 原型 #define DENSITY 62.4 //人体密度（单位：磅/立方英尺） int main() { float weight,volume; int size,letters; char name[40]; //name是一个可容纳40个字符的数组 printf(&amp;quot;Hi! What&#39; s your first name?\n&amp;quot;); scanf(&amp;quot;%s&amp;quot;, name); printf(&amp;quot;%s, what&#39;s your weight in pounds?\n&amp;quot;, name); scanf(&amp;quot;%f&amp;quot;, &amp;amp;weight); size = sizeof name; letters = strlen(name); volume = weight / DENSITY; printf(&amp;quot;Well, %s, your volume is %2.</description>
     </item>
     
     <item>

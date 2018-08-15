@@ -109,10 +109,23 @@
 
 <h1 id="字符串和格式化输入-输出">字符串和格式化输入/输出</h1>
 
-<pre><code class="language-C">#include &lt; stdio. h&gt; 
-#include &lt; string. h&gt; //提供 strlen() 函数 的 原型 
-#define DENSITY 62.4 //人体密度（单位：磅/ 立方英尺） 
-int main() { 
+<blockquote>
+<ul>
+<li>函数 strlen()</li>
+<li>关键字 const</li>
+<li>字符串</li>
+<li>如何创建、存储字符串</li>
+<li>如何使用strlen()函数获取字符串的长度</li>
+<li>用C预处理器指令#define和ANSIC的const修饰符创建符号常量</li>
+</ul>
+</blockquote>
+
+<pre><code class="language-C">#include &lt;stdio.h&gt; 
+#include &lt;string.h&gt; //提供 strlen() 函数 的 原型 
+#define DENSITY 62.4  //人体密度（单位：磅/立方英尺）
+
+int main() 
+{ 
     float weight,volume; 
     int size,letters; 
     char name[40]; //name是一个可容纳40个字符的数组 
@@ -126,6 +139,7 @@ int main() {
     printf(&quot;Well, %s, your volume is %2.2f cubic feet.\n&quot;, name, volume); 
     printf(&quot;Also, your first name has %d letters,\n&quot;, letters); 
     printf(&quot;and we have %d bytes to store it.\n&quot;, size); 
+    
     return 0; 
 }
 
@@ -297,6 +311,8 @@ strlen()不包含空字符串所有存储单元的字符串长度</p>
                             <a href="https://timx.cn/post/c_2/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;C Primer Plus阅读学习(二)<br /><br />
                             
                             
+                            <a href="https://timx.cn/post/c_4/">下一页&nbsp;<i class="fa fa-angle-double-down" ></i></a>&nbsp;C Primer Plus阅读学习(四)
+                            
                             <br />
                             <br />
                             <br />
@@ -399,7 +415,7 @@ strlen()不包含空字符串所有存储单元的字符串长度</p>
         <ul class="widget-list">
             
             <li class="fa fa-angle-right">
-                <a href="/categories/c%E8%AF%AD%E8%A8%80">c语言 (3)</a>
+                <a href="/categories/c%E8%AF%AD%E8%A8%80">c语言 (4)</a>
             </li><br />
             
             <li class="fa fa-angle-right">
@@ -441,7 +457,7 @@ strlen()不包含空字符串所有存储单元的字符串长度</p>
             </li><br />
             
             <li class="fa fa-angle-right">
-                <a href="/tags/2018-8">2018-8 (13)</a>
+                <a href="/tags/2018-8">2018-8 (14)</a>
             </li><br />
             
         </ul>
