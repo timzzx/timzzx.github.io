@@ -8,19 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="shortcut icon" href="/img/favicon.ico" >
-    <title>C Primer Plus阅读学习(三) - 淡淡忧愁</title>
-    <meta property="og:title" content="C Primer Plus阅读学习(三) - 淡淡忧愁">
+    <title>C Primer Plus阅读学习(五) - 淡淡忧愁</title>
+    <meta property="og:title" content="C Primer Plus阅读学习(五) - 淡淡忧愁">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-08-14T16:31:02&#43;08:00">
+    <meta property="article:published_time" content="2018-08-16T13:11:30&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2018-08-14T16:31:02&#43;08:00">
+    <meta property="article:modified_time" content="2018-08-16T13:11:30&#43;08:00">
         
-    <meta name="description" content="C Primer Plus阅读学习(三)">
+    <meta name="description" content="C Primer Plus阅读学习(五)">
         
     <meta name="author" content="Tim Zhang">
-    <meta property="og:url" content="https://timx.cn/post/c_3/">
+    <meta property="og:url" content="https://timx.cn/post/c_5/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
     
@@ -74,12 +74,12 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;C Primer Plus阅读学习(三)</h1>
+                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;C Primer Plus阅读学习(五)</h1>
                         </header>
                         <date class="post-meta meta-date animated slower fadeInUp">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                            2018年8月14日
-                            16:31
+                            2018年8月16日
+                            13:11
                             
                         </date>
                         <div class="post-meta animated slower fadeInUp">
@@ -107,196 +107,215 @@
                             <article>
                             
 
-<h1 id="字符串和格式化输入-输出">字符串和格式化输入/输出</h1>
+<h1 id="c控制语句-循环">C控制语句：循环</h1>
 
 <blockquote>
 <ul>
-<li>函数 strlen()</li>
-<li>关键字 const</li>
-<li>字符串</li>
-<li>如何创建、存储字符串</li>
-<li>如何使用strlen()函数获取字符串的长度</li>
-<li>用C预处理器指令#define和ANSIC的const修饰符创建符号常量</li>
+<li>关键字：for、while、do while</li>
+<li>运算符：&lt;、&gt;、&gt;=、&lt;=、!=、==、+=、*=、-=、/=、%=</li>
+<li>函数：fabs()</li>
+<li>C语言3种循环：for、while、do while</li>
+<li>使用关系运算符构建控制循环的表达式</li>
+<li>其他运算符</li>
+<li>循环常用的数组</li>
+<li>编写有返回值的函数</li>
 </ul>
 </blockquote>
 
-<pre><code class="language-C">#include &lt;stdio.h&gt; 
-#include &lt;string.h&gt; //提供 strlen() 函数 的 原型 
-#define DENSITY 62.4  //人体密度（单位：磅/立方英尺）
-
-int main() 
-{ 
-    float weight,volume; 
-    int size,letters; 
-    char name[40]; //name是一个可容纳40个字符的数组 
-    printf(&quot;Hi! What' s your first name?\n&quot;); 
-    scanf(&quot;%s&quot;, name); 
-    printf(&quot;%s, what's your weight in pounds?\n&quot;, name); 
-    scanf(&quot;%f&quot;, &amp;weight); 
-    size = sizeof name; 
-    letters = strlen(name); 
-    volume = weight / DENSITY; 
-    printf(&quot;Well, %s, your volume is %2.2f cubic feet.\n&quot;, name, volume); 
-    printf(&quot;Also, your first name has %d letters,\n&quot;, letters); 
-    printf(&quot;and we have %d bytes to store it.\n&quot;, size); 
-    
-    return 0; 
-}
-
-</code></pre>
-
-<hr />
-
-<pre><code class="language-C">Hi! What's your first name? 
-Christine
-Christine, what's your weight in pounds? 
-154 
-Well, Christine, your volume is 2.47 cubic feet. 
-Also, your first name has 9 letters, 
-and we have 40 bytes to store it.
-</code></pre>
-
-<hr />
-
-<p>该程序包含以下特性。</p>
+<p>一门语言应该提供3中形式的程序流</p>
 
 <ul>
-<li>用数组(array)储存字符串。在该程序中，用户输入的名被储存在数组中，该数组占用内存中40个连续的字节，每个字节存储一个字符值。</li>
-<li>使用%s转换说明来处理字符串的输入和输出。注意、在scanf()中，name没有&amp;前缀，而weight有（&amp;weight和name都是地址）。</li>
-<li>用C预处理器把字符常量DENSITY定义为62.4</li>
-<li>用C函数strlen()获取字符串的长度。</li>
+<li>执行语句序列</li>
+<li>如果满足某些条件就重复执行语句序列（循环）</li>
+<li>通过测试选择执行哪一个语句序列（分支）</li>
 </ul>
 
-<hr />
+<h2 id="while循环">while循环</h2>
 
-<h2 id="char类型数组和null字符">char类型数组和null字符</h2>
+<p>while( expression )
+statement</p>
+
+<h2 id="终止while循环">终止while循环</h2>
 
 <blockquote>
-<p>C语言没有用于储存字符串的变量类型，字符串都被储存在char类型的数组中。数组由连续的存储单元组成，字符串中的字符被储存在相邻的存储单元中，每个单元储存一个字符。</p>
+<p>while循环有一点非常重要：在构建while循环时，必须让测试表达式的值有变化，表达式最终要为假。否则，循环就不会终止。</p>
 </blockquote>
 
-<h2 id="字符串和字符">字符串和字符</h2>
+<h2 id="for循环">for循环</h2>
+
+<p>for循环把3个行为（初始化、测试和更新）组合在一处。</p>
+
+<h1 id="c控制语句-分支和跳转">C控制语句：分支和跳转</h1>
 
 <blockquote>
-<p>字符串常量&rdquo;x&rdquo;和字符常量&rsquo;x&rsquo;不同。</p>
-
 <ul>
-<li>区别之一在于&rsquo;x&rsquo;是基本类型（char），而&rdquo;x&rdquo;是派生类型（char数组）；</li>
-<li>区别之二是&rdquo;x&rdquo;实际上由两个字符组成：&rsquo;x&rsquo;和空字符\0</li>
+<li>关键字：if、else、switch、continue、break、case、default、goto</li>
+<li>运算符：&amp;&amp;、||、?:</li>
+<li>函数：getchar()、putchar()、ctype.h系列</li>
+<li>如何使用if和if else语句，如何嵌套它们</li>
+<li>在更复杂的测试表达式中用逻辑运算符组合关系表达式</li>
+<li>C的条件运算符</li>
+<li>switch语句</li>
+<li>break、continue和goto语句</li>
+<li>使用C的字符I/O函数：getchar()和putchar()</li>
+<li>ctype.h头文件提供的字符分析函数系列</li>
 </ul>
 </blockquote>
+
+<p>ctype.h头文件中的字符测试函数</p>
 
 <table>
 <thead>
 <tr>
-<th>-</th>
-<th>-</th>
-<th>-</th>
+<th>函数名</th>
+<th>如果是下列参数时，返回值为真</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td>&lsquo;x&rsquo;是一个字符</td>
-<td>x</td>
-<td></td>
+<td>isalnum()</td>
+<td>字母数字（字母或数字）</td>
 </tr>
 
 <tr>
-<td>&ldquo;x&rdquo;是一个字符串</td>
-<td>x</td>
-<td>\0</td>
+<td>isalpha()</td>
+<td>字母</td>
+</tr>
+
+<tr>
+<td>isblank()</td>
+<td>标准的空白字符（空格、水平制表符或换行符）或任何其他本地化指定为空白的字符</td>
+</tr>
+
+<tr>
+<td>iscntrl()</td>
+<td>控制字符，如Ctrl+B</td>
+</tr>
+
+<tr>
+<td>isdigit()</td>
+<td>数字</td>
+</tr>
+
+<tr>
+<td>isgraph()</td>
+<td>除空格之外的任意可打印字符</td>
+</tr>
+
+<tr>
+<td>islower()</td>
+<td>小写字母</td>
+</tr>
+
+<tr>
+<td>isprint()</td>
+<td>可打印字符</td>
+</tr>
+
+<tr>
+<td>ispunct()</td>
+<td>标点符号（除空格或字母数字字符以外的任何可打印字符）</td>
+</tr>
+
+<tr>
+<td>isspace()</td>
+<td>空白字符（空格、换行符、换页符、回车符、垂直制表符、水平制表符或其他本地化定义的字符）</td>
+</tr>
+
+<tr>
+<td>isupper()</td>
+<td>大写字母</td>
+</tr>
+
+<tr>
+<td>isxdigit()</td>
+<td>十六进制数字符</td>
 </tr>
 </tbody>
 </table>
 
-<h2 id="strlen-函数">strlen()函数</h2>
-
-<blockquote>
-<p>sizeof()包含空字符串所有存储单元的字符串长度<br />
-strlen()不包含空字符串所有存储单元的字符串长度</p>
-</blockquote>
-
-<h2 id="常量和c预处理器">常量和C预处理器</h2>
-
-<blockquote>
-<p>定义常量PI的两种方式：</p>
-
-<ul>
-<li>#define Pi 3.1415926f;</li>
-
-<li><p>const float pi 3.1415926f;
 <hr />
-区别：</p></li>
 
-<li><p>第一种方式：是将Pi定义成一种符号，此时Pi只是3.1415926的别名，在编译期间用3.1415926去取代Pi的值；</p></li>
-
-<li><p>第二种方式：是将PI定义成变量，但告诉编译器它的值是固定不变的，如果在程序中试图去修改它的值，在编译时会报错；</p></li>
-</ul>
-</blockquote>
+<p>ctype.h头文件中的字符映射函数</p>
 
 <table>
 <thead>
 <tr>
-<th>指令</th>
-<th>描述</th>
+<th>函数名</th>
+<th>行为</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
-<td>#define</td>
-<td>定义宏</td>
+<td>tolower()</td>
+<td>如果参数是大写字符，该函数返回小写字符；否则，返回原始参数</td>
 </tr>
 
 <tr>
-<td>#include</td>
-<td>包含一个源代码文件</td>
+<td>toupper()</td>
+<td>如果参数是小写字符，该函数返回大写字符；否则，返回原始参数</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>逻辑运算符</p>
+
+<table>
+<thead>
+<tr>
+<th>逻辑运算符</th>
+<th>含义</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>&amp;&amp;</td>
+<td>与</td>
 </tr>
 
 <tr>
-<td>#undef</td>
-<td>取消已定义的宏</td>
+<td>||</td>
+<td>或</td>
 </tr>
 
 <tr>
-<td>#ifdef</td>
-<td>如果宏已经定义，则返回真</td>
+<td>!</td>
+<td>非</td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>逻辑运算符的备选拼写</p>
+
+<table>
+<thead>
+<tr>
+<th>传统写法</th>
+<th>iso646.h</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>&amp;&amp;</td>
+<td>and</td>
 </tr>
 
 <tr>
-<td>#ifndef</td>
-<td>如果宏没有定义，则返回真</td>
+<td>||</td>
+<td>or</td>
 </tr>
 
 <tr>
-<td>#if</td>
-<td>如果给定条件为真，则编译下面代码</td>
-</tr>
-
-<tr>
-<td>#else</td>
-<td>#if 的替代方案</td>
-</tr>
-
-<tr>
-<td>#elif</td>
-<td>如果前面的 #if 给定条件不为真，当前条件为真，则编译下面代码</td>
-</tr>
-
-<tr>
-<td>#endif</td>
-<td>结束一个 #if……#else 条件编译块</td>
-</tr>
-
-<tr>
-<td>#error</td>
-<td>当遇到标准错误时，输出错误消息</td>
-</tr>
-
-<tr>
-<td>#pragma</td>
-<td>使用标准化方法，向编译器发布特殊的命令到编译器中</td>
+<td>!</td>
+<td>not</td>
 </tr>
 </tbody>
 </table>
@@ -308,10 +327,8 @@ strlen()不包含空字符串所有存储单元的字符串长度</p>
                             <hr />
                             
                             
-                            <a href="https://timx.cn/post/c_2/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;C Primer Plus阅读学习(二)<br /><br />
+                            <a href="https://timx.cn/post/c_4/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;C Primer Plus阅读学习(四)<br /><br />
                             
-                            
-                            <a href="https://timx.cn/post/c_4/">下一页&nbsp;<i class="fa fa-angle-double-down" ></i></a>&nbsp;C Primer Plus阅读学习(四)
                             
                             <br />
                             <br />

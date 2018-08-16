@@ -6,10 +6,24 @@
     <description>Recent content in 2018 8 on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Aug 2018 10:15:30 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 16 Aug 2018 13:11:30 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/tags/2018-8/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C Primer Plus阅读学习(五)</title>
+      <link>https://timx.cn/post/c_5/</link>
+      <pubDate>Thu, 16 Aug 2018 13:11:30 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_5/</guid>
+      <description>C控制语句：循环   关键字：for、while、do while 运算符：&amp;lt;、&amp;gt;、&amp;gt;=、&amp;lt;=、!=、==、+=、*=、-=、/=、%= 函数：fabs() C语言3种循环：for、while、do while 使用关系运算符构建控制循环的表达式 其他运算符 循环常用的数组 编写有返回值的函数   一门语言应该提供3中形式的程序流
+ 执行语句序列 如果满足某些条件就重复执行语句序列（循环） 通过测试选择执行哪一个语句序列（分支）  while循环 while( expression ) statement
+终止while循环  while循环有一点非常重要：在构建while循环时，必须让测试表达式的值有变化，表达式最终要为假。否则，循环就不会终止。
+ for循环 for循环把3个行为（初始化、测试和更新）组合在一处。
+C控制语句：分支和跳转   关键字：if、else、switch、continue、break、case、default、goto 运算符：&amp;amp;&amp;amp;、||、?: 函数：getchar()、putchar()、ctype.h系列 如何使用if和if else语句，如何嵌套它们 在更复杂的测试表达式中用逻辑运算符组合关系表达式 C的条件运算符 switch语句 break、continue和goto语句 使用C的字符I/O函数：getchar()和putchar() ctype.h头文件提供的字符分析函数系列   ctype.h头文件中的字符测试函数
+   函数名 如果是下列参数时，返回值为真     isalnum() 字母数字（字母或数字）   isalpha() 字母   isblank() 标准的空白字符（空格、水平制表符或换行符）或任何其他本地化指定为空白的字符   iscntrl() 控制字符，如Ctrl+B   isdigit() 数字   isgraph() 除空格之外的任意可打印字符   islower() 小写字母   isprint() 可打印字符   ispunct() 标点符号（除空格或字母数字字符以外的任何可打印字符）   isspace() 空白字符（空格、换行符、换页符、回车符、垂直制表符、水平制表符或其他本地化定义的字符）   isupper() 大写字母   isxdigit() 十六进制数字符    ctype.</description>
+    </item>
     
     <item>
       <title>C Primer Plus阅读学习(四)</title>
