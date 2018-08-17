@@ -8,19 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="shortcut icon" href="/img/favicon.ico" >
-    <title>C Primer Plus阅读学习(三) - 淡淡忧愁</title>
-    <meta property="og:title" content="C Primer Plus阅读学习(三) - 淡淡忧愁">
+    <title>C Primer Plus阅读学习(七) - 淡淡忧愁</title>
+    <meta property="og:title" content="C Primer Plus阅读学习(七) - 淡淡忧愁">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-08-14T16:31:02&#43;08:00">
+    <meta property="article:published_time" content="2018-08-17T11:48:10&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2018-08-14T16:31:02&#43;08:00">
+    <meta property="article:modified_time" content="2018-08-17T11:48:10&#43;08:00">
         
-    <meta name="description" content="C Primer Plus阅读学习(三)">
+    <meta name="description" content="C Primer Plus阅读学习(七)">
         
     <meta name="author" content="Tim Zhang">
-    <meta property="og:url" content="https://timx.cn/post/c_3/">
+    <meta property="og:url" content="https://timx.cn/post/c_7/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
     
@@ -74,12 +74,12 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;C Primer Plus阅读学习(三)</h1>
+                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;C Primer Plus阅读学习(七)</h1>
                         </header>
                         <date class="post-meta meta-date animated slower fadeInUp">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                            2018年8月14日
-                            16:31
+                            2018年8月17日
+                            11:48
                             
                         </date>
                         <div class="post-meta animated slower fadeInUp">
@@ -96,7 +96,7 @@
                         
                         <br />
                         <div class="post-meta animated slower fadeInUp">
-                            <i class="fa fa-clock-o"></i>&nbsp;阅读时间1分钟
+                            <i class="fa fa-clock-o"></i>&nbsp;阅读时间2分钟
                         </div>
                         <br />
                     </article>
@@ -107,199 +107,184 @@
                             <article>
                             
 
-<h1 id="字符串和格式化输入-输出">字符串和格式化输入/输出</h1>
+<h1 id="数组和指针">数组和指针</h1>
 
 <blockquote>
 <ul>
-<li>函数 strlen()</li>
-<li>关键字 const</li>
-<li>字符串</li>
-<li>如何创建、存储字符串</li>
-<li>如何使用strlen()函数获取字符串的长度</li>
-<li>用C预处理器指令#define和ANSIC的const修饰符创建符号常量</li>
+<li>关键字：static</li>
+<li>运算符：&amp;、*、（一元）</li>
+<li>如何创建并初始化数组</li>
+<li>指针（在已学过的基础上）、指针和数组的关系</li>
+<li>编写处理数组的函数</li>
+<li>二维数组</li>
 </ul>
 </blockquote>
 
-<pre><code class="language-C">#include &lt;stdio.h&gt; 
-#include &lt;string.h&gt; //提供 strlen() 函数 的 原型 
-#define DENSITY 62.4  //人体密度（单位：磅/立方英尺）
+<h2 id="数组">数组</h2>
 
-int main() 
-{ 
-    float weight,volume; 
-    int size,letters; 
-    char name[40]; //name是一个可容纳40个字符的数组 
-    printf(&quot;Hi! What' s your first name?\n&quot;); 
-    scanf(&quot;%s&quot;, name); 
-    printf(&quot;%s, what's your weight in pounds?\n&quot;, name); 
-    scanf(&quot;%f&quot;, &amp;weight); 
-    size = sizeof name; 
-    letters = strlen(name); 
-    volume = weight / DENSITY; 
-    printf(&quot;Well, %s, your volume is %2.2f cubic feet.\n&quot;, name, volume); 
-    printf(&quot;Also, your first name has %d letters,\n&quot;, letters); 
-    printf(&quot;and we have %d bytes to store it.\n&quot;, size); 
-    
-    return 0; 
+<p>数组由数据类型相同的一系列元素组成。需要使用数组时候，通过声明数组告诉编译器数组中内含多少元素和这些元素的类型。编译器根据这些信息正确的创建数组。</p>
+
+<pre><code class="language-C">int main(void)
+{
+    float candy[365]; /* 内含365个float类型元素的数组 */
+    char code[12];    /* 内含12个char类型元素的数组 */
+    int states[50];   /* 内含50个int类型元素的数组 */
+    ...
 }
+</code></pre>
+
+<h2 id="初始化数组">初始化数组</h2>
+
+<h2 id="指定初始化-c99">指定初始化（C99）</h2>
+
+<p>int arr[6] = {[5] = 212}; //把arr[5]初始化为212 <br />
+对于一般的初始化，在初始化一个元素后，未初始化的元素都会设置为0.</p>
+
+<h2 id="数组边界">数组边界</h2>
+
+<p>在使用数组时，要防止数组下标超出边界。也就是说，必须确保下标是有效的值<br /></p>
+
+<p>编译器不会检查数组下标是否使用得当。在C标准中，使用越界下标的结果是未定义的。这意味着程序看上去可以运行，但是运行结果很奇怪，或异常中止。</p>
+
+<h2 id="指定数组的大小">指定数组的大小</h2>
+
+<h2 id="多维数组">多维数组</h2>
+
+<h2 id="初始化二维数组">初始化二维数组</h2>
+
+<h2 id="其他多维数组">其他多维数组</h2>
+
+<p>可以把一维数组想象成一行数据，把二维数组想象成数据表，把三维数组想象成一叠数据表。<br />
+通常，处理三维数组要使用3重嵌套循环，处理四维数组要使用4重嵌套循环。对于其他多维数组，以此类推。</p>
+
+<h2 id="指针和数组">指针和数组</h2>
+
+<p>指针提供一种以符号形式使用地址的方法。因为计算机的硬件指令非常依赖地址，指针在某种程度上把程序员想要传达的指令以更接近机器的方式表达。因此，在使用指针的程序更有效率。尤其是，指针能有效的处理数组。数组表示法其实是在变相的使用指针。<br /><br />
+flizny == &amp;flizny[0]; //数组名是该数组首元素的地址<br /><br />
+flizny和&amp;flizny[0]都表示数组首元素的内存地址（&amp;是地址运算符）。两者都是常量，在程序的运行过程中，不会改变。但是，可以把它们赋值给指针变量，然后可以修改指针变量的值。<br /><br /></p>
+
+<ul>
+<li>指针的值是它所指向对象的地址。地址的表示方式依赖于计算机内部的硬件。许多计算机都是按字节编址，意思是内存中的每个字节都按顺序编号。这里，一个较大对象的地址（如double类型的变量）通常是该对象第一个字节的地址。</li>
+<li>在指针前面使用*运算符可以得到该指针所指向对象的值。</li>
+<li>指针加1，指针的值递增它所指向类型的大小（以字节为单位）</li>
+</ul>
+
+<p>dataes + 2 == &amp;dates[2] // 相同的地址 <br />
+*(dates+2) == dates[2]  // 相同的值<br /><br /></p>
+
+<p>不要混淆*(dates+2)和<em>dates+2。间接运算符(</em>)的优先级高于+，所以<em>dates+2相当于</em>(dates)+2</p>
+
+<h2 id="函数-数组和指针">函数、数组和指针</h2>
+
+<h2 id="指针表示法和数组表示法">指针表示法和数组表示法</h2>
+
+<p>处理数组的函数实际上用指针作为参数，但是在编写这样的函数时，可以选择是使用数组表示法还是指针表示法。使用数组表示法，让函数是处理数组的这一意图更加明显。<br />
+指针表示法（尤其与递增运算符一起使用时）更接近机器语言，因此一些编译器在编译时能生成效率更高的代码。</p>
+
+<h2 id="指针操作">指针操作</h2>
+
+<p>C提供了一些基本的指针操作，下面的程序示例中演示了8中不同的操作。</p>
+
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+int main(void)
+{
+    int urn[5] = { 100, 200, 300, 400, 500};
+    int * ptr1,*ptr2,*ptr3;
+
+    ptr1 = urn;  //把一个地址赋给指针
+    ptr2 = &amp;urn[2]; //把一个地址赋给指针
+                    //解引用指针，以及获取指针的地址
+    printf(&quot;pointer value, dereferenced pointer, pointer address:\n&quot;);
+    printf(&quot;ptr1 = %p, *ptr1 = %d, &amp;ptr1 = %p\n&quot;, ptr1, *ptr1, &amp;ptr1);
+
+    //指针加法
+    ptr3 = ptr1 + 4;
+    printf(&quot;\nadding an int to a pointer:\n&quot;);
+    printf(&quot;ptr1 + 4 = %p, *(ptr1 + 4) = %d\n&quot;, ptr1 + 4, *(ptr1 +4));
+    ptr1++;           //递增指针
+    printf(&quot;\nvalues after ptr1++:\n&quot;);
+    printf(&quot;ptr1 = %p, *ptr1 = %d, &amp;ptr1 = %p\n&quot;, ptr1, *ptr1, &amp;ptr1);
+    ptr2--;           //递减指针
+    printf(&quot;\nvalues after --ptr2:\n&quot;);
+    printf(&quot;ptr2 = %p, *ptr2 = %d, &amp;ptr2 = %p\n&quot;, ptr2, *ptr2, &amp;ptr2);
+    --ptr1;            //恢复为初始值
+    ++ptr2;            //恢复为初始值
+    printf(&quot;\nPointers reset to original values:\ n&quot;); 
+    printf(&quot;ptr1 = %p, ptr2 = %p\n&quot;, ptr1, ptr2); 
+    // 一个指针减去另一个指针 
+    printf(&quot;\nsubtracting one pointer from another:\ n&quot;); 
+    printf(&quot;ptr2 = %p, ptr1 = %p, ptr2 - ptr1 = %td\ n&quot;, ptr2, ptr1, ptr2 - ptr1); 
+    // 一个 指针减去一个整数 
+    printf(&quot;\nsubtracting an int from a pointer:\n&quot;); 
+    printf(&quot;ptr3 = %p, ptr3 - 2 = %p\ n&quot;, ptr3, ptr3 - 2); 
+
+    return 0;
+}
+</code></pre>
+
+<p>运行结果</p>
+
+<pre><code class="language-C">pointer value, dereferenced pointer, pointer address: 
+ptr1 = 0x7fff5fbff8d0, *ptr1 = 100, &amp;ptr1 = 0x7fff5fbff8c8 
+
+adding an int to a pointer: 
+ptr1 + 4 = 0x7fff5fbff8e0, *(ptr1 + 4) = 500 
+values after ptr1++: 
+ptr1 = 0x7fff5fbff8d4, *ptr1 = 200, &amp;ptr1 = 0x7fff5fbff8c8
+values after --ptr2: 
+ptr2 = 0x7fff5fbff8d4, *ptr2 = 200, &amp;ptr2 = 0x7fff5fbff8c0 
+
+Pointers reset to original values: 
+ptr1 = 0x7fff5fbff8d0, ptr2 = 0x7fff5fbff8d8 
+
+subtracting one pointer from another: 
+ptr2 = 0x7fff5fbff8d8, ptr1 = 0x7fff5fbff8d0, ptr2 - ptr1 = 2 
+
+subtracting an int from a pointer: 
+ptr3 = 0x7fff5fbff8e0, ptr3 - 2 = 0x7fff5fbff8d8
 
 </code></pre>
 
-<hr />
-
-<pre><code class="language-C">Hi! What's your first name? 
-Christine
-Christine, what's your weight in pounds? 
-154 
-Well, Christine, your volume is 2.47 cubic feet. 
-Also, your first name has 9 letters, 
-and we have 40 bytes to store it.
-</code></pre>
-
-<hr />
-
-<p>该程序包含以下特性。</p>
-
 <ul>
-<li>用数组(array)储存字符串。在该程序中，用户输入的名被储存在数组中，该数组占用内存中40个连续的字节，每个字节存储一个字符值。</li>
-<li>使用%s转换说明来处理字符串的输入和输出。注意、在scanf()中，name没有&amp;前缀，而weight有（&amp;weight和name都是地址）。</li>
-<li>用C预处理器把字符常量DENSITY定义为62.4</li>
-<li>用C函数strlen()获取字符串的长度。</li>
+<li>指针减去一个整数：可以使用-运算符从一个指针中减去一个整数。指针必须是第1个运算对象，整数是第2 个运算对象。该整数将乘以指针指向类型的大小（ 以字节为单位），然后用初始地址减去乘积。所以ptr3 - 2与&amp;urn[2]等价，因为ptr3指向的是&amp;urn[4]。如果相减的结果超出了初始指针所指向数组的范围，计算 结果则是未定义的。除非正好超过数组末尾第一个位置，C保证该指针有效。</li>
+<li>递减指针：当然，除了递增指针还可以递减指针。在本例中，递减ptr3使其指向数组的第2个元素而不是第3个元素。前缀或后缀的递增和递减运算符都可以使用。注意，在重置ptr1和ptr2前，它们都指向相同的元素urn[1]。</li>
+<li>指针求差：可以计算两个指针的差值。通常，求差的两个指针分别指向同一个数组的不同元素，通过计算求出两元素之间的距离。差值的单位与数组类型的单位相同。例如，程序清单10.13的输出中，ptr2 - ptr1得 2，意思是这两个指针所指向的两个元素相隔两个int，而不是2字节。只要两个指针都指向相同的数组（或者 其中一个指针指向数组后面的第1个地址），C都能保证相减运算有效。如果指向两个不同数组的指针进行求差运算可能会得出一个值，或者导致运行时错误。</li>
+<li>比较：使用关系运算符可以比较两个指针的值，前提是两个指针都指向相同类型的对象。</li>
 </ul>
 
-<hr />
+<h2 id="保护数组中的数据">保护数组中的数据</h2>
 
-<h2 id="char类型数组和null字符">char类型数组和null字符</h2>
+<p>编写一个处理基本类型（如，int）的函数时，要选择是传递int类型的值还是传递指向int的指针。通常都是直接传递数值，只有程序需要在函数中改变该数值时，才会传递指针。对于数组别无选择，必须传递指针，因为这样做效率高。<br /><br />
+传递地址会导致一些问题。C通常都按值传递数据，因为这样做可以保证数据的完整性。如果函数使用的是原始数据的副本，就不会意外修改原始数据。但是，处理数组的函数通常都需要使用原始数据，因此这样的函数可以修改原数组。有时，这正是我们需要的。</p>
 
-<blockquote>
-<p>C语言没有用于储存字符串的变量类型，字符串都被储存在char类型的数组中。数组由连续的存储单元组成，字符串中的字符被储存在相邻的存储单元中，每个单元储存一个字符。</p>
-</blockquote>
+<h2 id="对形式参数使用const">对形式参数使用const</h2>
 
-<h2 id="字符串和字符">字符串和字符</h2>
+<p>const告诉编译器，该函数不能修改ar指向的数组中的内容。</p>
 
-<blockquote>
-<p>字符串常量&rdquo;x&rdquo;和字符常量&rsquo;x&rsquo;不同。</p>
+<h2 id="指针和多维数组">指针和多维数组</h2>
 
-<ul>
-<li>区别之一在于&rsquo;x&rsquo;是基本类型（char），而&rdquo;x&rdquo;是派生类型（char数组）；</li>
-<li>区别之二是&rdquo;x&rdquo;实际上由两个字符组成：&rsquo;x&rsquo;和空字符\0</li>
-</ul>
-</blockquote>
+<p>指针和多维数组有什么关系</p>
 
-<table>
-<thead>
-<tr>
-<th>-</th>
-<th>-</th>
-<th>-</th>
-</tr>
-</thead>
+<h2 id="指针的兼容性">指针的兼容性</h2>
 
-<tbody>
-<tr>
-<td>&lsquo;x&rsquo;是一个字符</td>
-<td>x</td>
-<td></td>
-</tr>
+<p>指针之间的赋值比数值类型之间的赋值要严格。例如，不用类型转换就可以把int类型的值赋给double类型的变量，但是两个类型的指针不能这样做。</p>
 
-<tr>
-<td>&ldquo;x&rdquo;是一个字符串</td>
-<td>x</td>
-<td>\0</td>
-</tr>
-</tbody>
-</table>
+<h2 id="函数和多维数组">函数和多维数组</h2>
 
-<h2 id="strlen-函数">strlen()函数</h2>
+<h2 id="变长数组-vla">变长数组（VLA）</h2>
 
 <blockquote>
-<p>sizeof()包含空字符串所有存储单元的字符串长度<br />
-strlen()不包含空字符串所有存储单元的字符串长度</p>
+<p><strong>TIPS:</strong><br />
+变长数组中的“变”不是指可以修改已创建数组的大小，一旦创建了变长数组，它的大小则保持不变。这里的“变”指的是：在创建数组时，可以使用变量指定数组的维度。<hr />
+变长数组还允许动态内存分配，这说明可以在程序运行时指定数组的大小。普通C数组都是静态内存分配，即在编译时确定数组的大小。由于数组大小是常量，所以编译器在编译时就知道了。</p>
 </blockquote>
 
-<h2 id="常量和c预处理器">常量和C预处理器</h2>
+<h2 id="复合字面量">复合字面量</h2>
 
-<blockquote>
-<p>定义常量PI的两种方式：</p>
+<h2 id="关键概念">关键概念</h2>
 
-<ul>
-<li>#define Pi 3.1415926f;</li>
-
-<li><p>const float pi 3.1415926f;
-<hr />
-区别：</p></li>
-
-<li><p>第一种方式：是将Pi定义成一种符号，此时Pi只是3.1415926的别名，在编译期间用3.1415926去取代Pi的值；</p></li>
-
-<li><p>第二种方式：是将PI定义成变量，但告诉编译器它的值是固定不变的，如果在程序中试图去修改它的值，在编译时会报错；</p></li>
-</ul>
-</blockquote>
-
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th>描述</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>#define</td>
-<td>定义宏</td>
-</tr>
-
-<tr>
-<td>#include</td>
-<td>包含一个源代码文件</td>
-</tr>
-
-<tr>
-<td>#undef</td>
-<td>取消已定义的宏</td>
-</tr>
-
-<tr>
-<td>#ifdef</td>
-<td>如果宏已经定义，则返回真</td>
-</tr>
-
-<tr>
-<td>#ifndef</td>
-<td>如果宏没有定义，则返回真</td>
-</tr>
-
-<tr>
-<td>#if</td>
-<td>如果给定条件为真，则编译下面代码</td>
-</tr>
-
-<tr>
-<td>#else</td>
-<td>#if 的替代方案</td>
-</tr>
-
-<tr>
-<td>#elif</td>
-<td>如果前面的 #if 给定条件不为真，当前条件为真，则编译下面代码</td>
-</tr>
-
-<tr>
-<td>#endif</td>
-<td>结束一个 #if……#else 条件编译块</td>
-</tr>
-
-<tr>
-<td>#error</td>
-<td>当遇到标准错误时，输出错误消息</td>
-</tr>
-
-<tr>
-<td>#pragma</td>
-<td>使用标准化方法，向编译器发布特殊的命令到编译器中</td>
-</tr>
-</tbody>
-</table>
+<p>数组用于储存相同类型的数据。C把数组看作是派生类型，因为数组是建立在其他类型的基础上。<br />
+通常编写一个函数来处理数组，这样在特定的函数中解决特定的问题，有助于实现程序的模块化。在把数组名作为实际参数时，传递给函数的不是正规数组，而是数组的地址（因此，函数对应的形式参数是指针）。为了处理数组，函数必须知道从何处开始读取数据和要处理多少个数组元素。数组地址提供了“地址”，“元素个数”可以内置在函数中或作为单独的参数传递。第2种方法更普遍，这样做可以让同一个函数处理不同大小的数组。</p>
 
                             
                             <br />
@@ -308,10 +293,8 @@ strlen()不包含空字符串所有存储单元的字符串长度</p>
                             <hr />
                             
                             
-                            <a href="https://timx.cn/post/c_2/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;C Primer Plus阅读学习(二)<br /><br />
+                            <a href="https://timx.cn/post/c_6/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;C Primer Plus阅读学习(六)<br /><br />
                             
-                            
-                            <a href="https://timx.cn/post/c_4/">下一页&nbsp;<i class="fa fa-angle-double-down" ></i></a>&nbsp;C Primer Plus阅读学习(四)
                             
                             <br />
                             <br />

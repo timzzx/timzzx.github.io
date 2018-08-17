@@ -6,10 +6,28 @@
     <description>Recent content on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Aug 2018 14:53:06 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 17 Aug 2018 11:48:10 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C Primer Plus阅读学习(七)</title>
+      <link>https://timx.cn/post/c_7/</link>
+      <pubDate>Fri, 17 Aug 2018 11:48:10 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_7/</guid>
+      <description>数组和指针   关键字：static 运算符：&amp;amp;、*、（一元） 如何创建并初始化数组 指针（在已学过的基础上）、指针和数组的关系 编写处理数组的函数 二维数组   数组 数组由数据类型相同的一系列元素组成。需要使用数组时候，通过声明数组告诉编译器数组中内含多少元素和这些元素的类型。编译器根据这些信息正确的创建数组。
+int main(void) { float candy[365]; /* 内含365个float类型元素的数组 */ char code[12]; /* 内含12个char类型元素的数组 */ int states[50]; /* 内含50个int类型元素的数组 */ ... }  初始化数组 指定初始化（C99） int arr[6] = {[5] = 212}; //把arr[5]初始化为212 对于一般的初始化，在初始化一个元素后，未初始化的元素都会设置为0.
+数组边界 在使用数组时，要防止数组下标超出边界。也就是说，必须确保下标是有效的值
+编译器不会检查数组下标是否使用得当。在C标准中，使用越界下标的结果是未定义的。这意味着程序看上去可以运行，但是运行结果很奇怪，或异常中止。
+指定数组的大小 多维数组 初始化二维数组 其他多维数组 可以把一维数组想象成一行数据，把二维数组想象成数据表，把三维数组想象成一叠数据表。
+通常，处理三维数组要使用3重嵌套循环，处理四维数组要使用4重嵌套循环。对于其他多维数组，以此类推。
+指针和数组 指针提供一种以符号形式使用地址的方法。因为计算机的硬件指令非常依赖地址，指针在某种程度上把程序员想要传达的指令以更接近机器的方式表达。因此，在使用指针的程序更有效率。尤其是，指针能有效的处理数组。数组表示法其实是在变相的使用指针。
+flizny == &amp;amp;flizny[0]; //数组名是该数组首元素的地址
+flizny和&amp;amp;flizny[0]都表示数组首元素的内存地址（&amp;amp;是地址运算符）。两者都是常量，在程序的运行过程中，不会改变。但是，可以把它们赋值给指针变量，然后可以修改指针变量的值。
+ 指针的值是它所指向对象的地址。地址的表示方式依赖于计算机内部的硬件。许多计算机都是按字节编址，意思是内存中的每个字节都按顺序编号。这里，一个较大对象的地址（如double类型的变量）通常是该对象第一个字节的地址。 在指针前面使用*运算符可以得到该指针所指向对象的值。 指针加1，指针的值递增它所指向类型的大小（以字节为单位）  dataes + 2 == &amp;amp;dates[2] // 相同的地址 *(dates+2) == dates[2] // 相同的值</description>
+    </item>
     
     <item>
       <title>C Primer Plus阅读学习(六)</title>
