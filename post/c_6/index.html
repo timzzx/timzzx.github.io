@@ -8,19 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="shortcut icon" href="/img/favicon.ico" >
-    <title>Unix编程艺术(五) - 淡淡忧愁</title>
-    <meta property="og:title" content="Unix编程艺术(五) - 淡淡忧愁">
+    <title>C Primer Plus阅读学习(六) - 淡淡忧愁</title>
+    <meta property="og:title" content="C Primer Plus阅读学习(六) - 淡淡忧愁">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-08-06T15:00:31&#43;08:00">
+    <meta property="article:published_time" content="2018-08-16T14:53:06&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2018-08-06T15:00:31&#43;08:00">
+    <meta property="article:modified_time" content="2018-08-16T14:53:06&#43;08:00">
         
-    <meta name="description" content="Unix编程艺术(五)">
+    <meta name="description" content="C Primer Plus阅读学习(六)">
         
     <meta name="author" content="Tim Zhang">
-    <meta property="og:url" content="https://timx.cn/post/unix_art_5/">
+    <meta property="og:url" content="https://timx.cn/post/c_6/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
     
@@ -74,12 +74,12 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;Unix编程艺术(五)</h1>
+                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;C Primer Plus阅读学习(六)</h1>
                         </header>
                         <date class="post-meta meta-date animated slower fadeInUp">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                            2018年8月6日
-                            15:00
+                            2018年8月16日
+                            14:53
                             
                         </date>
                         <div class="post-meta animated slower fadeInUp">
@@ -90,198 +90,113 @@
                         <div class="post-meta animated slower fadeInUp">
                          | <i class="fa fa-folder-o" aria-hidden="true"></i>
                             
-                                <a href="/categories/unix">UNIX</a>
+                                <a href="/categories/c%E8%AF%AD%E8%A8%80">c语言</a>
                             
                         </div>
                         
                         <br />
                         <div class="post-meta animated slower fadeInUp">
-                            <i class="fa fa-clock-o"></i>&nbsp;阅读时间2分钟
+                            <i class="fa fa-clock-o"></i>&nbsp;阅读时间1分钟
                         </div>
                         <br />
                     </article>
                     
                 </div>
                 
-                <aside>
-                    <div class="tablelist animated slower flipInX">
-                    <nav id="TableOfContents">
-<ul>
-<li><a href="#unix配置">Unix配置</a>
-<ul>
-<li><a href="#unix命令行选项">unix命令行选项</a></li>
-</ul></li>
-</ul>
-</nav>
-                    </div>
-                </aside>
-                 
                         <div class="post-content animated slower fadeInLeftBig">
                             <article>
                             
 
-<h1 id="unix配置">Unix配置</h1>
+<h1 id="字符输入-输出和输入验证">字符输入/输出和输入验证</h1>
 
 <blockquote>
-<p>经验法则：<hr /></p>
-
 <ul>
-<li>提高适应能力，除非这样做会产生超过0.7秒的延迟。0.7秒是一个魔数，人们几乎察觉不到少于0.7秒的启动延迟。</li>
-<li>用户不应该看到优化开关。让程序经济运行时设计者的任务，不是用户的任务。与提高界面复杂度成本相比，让用户从优化开关来获取那点儿性能收益，换来界面复杂度的提升，往往得不偿失。</li>
-<li>能用脚本包装器或简单管道实现的任务，就不要用配置开关实现。能简单利用其它程序来完成的任务，就不要增加本程序的复杂度。</li>
+<li>更详细得介绍输入、输出以及缓冲输入和无缓冲输入的区别</li>
+<li>如何通过键盘模拟文件结尾条件</li>
+<li>如何使用重定向把程序和文件相连接</li>
+<li>创建更友好的用户界面</li>
 </ul>
 </blockquote>
 
+<h1 id="函数">函数</h1>
+
 <blockquote>
-<p>增加配置是要考虑的问题：<hr /></p>
-
 <ul>
-<li>能省掉这个功能吗？为什么在加厚手册之外还要加重用户负担？</li>
-<li>能否用某种无伤大雅的方式改变程序的常规行为从而无需这个选项？</li>
-<li>这个选项是否花哨没用？是否应该少考虑用户界面的可配置性而多考虑正确性？</li>
-<li>这个选项附加的行为是否应该用一个独立的程序来代替？</li>
+<li>关键字：return</li>
+<li>运算符：*（一元）、&amp;（一元）</li>
+<li>函数及其定义方式</li>
+<li>如何使用参数和返回值</li>
+<li>如何把指针变量用作函数参数</li>
+<li>函数类型</li>
+<li>ANSI C原型</li>
+<li>递归</li>
 </ul>
-
-<p><hr />增加不必要的选项会产生很多不良后果。其中最严重的后果是对测试覆盖率的影响。</p>
 </blockquote>
 
-<h2 id="unix命令行选项">unix命令行选项</h2>
+<hr />
 
-<table>
-<thead>
-<tr>
-<th>&nbsp;&nbsp;参数</th>
-<th>说明</th>
-</tr>
-</thead>
+<blockquote>
+<p>函数是完成特定任务的独立程序代码单元。语法规则定义了函数的结构和使用方式。</p>
+</blockquote>
 
-<tbody>
-<tr>
-<td>-a</td>
-<td>all : 全部，所有 (ls , lsattr , uname) archive : 存档 (cp , rsync) append : 附加 (tar -A , 7z)</td>
-</tr>
+<h2 id="函数类型">函数类型</h2>
 
-<tr>
-<td>-b</td>
-<td>blocksize : 块大小，带参数 (du , df) batch : 批处理模式 (交互模式的程序通常拥有此选项，如 top -b)</td>
-</tr>
+<blockquote>
+<p>声明函数时必须声明函数的类型。带返回值的函数类型应该与其返回值类型相同，而没有返回值的函数应声明void类型。如果没有声明函数的类型。 <hr />
+类型声明是函数定义的一部分。要记住，函数类型指的是返回值的类型，不是函数参数的类型。</p>
+</blockquote>
 
-<tr>
-<td>-c</td>
-<td>commands : 执行命令，带参数 (bash , ksh , python) create : 创建 (tar)</td>
-</tr>
+<h2 id="递归">递归</h2>
 
-<tr>
-<td>-d</td>
-<td>debug : 调试 delete : 删除 directory : 目录 (ls)</td>
-</tr>
+<blockquote>
+<p>C允许函数调用它自己，这种调用过程称为递归。递归有时候年以捉摸，有时候却很方便实用。结束递归是使用递归的难点，如果递归代码中没有终止递归的条件测试部分，一个调用自己的函数会无限递归。<hr />
+可以使用循环的地方通常都可以使用递归。有时用循环解决问题比较好，但有时用递归更好。递归的方案更简洁，但效率却没有循环高。</p>
+</blockquote>
 
-<tr>
-<td>-e</td>
-<td>execute : 执行，带参数 (xterm , perl) edit : 编辑 exclude : 排除</td>
-</tr>
+<h2 id="尾递归">尾递归</h2>
 
-<tr>
-<td>-f</td>
-<td>force : 强制，不经确认(cp , rm ,mv) file : 文件，带参数 (tar) configuration file : 指定配置文件(有些守护进程拥有此选项，如 ssh , lighttpd)</td>
-</tr>
+<blockquote>
+<p>最简单的递归形式是把递归调用置于函数的末尾，即正好在return语句之前。这种形式的递归被称为尾递归，因为递归调用在函数的末尾。尾递归是最简单的递归形式，因为它相当于循环。</p>
+</blockquote>
 
-<tr>
-<td>-g</td>
-<td></td>
-</tr>
+<h2 id="递归的优缺点">递归的优缺点</h2>
 
-<tr>
-<td>-h</td>
-<td>&ndash;help : 帮助 human readable : 人性化显示(ls , du , df) headers : 头部</td>
-</tr>
+<blockquote>
+<p>递归既有优点也有缺点。优点是递归为某些编程问题提供了最简单的解决方案。缺点是一些递归算法会快速消耗计算机的内存资源。另外，递归不方便阅读和维护。</p>
+</blockquote>
 
-<tr>
-<td>-i</td>
-<td>interactive : 交互模式，提示(rm , mv) include : 包含</td>
-</tr>
+<h2 id="查询地址-运算符">查询地址：&amp;运算符</h2>
 
-<tr>
-<td>-k</td>
-<td>keep : 保留 kill</td>
-</tr>
+<blockquote>
+<p>指针是C语言最重要的概念之一，用于存储变量的地址。前面使用的scanf()函数中就使用地址作为参数。</p>
+</blockquote>
 
-<tr>
-<td>-l</td>
-<td>long listing format : 长格式(ls) list : 列表 load : 读取 (gcc , emacs)</td>
-</tr>
+<h2 id="指针简介">指针简介</h2>
 
-<tr>
-<td>-m</td>
-<td>message : 消息 (cvs) manual : 手册 (whereis) create home : 创建 home 目录 (usermod , useradd)</td>
-</tr>
+<blockquote>
+<p>指针？什么是指针？从根本上看，指针是一个值为农村地址的变量（或数据对象）。正如char类型变量的值是字符，int类型变量是整数，指针变量的值是地址。在C语言中，指针有许多用法。</p>
+</blockquote>
 
-<tr>
-<td>-n</td>
-<td>number : 行号、编号 (cat , head , tail , pstree , lspci) no : (useradd , make)</td>
-</tr>
+<h2 id="间接运算符">间接运算符：*</h2>
 
-<tr>
-<td>-o</td>
-<td>output : 输出 (cc , sort) options : 选项 (mount)</td>
-</tr>
+<p>地址运算符：&amp;<br />
+一般注解：<br />
+后跟一个变量名时，&amp;给出该变量的地址。<br />
+示例：<br />
+&amp;nurse表示变量nurse的地址。<br />
+地址运算符：*<br />
+一般注解：<br />
+后跟一个指针名或地址时，*给出储存在指针指向地址上的值。<br />
+示例：<br />
+nurse=22；<br />
+ptr = &amp;nurse； //指向nurse的指针<br />
+val = *ptr； //把ptr指向的地址上的值赋给val<br /></p>
 
-<tr>
-<td>-p</td>
-<td>port : 端口，带参数 (很多网络工具拥有此选项，如 ssh , lftp ) protocol : 协议，带参数 passwd : 密码，带参数</td>
-</tr>
+<h2 id="声明指针">声明指针</h2>
 
-<tr>
-<td>-q</td>
-<td>quiet : 静默</td>
-</tr>
+<p>类型说明符表明了指针所指向对象的类型，星号表明声明的变量是一个指针。int * pi;声明的意思是pi是一个指针,*pi是int类型。</p>
 
-<tr>
-<td>-r</td>
-<td>reverse : 反转 recursive : 递归 (cp , rm , chmod -R)</td>
-</tr>
-
-<tr>
-<td>-s</td>
-<td>silent : 安静 size : 大小，带参数 subject</td>
-</tr>
-
-<tr>
-<td>-t</td>
-<td>tag type : 类型 (mount)</td>
-</tr>
-
-<tr>
-<td>-u</td>
-<td>user : 用户名、UID，带参数</td>
-</tr>
-
-<tr>
-<td>-v</td>
-<td>verbose : 冗长 version : 版本</td>
-</tr>
-
-<tr>
-<td>-w</td>
-<td>width : 宽度 warning : 警告</td>
-</tr>
-
-<tr>
-<td>-x</td>
-<td>exclude : 排除 (tar , zip)</td>
-</tr>
-
-<tr>
-<td>-y</td>
-<td>yes</td>
-</tr>
-
-<tr>
-<td>-z</td>
-<td>zip : 启用压缩 (bzip , tar , zcat , zip , cvs)</td>
-</tr>
-</tbody>
-</table>
+<h2 id="使用指针在函数间通信">使用指针在函数间通信</h2>
 
                             
                             <br />
@@ -290,10 +205,8 @@
                             <hr />
                             
                             
-                            <a href="https://timx.cn/post/unix_art_4/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;Unix编程艺术(四)<br /><br />
+                            <a href="https://timx.cn/post/c_5/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;C Primer Plus阅读学习(五)<br /><br />
                             
-                            
-                            <a href="https://timx.cn/post/unix_art_6/">下一页&nbsp;<i class="fa fa-angle-double-down" ></i></a>&nbsp;Unix编程艺术(六)
                             
                             <br />
                             <br />

@@ -6,10 +6,37 @@
     <description>Recent content in Posts on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Aug 2018 13:11:30 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 16 Aug 2018 14:53:06 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C Primer Plus阅读学习(六)</title>
+      <link>https://timx.cn/post/c_6/</link>
+      <pubDate>Thu, 16 Aug 2018 14:53:06 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_6/</guid>
+      <description>字符输入/输出和输入验证   更详细得介绍输入、输出以及缓冲输入和无缓冲输入的区别 如何通过键盘模拟文件结尾条件 如何使用重定向把程序和文件相连接 创建更友好的用户界面   函数   关键字：return 运算符：*（一元）、&amp;amp;（一元） 函数及其定义方式 如何使用参数和返回值 如何把指针变量用作函数参数 函数类型 ANSI C原型 递归    函数是完成特定任务的独立程序代码单元。语法规则定义了函数的结构和使用方式。
+ 函数类型  声明函数时必须声明函数的类型。带返回值的函数类型应该与其返回值类型相同，而没有返回值的函数应声明void类型。如果没有声明函数的类型。 类型声明是函数定义的一部分。要记住，函数类型指的是返回值的类型，不是函数参数的类型。
+ 递归  C允许函数调用它自己，这种调用过程称为递归。递归有时候年以捉摸，有时候却很方便实用。结束递归是使用递归的难点，如果递归代码中没有终止递归的条件测试部分，一个调用自己的函数会无限递归。可以使用循环的地方通常都可以使用递归。有时用循环解决问题比较好，但有时用递归更好。递归的方案更简洁，但效率却没有循环高。
+ 尾递归  最简单的递归形式是把递归调用置于函数的末尾，即正好在return语句之前。这种形式的递归被称为尾递归，因为递归调用在函数的末尾。尾递归是最简单的递归形式，因为它相当于循环。
+ 递归的优缺点  递归既有优点也有缺点。优点是递归为某些编程问题提供了最简单的解决方案。缺点是一些递归算法会快速消耗计算机的内存资源。另外，递归不方便阅读和维护。
+ 查询地址：&amp;amp;运算符  指针是C语言最重要的概念之一，用于存储变量的地址。前面使用的scanf()函数中就使用地址作为参数。
+ 指针简介  指针？什么是指针？从根本上看，指针是一个值为农村地址的变量（或数据对象）。正如char类型变量的值是字符，int类型变量是整数，指针变量的值是地址。在C语言中，指针有许多用法。
+ 间接运算符：* 地址运算符：&amp;amp;
+一般注解：
+后跟一个变量名时，&amp;amp;给出该变量的地址。
+示例：
+&amp;amp;nurse表示变量nurse的地址。
+地址运算符：*
+一般注解：
+后跟一个指针名或地址时，*给出储存在指针指向地址上的值。
+示例：
+nurse=22；
+ptr = &amp;amp;nurse； //指向nurse的指针
+val = *ptr； //把ptr指向的地址上的值赋给val</description>
+    </item>
     
     <item>
       <title>C Primer Plus阅读学习(五)</title>
