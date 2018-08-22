@@ -8,19 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="shortcut icon" href="/img/favicon.ico" >
-    <title>HTTP学习理解(一) - 淡淡忧愁</title>
-    <meta property="og:title" content="HTTP学习理解(一) - 淡淡忧愁">
+    <title>web高并发的理解和发现 - 淡淡忧愁</title>
+    <meta property="og:title" content="web高并发的理解和发现 - 淡淡忧愁">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-07-26T13:48:11&#43;08:00">
+    <meta property="article:published_time" content="2018-08-22T11:08:10&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2018-07-26T13:48:11&#43;08:00">
+    <meta property="article:modified_time" content="2018-08-22T11:08:10&#43;08:00">
         
-    <meta name="description" content="HTTP学习理解(一)">
+    <meta name="description" content="web高并发的理解和发现">
         
     <meta name="author" content="Tim Zhang">
-    <meta property="og:url" content="https://timx.cn/post/http_1/">
+    <meta property="og:url" content="https://timx.cn/post/complicated/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
     
@@ -74,12 +74,12 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;HTTP学习理解(一)</h1>
+                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;web高并发的理解和发现</h1>
                         </header>
                         <date class="post-meta meta-date animated slower fadeInUp">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                            2018年7月26日
-                            13:48
+                            2018年8月22日
+                            11:08
                             
                         </date>
                         <div class="post-meta animated slower fadeInUp">
@@ -90,7 +90,7 @@
                         <div class="post-meta animated slower fadeInUp">
                          | <i class="fa fa-folder-o" aria-hidden="true"></i>
                             
-                                <a href="/categories/http">HTTP</a>
+                                <a href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91">高并发</a>
                             
                         </div>
                         
@@ -107,10 +107,34 @@
                     <div class="tablelist animated slower flipInX">
                     <nav id="TableOfContents">
 <ul>
-<li><a href="#http基础">HTTP基础</a></li>
-<li><a href="#http方法">HTTP方法</a></li>
-<li><a href="#持久连接">持久连接</a></li>
-<li><a href="#使用cookie的状态管理">使用Cookie的状态管理</a></li>
+<li><a href="#高并发的理解">高并发的理解</a>
+<ul>
+<li><a href="#发现问题">发现问题</a></li>
+<li><a href="#跟踪分析问题">跟踪分析问题</a></li>
+<li><a href="#本地重现">本地重现</a></li>
+<li><a href="#上网查询解决方案">上网查询解决方案</a>
+<ul>
+<li><a href="#redis缓存">redis缓存</a></li>
+<li><a href="#还是redis缓存">还是redis缓存</a></li>
+<li><a href="#使用文件锁或者redis锁">使用文件锁或者redis锁</a></li>
+<li><a href="#使用队列">使用队列</a></li>
+<li><a href="#mysql的唯一索引">mysql的唯一索引</a></li>
+<li><a href="#使用mysql-innodb的悲观锁">使用mysql InnoDB的悲观锁</a></li>
+</ul></li>
+<li><a href="#网上解决方案思考">网上解决方案思考。</a></li>
+<li><a href="#询问其他人">询问其他人</a></li>
+<li><a href="#根据其他人思路实现">根据其他人思路实现</a></li>
+<li><a href="#未完成的测试-workerman的tcp服务并发的极限">未完成的测试，workerman的tcp服务并发的极限。</a></li>
+</ul></li>
+<li><a href="#高并发的思考">高并发的思考</a>
+<ul>
+<li><a href="#读">读</a></li>
+<li><a href="#写">写</a></li>
+<li><a href="#先读后写">先读后写</a></li>
+<li><a href="#先写后读">先写后读</a></li>
+<li><a href="#解决方案思考">解决方案思考</a></li>
+</ul></li>
+<li><a href="#待解决问题">待解决问题</a></li>
 </ul>
 </nav>
                     </div>
@@ -120,52 +144,156 @@
                             <article>
                             
 
-<h1 id="http基础">HTTP基础</h1>
+<h1 id="高并发的理解">高并发的理解</h1>
+
+<h2 id="发现问题">发现问题</h2>
 
 <blockquote>
-<p>两台计算机在使用HTTP通信在一条线路上的必须是一端为客户端， 一端为服务器；<br />
-HTTP协议规定请求从客户端发出， 最后服务器端响应该请求并返回；<br />
-HTTP是不保存状态， 即无状态协议， 于是为了实现保持状态功能引入了Cookie技术；<br /></p>
+<p><b>这几天登录服务器上线，发现注册新用户数据库有多条记录！！</b></p>
 </blockquote>
 
-<h1 id="http方法">HTTP方法</h1>
-
-<p><b>GET：</b>获取资源<br /><br />
-GET方法用来请求访问已被URI识别的资源， 制定的资源经服务器端解析后返回响应内容。<br /><br />
-<b>POST：</b>传输实体主体<br /><br />
-POST方法用来传输实体的主体， 虽然GET方法也可以但一般不用GET方法传输实体的主体。<br /><br />
-<b>PUT：</b>传输文件<br /><br />
-PUT方法用来传输文件。 就像FTP协议的文件上传一样， 要求在请求报文的主体中包含文件的内容， 然后保存到请求URI指定的位置。<br /><br />
-<b>HEAD：</b>获得报文首部<br /><br />
-HEAD方法和GET方法一样， 只是不返回报文主体部分， 用于确认URI的有效性及资源更新的日期时间。<br /><br />
-<b>DELETE：</b>删除文件<br /><br />
-DELETE方法用来删除文件， 是与PUT方法相反的方法。<br /><br />
-<b>OPTION：</b>询问支持的方法<br /><br />
-OPTION方法用来查询针对请求URI指定的资源支持的方法。<br /><br />
-<b>TRACE：</b>追踪路径<br /><br />
-TRACE方法是让WEB服务器端将之前的请求通信环回给客户端的方法。<br /><br />
-<b>CONNECT：</b>要求用隧道协议连接代理<br /><br />
-CONNECT方法要求在代理服务器通信时建立隧道， 实现隧道协议进行TCP通信。<br />
-<hr /></p>
-
-<h1 id="持久连接">持久连接</h1>
-
-<p><b>问题：</b><br /><br />
-初始的HTTP协议版本中， 每进行一次HTTP通信就要断开一次TCP连接， 随着HTTP的普及，文档中包含大量图片的情况多了起来以后， 每次请求都会造成无谓的TCP连接建立和断开，增加通信量的开销。<br /><br />
-<b>解决：</b><br /><br />
-使用持久连接的方法。 特点是：只要任意一端没有明确的提出断开连接， 则保持TCP的连接状态。<br /><br />
-<b>优点：</b><br /><br />
-减少了TCP连接的重复建立和断开造成的额外开销， 减轻了服务器的负载；另外，减少了开销的那部分时间， 使HTTP请求和响应不能够更早的结束， 这样WEB页面的显示速度也就相应的提高了。<br /><br />
-<hr /></p>
-
-<h1 id="使用cookie的状态管理">使用Cookie的状态管理</h1>
+<h2 id="跟踪分析问题">跟踪分析问题</h2>
 
 <blockquote>
-<p>Cookie会根据从服务器端发送的响应报文内的一个叫做Set—Cookie的首部字段信息， 通知保存Cookie。 当下次客户端再往该服务器发送请求时， 客户端会自动在请求报文中加入Cookie值后发送出去。<br /><br />
-服务端发现客户端发送过来的Cookie后， 会去检查究竟是从哪一个客户端发来的连接请求，然后对比服务器上的记录， 最后得到之前的状态信息。<br /><br /></p>
+<ul>
+<li>查询nginx的访问日志发现有相同的请求同时请求。</li>
+<li>查看代码逻辑发现创建新用户时，先查询mysql是否有相同的用户udid。如果有，那么直接返回用户主键id。没有就插入一条数据。</li>
+<li>逻辑非常简单，也没有用上缓存。</li>
+</ul>
+</blockquote>
+
+<h2 id="本地重现">本地重现</h2>
+
+<blockquote>
+<ul>
+<li>ab创建注册接口。10个用户并发，100个人次。</li>
+<li>ab发现数据库出现了重复数据。概率90%以上。</li>
+</ul>
+</blockquote>
+
+<h2 id="上网查询解决方案">上网查询解决方案</h2>
+
+<h3 id="redis缓存">redis缓存</h3>
+
+<blockquote>
+<ul>
+<li>用户访问注册接口。</li>
+<li>先访问缓存如果有用户id就直接返回用户id</li>
+<li>没有就插入redis缓存一条，然后再访问数据库查询是否存在，不存在就插入mysql，再更新缓存。</li>
+</ul>
 </blockquote>
 
 <hr />
+
+<blockquote>
+<p>本地测试<hr />
+ab创建注册接口。10个用户并发，100个人次。没有发现重复数据<br />
+直到ab 60个用户并发，200人次再次出现重复数据，复现80%左右。<br />
+没有完美解决</p>
+</blockquote>
+
+<h3 id="还是redis缓存">还是redis缓存</h3>
+
+<blockquote>
+<p>直接用redis做防护层，控制相同udid一秒内只能一次，其他返回失败。
+本地测试<hr />
+ab创建注册接口。10个用户并发，100个人次。没有发现重复数据<br />
+直到ab 60个用户并发，200人次再次出现重复数据，复现80%左右。
+没有完美解决</p>
+</blockquote>
+
+<h3 id="使用文件锁或者redis锁">使用文件锁或者redis锁</h3>
+
+<blockquote>
+<p>这个没有实现测试，思考时，我不打算用代码层做阻塞用户的操作！！！</p>
+</blockquote>
+
+<h3 id="使用队列">使用队列</h3>
+
+<blockquote>
+<p>让注册用户的并发串行化。使用延迟插入。可以解决。<br />
+队列带来异步的问题。需要客户端配合。</p>
+</blockquote>
+
+<h3 id="mysql的唯一索引">mysql的唯一索引</h3>
+
+<blockquote>
+<p>这个可以解决但是会有报错返回对客户端不友好，不合适。</p>
+</blockquote>
+
+<h3 id="使用mysql-innodb的悲观锁">使用mysql InnoDB的悲观锁</h3>
+
+<blockquote>
+<p>查询时候进行行锁，然后再插入。最后提交。<br />
+ab创建注册接口。10个用户并发，100个人次。没有发现重复数据<br />
+直到ab 60个用户并发，200人次没有出现重复数据。<br />
+本地完美解决。</p>
+</blockquote>
+
+<h2 id="网上解决方案思考">网上解决方案思考。</h2>
+
+<p>利用redis做缓存还是不能完美解决并发的问题，只能解决一部分。如果使用redis集群提高处理速度和延迟，买更好的机器。可以降低并发出问题的几率，但不完美，不可扩展。
+利用mysql悲观锁可以解决但是会让mysql性能下降，并且代码逻辑不严谨有产生死锁的可能。所以mysql的悲观锁也不是一个好的解决方案。</p>
+
+<h2 id="询问其他人">询问其他人</h2>
+
+<p>游戏服务器他们的处理是用单进程单线程来解决。</p>
+
+<h2 id="根据其他人思路实现">根据其他人思路实现</h2>
+
+<p>我之前一直再测试workerman框架，打算使用它的单进程单线程来处理注册用户的逻辑。</p>
+
+<blockquote>
+<p>编写代码实现了一个单进程单线程的http服务来处理注册。先查询数据库再插入的简单逻辑。<br />
+接口使用curl来请求workerman来注册。<br />
+ab后发现可以完美避免重复数据问题。带来的新问题是接口的qps从400降到70.性能下降巨大。<br /></p>
+</blockquote>
+
+<p>再次检查测试发现curl的性能消耗很大导致qps下降。要解决就不要用curl。那么，决定不使用http，使用tcp直接请求workerman。</p>
+
+<blockquote>
+<p>改变workerman的协议为tcp，服务器代码使用socket来访问。
+ab之后发现qps重新回到400多。压力全部在mysql。</p>
+</blockquote>
+
+<h2 id="未完成的测试-workerman的tcp服务并发的极限">未完成的测试，workerman的tcp服务并发的极限。</h2>
+
+<p>现在正在压测使用workerman的tcp服务注册接口。要几天后再看是否使用这套解决方案。</p>
+
+<h1 id="高并发的思考">高并发的思考</h1>
+
+<p>高并发我的理解可以分成四类：<br /></p>
+
+<ul>
+<li>读</li>
+<li>写</li>
+<li>先读后写</li>
+<li>先写后读</li>
+</ul>
+
+<h2 id="读">读</h2>
+
+<p>解决使用缓存即可。缓存可以多点部署。或者直接使用静态文件让后使用CDN来做。主要这种读不需要考虑更新可以接受比较大的延迟。</p>
+
+<h2 id="写">写</h2>
+
+<p>可以先写缓存，或者队列，异步存入mysql数据库。</p>
+
+<h2 id="先读后写">先读后写</h2>
+
+<p>这次事件就是这种模式</p>
+
+<h2 id="先写后读">先写后读</h2>
+
+<p>例子：mysql读写分离之后，写入写库后，从读库读取，获取不到数据问题，这个有一定延迟。以前解决办法就是直接读取写库解决。</p>
+
+<h2 id="解决方案思考">解决方案思考</h2>
+
+<p>单纯的读或写都可以用缓存或队列解决。但是先写后读和先读后写这两种，我暂时考虑单进程单线程的模式解决。</p>
+
+<h1 id="待解决问题">待解决问题</h1>
+
+<p>单进程单线程的扩展性。还需要更深入去理解redis、mysql的高并发的性能受什么影响，如何更好的解决。</p>
 
                             
                             <br />
@@ -174,10 +302,8 @@ CONNECT方法要求在代理服务器通信时建立隧道， 实现隧道协议
                             <hr />
                             
                             
-                            <a href="https://timx.cn/post/tcp_11/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;TCP/IP的题目和问答<br /><br />
+                            <a href="https://timx.cn/post/c_7/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;C Primer Plus阅读学习(七)<br /><br />
                             
-                            
-                            <a href="https://timx.cn/post/http_2/">下一页&nbsp;<i class="fa fa-angle-double-down" ></i></a>&nbsp;HTTP学习理解(二)
                             
                             <br />
                             <br />

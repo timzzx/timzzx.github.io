@@ -65,6 +65,41 @@
                         <article  class="post">
                             <header>
                                 <h2 class="post-title   wow  slow zoomIn "><i class="fa fa-file-text-o"></i>
+                                    <a href="https://timx.cn/post/complicated/">web高并发的理解和发现</a>
+                                </h2>
+                            </header>
+                            <date class="post-meta meta-date  wow  slow zoomIn">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                2018年8月22日
+                                11:08
+                            </date>
+                            <div class="post-meta  wow  slow zoomIn">
+                                | <i class="fa fa-user-o" aria-hidden="true"></i>
+                                <a href="/about">Tim Zhang</a>
+                            </div>
+                            
+                            <div class="post-meta  wow  slow zoomIn">
+                                | <i class="fa fa-folder-o" aria-hidden="true"></i>
+                                
+                                    <a href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91">高并发</a>
+                                
+                            </div>
+                            
+                            <div class="post-content  wow  slow zoomIn">
+                                <blockquote>
+                                <p>高并发的理解 发现问题  这几天登录服务器上线，发现注册新用户数据库有多条记录！！
+ 跟踪分析问题   查询nginx的访问日志发现有相同的请求同时请求。 查看代码逻辑发现创建新用户时，先查询mysql是否有相同的用户udid。如果有，那么直接返回用户主键id。没有就插入一条数据。 逻辑非常简单，也没有用上缓存。   本地重现   ab创建注册接口。10个用户并发，100个人次。 ab发现数据库出 …</p>
+                                </blockquote>
+                                <br />
+                                <a href="https://timx.cn/post/complicated/">阅读全文&nbsp;<i class="fa fa-angle-double-right" ></i></a>
+                            </div>
+                        </article>
+                        <br />
+                        <hr class =" wow  slow fadeInUp" />
+                    
+                        <article  class="post">
+                            <header>
+                                <h2 class="post-title   wow  slow zoomIn "><i class="fa fa-file-text-o"></i>
                                     <a href="https://timx.cn/post/c_7/">C Primer Plus阅读学习(七)</a>
                                 </h2>
                             </header>
@@ -340,43 +375,6 @@ int main(void) { float candy[365]; /* …</p>
                         <br />
                         <hr class =" wow  slow fadeInUp" />
                     
-                        <article  class="post">
-                            <header>
-                                <h2 class="post-title   wow  slow zoomIn "><i class="fa fa-file-text-o"></i>
-                                    <a href="https://timx.cn/post/unix_art_8/">Unix编程艺术(八)</a>
-                                </h2>
-                            </header>
-                            <date class="post-meta meta-date  wow  slow zoomIn">
-                                <i class="fa fa-calendar" aria-hidden="true"></i>
-                                2018年8月8日
-                                15:37
-                            </date>
-                            <div class="post-meta  wow  slow zoomIn">
-                                | <i class="fa fa-user-o" aria-hidden="true"></i>
-                                <a href="/about">Tim Zhang</a>
-                            </div>
-                            
-                            <div class="post-meta  wow  slow zoomIn">
-                                | <i class="fa fa-folder-o" aria-hidden="true"></i>
-                                
-                                    <a href="/categories/unix">UNIX</a>
-                                
-                            </div>
-                            
-                            <div class="post-content  wow  slow zoomIn">
-                                <blockquote>
-                                <p>重用：论不要重新发明轮子  透明性是重用的关键
-从重用到开源
- 可移植性 文档：向网络世界阐释代码 开放源码：在Unix新社区中编程  源码公开 尽早发布，经常发布 给贡献以表扬  未来：危机与机遇 附录：无根的根：无名师的Unix心传 无名师与万行码  无名师曾对来访的程序员说：“Unix传统上认为，一行shell脚本胜过万行C程序。”
-这个程序员自以为对C极其精通，说：“这不可能。UNIX内核 …</p>
-                                </blockquote>
-                                <br />
-                                <a href="https://timx.cn/post/unix_art_8/">阅读全文&nbsp;<i class="fa fa-angle-double-right" ></i></a>
-                            </div>
-                        </article>
-                        <br />
-                        <hr class =" wow  slow fadeInUp" />
-                    
                     <p class="pull-right2"><a href="/" class="fa fa-home" ></a></p>
                     <p class="pull-right"><a href="#" class="fa fa-angle-double-up" ></a></p>
                     <p class="pull-left"><a href="#" onclick="javascript:history.go(-1);return false;" class="fa fa-angle-double-left" ></a></p>
@@ -536,6 +534,10 @@ int main(void) { float candy[365]; /* …</p>
                 <a href="/categories/%E6%A8%A1%E6%9D%BF">模板 (1)</a>
             </li><br />
             
+            <li class="fa fa-angle-right">
+                <a href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91">高并发 (1)</a>
+            </li><br />
+            
         </ul>
     </section>
     <section class="widget wow slow zoomIn">
@@ -547,7 +549,7 @@ int main(void) { float candy[365]; /* …</p>
             </li><br />
             
             <li class="fa fa-angle-right">
-                <a href="/tags/2018-8">2018-8 (17)</a>
+                <a href="/tags/2018-8">2018-8 (18)</a>
             </li><br />
             
         </ul>

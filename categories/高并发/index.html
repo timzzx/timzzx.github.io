@@ -8,30 +8,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="shortcut icon" href="/img/favicon.ico" >
-    <title>博客开通 - 淡淡忧愁</title>
-    <meta property="og:title" content="博客开通 - 淡淡忧愁">
+    <title>高并发 - 淡淡忧愁</title>
+    <meta property="og:title" content="高并发 - 淡淡忧愁">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-07-04T17:44:01&#43;08:00">
         
-        
-    <meta property="article:modified_time" content="2018-07-04T17:44:01&#43;08:00">
-        
-    <meta name="description" content="博客开通">
+    <meta name="description" content="高并发">
         
     <meta name="author" content="Tim Zhang">
-    <meta property="og:url" content="https://timx.cn/post/new/">
+    <meta property="og:url" content="https://timx.cn/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.css" />
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" />
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 
 <body>
 <header id="header" class="clearfix">
@@ -44,7 +37,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix wow slow zoomIn">
-                    <a class="current" href="https://timx.cn/"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;博客</a>
+                    <a class="" href="https://timx.cn/"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;博客</a>
                     
                     <a  href="https://timx.cn/booklist/" title="学习书单">
                         <i class="fa fa-bars" aria-hidden="true"></i>&nbsp;学习书单
@@ -70,134 +63,63 @@
         <div class="col-group">
 
             <div class="col-8" id="main">
-            
                 <div class="res-cons">
-                    <article class="post">
-                        <header>
-                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;博客开通</h1>
-                        </header>
-                        <date class="post-meta meta-date animated slower fadeInUp">
-                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                            2018年7月4日
-                            17:44
-                            
-                        </date>
-                        <div class="post-meta animated slower fadeInUp">
-                            | <i class="fa fa-user-o" aria-hidden="true"></i>
-                            <a href="/about">Tim Zhang</a>
-                        </div>
-                        
-                        <div class="post-meta animated slower fadeInUp">
-                         | <i class="fa fa-folder-o" aria-hidden="true"></i>
-                            
-                                <a href="/categories/%E5%85%B6%E4%BB%96">其他</a>
-                            
-                        </div>
-                        
-                        <br />
-                        <div class="post-meta animated slower fadeInUp">
-                            <i class="fa fa-clock-o"></i>&nbsp;阅读时间1分钟
-                        </div>
-                        <br />
-                    </article>
                     
+                    <h3 class="archive-title">
+                        分类
+                        <span class="keyword">高并发</span>
+                        中的文章
+                    </h3>
+                    
+
+                    
+                        <article class="post">
+                            <header>
+                                <h2 class="post-title  wow  slow zoomIn">
+                                    <i class="fa fa-file-text-o"></i>
+                                    <a href="https://timx.cn/post/complicated/">web高并发的理解和发现</a>
+                                </h2>
+                            </header>
+                            <date class="post-meta meta-date  wow  slow zoomIn">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                2018年8月22日
+                                11:08
+                            </date>
+                            <div class="post-meta  wow  slow zoomIn">
+                                | <i class="fa fa-user-o" aria-hidden="true"></i>
+                                <a href="/about">Tim Zhang</a>
+                            </div>
+                            
+                            <div class="post-meta  wow  slow zoomIn">
+                              | <i class="fa fa-folder-o" aria-hidden="true"></i>
+                                
+                                    <a href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91">高并发</a>
+                                
+                            </div>
+                            
+                            <div class="post-content  wow  slow zoomIn">
+                                <blockquote>
+                                <p>高并发的理解 发现问题  这几天登录服务器上线，发现注册新用户数据库有多条记录！！
+ 跟踪分析问题   查询nginx的访问日志发现有相同的请求同时请求。 查看代码逻辑发现创建新用户时，先查询mysql是否有相同的用户udid。如果有，那么直接返回用户主键id。没有就插入一条数据。 逻辑非常简单，也没有用上缓存。   本地重现   ab创建注册接口。10个用户并发，100个人次。 ab发现数据库出 …</p>
+                                </blockquote>
+                                <br />
+                                <a href="https://timx.cn/post/complicated/">阅读全文&nbsp;<i class="fa fa-angle-double-right" ></i></a>
+                            </div>
+                        </article>
+                        <br />
+                        <hr class=" wow  slow fadeInUp" />
+                    
+                    <p class="pull-right2"><a href="/" class="fa fa-home" ></a></p>
+                    <p class="pull-right"><a href="#" class="fa fa-angle-double-up" ></a></p>
+                    <p class="pull-left"><a href="#" onclick="javascript:history.go(-1);return false;" class="fa fa-angle-double-left" ></a></p>
+                    
+
+
+
+
                 </div>
-                
-                <aside>
-                    <div class="tablelist animated slower flipInX">
-                    <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li>
-<ul>
-<li><a href="#测试代码展示">测试代码展示</a></li>
-</ul></li>
-</ul></li>
-</ul></li>
-</ul>
-</nav>
-                    </div>
-                </aside>
-                 
-                        <div class="post-content animated slower fadeInLeftBig">
-                            <article>
-                            
-
-<blockquote>
-<p>第一次用github的Pages来做自己的博客感觉挺有意思，希望自己能坚持写下去吧！</p>
-</blockquote>
-
-<h4 id="测试代码展示">测试代码展示</h4>
-
-<pre><code class="language-go">package main
-
-import &quot;fmt&quot;
-
-func main() {  
-    fmt.Println(&quot;Hello World&quot;)
-}
-
-</code></pre>
-
-                            
-                            <br />
-                            <br />
-                            <br />
-                            <hr />
-                            
-                            
-                            <a href="https://timx.cn/about/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;关于<br /><br />
-                            
-                            
-                            <a href="https://timx.cn/wall/">下一页&nbsp;<i class="fa fa-angle-double-down" ></i></a>&nbsp;留言板
-                            
-                            <br />
-                            <br />
-                            <br />
-                            
-                            </article>
-                        </div>
-                        <p class="pull-right2"><a href="/" class="fa fa-home" ></a></p>
-                            <p class="pull-right"><a href="#" class="fa fa-angle-double-up" ></a></p>
-                            <p class="pull-left"><a href="#" onclick="javascript:history.go(-1);return false;" class="fa fa-angle-double-left" ></a></p>
-                
-                <div id="git-comments"></div>
-                <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
-                <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-                <script>
-                
-                function GetUrlRelativePath()
-            　　{
-            　　　　var url = document.location.toString();
-            　　　　var arrUrl = url.split("//");
-
-            　　　　var start = arrUrl[1].indexOf("/");
-            　　　　var relUrl = arrUrl[1].substring(start);
-
-            　　　　if(relUrl.indexOf("?") != -1){
-            　　　　　　relUrl = relUrl.split("?")[0];
-            　　　　}
-            　　　　return relUrl;
-            　　}
-                  
-                  var gitalk = new Gitalk({
-                  clientID: "5b5fde7475577bcb14fc",
-                  clientSecret: "5a75bf2c7de61ecfb836987ddb5889433044a464",
-                  owner: "timzzx",
-                  repo: "timx.cn",
-                  admin: ["timzzx"],
-                    id: GetUrlRelativePath(),  
-                  distractionFreeMode: false  
-                })
-
-                gitalk.render('git-comments')
-                </script>
-                
-                        
             </div>
+
             <div id="secondary" class="">
     <section class="widget wow slow zoomIn">
         
@@ -367,19 +289,6 @@ func main() {
   new WOW().init();
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-go.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-php.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-javascript.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.js"></script>
-<script type="text/javascript">
-  $('pre').addClass("line-numbers").css("white-space", "pre-wrap");
-  new WOW().init();
-</script>
 
 
 </body>
