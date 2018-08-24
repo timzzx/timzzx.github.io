@@ -8,30 +8,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="shortcut icon" href="/img/favicon.ico" >
-    <title>Unix编程艺术(三) - 淡淡忧愁</title>
-    <meta property="og:title" content="Unix编程艺术(三) - 淡淡忧愁">
+    <title>编程技巧和习惯 - 淡淡忧愁</title>
+    <meta property="og:title" content="编程技巧和习惯 - 淡淡忧愁">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-08-03T15:08:36&#43;08:00">
         
-        
-    <meta property="article:modified_time" content="2018-08-03T15:08:36&#43;08:00">
-        
-    <meta name="description" content="Unix编程艺术(三)">
+    <meta name="description" content="编程技巧和习惯">
         
     <meta name="author" content="Tim Zhang">
-    <meta property="og:url" content="https://timx.cn/post/unix_art_3/">
+    <meta property="og:url" content="https://timx.cn/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7%E5%92%8C%E4%B9%A0%E6%83%AF/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.css" />
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" />
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 
 <body>
 <header id="header" class="clearfix">
@@ -44,7 +37,7 @@
             </div>
             <div>
                 <nav id="nav-menu" class="clearfix wow slow zoomIn">
-                    <a class="current" href="https://timx.cn/"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;博客</a>
+                    <a class="" href="https://timx.cn/"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;博客</a>
                     
                     <a  href="https://timx.cn/booklist/" title="学习书单">
                         <i class="fa fa-bars" aria-hidden="true"></i>&nbsp;学习书单
@@ -70,121 +63,65 @@
         <div class="col-group">
 
             <div class="col-8" id="main">
-            
                 <div class="res-cons">
-                    <article class="post">
-                        <header>
-                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;Unix编程艺术(三)</h1>
-                        </header>
-                        <date class="post-meta meta-date animated slower fadeInUp">
-                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                            2018年8月3日
-                            15:08
-                            
-                        </date>
-                        <div class="post-meta animated slower fadeInUp">
-                            | <i class="fa fa-user-o" aria-hidden="true"></i>
-                            <a href="/about">Tim Zhang</a>
-                        </div>
-                        
-                        <div class="post-meta animated slower fadeInUp">
-                         | <i class="fa fa-folder-o" aria-hidden="true"></i>
-                            
-                                <a href="/categories/unix">UNIX</a>
-                            
-                        </div>
-                        
-                        <br />
-                        <div class="post-meta animated slower fadeInUp">
-                            <i class="fa fa-clock-o"></i>&nbsp;阅读时间1分钟
-                        </div>
-                        <br />
-                    </article>
                     
+                    <h3 class="archive-title">
+                        分类
+                        <span class="keyword">编程技巧和习惯</span>
+                        中的文章
+                    </h3>
+                    
+
+                    
+                        <article class="post">
+                            <header>
+                                <h2 class="post-title  wow  slow zoomIn">
+                                    <i class="fa fa-file-text-o"></i>
+                                    <a href="https://timx.cn/post/code/">编程习惯</a>
+                                </h2>
+                            </header>
+                            <date class="post-meta meta-date  wow  slow zoomIn">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                2018年8月24日
+                                13:42
+                            </date>
+                            <div class="post-meta  wow  slow zoomIn">
+                                | <i class="fa fa-user-o" aria-hidden="true"></i>
+                                <a href="/about">Tim Zhang</a>
+                            </div>
+                            
+                            <div class="post-meta  wow  slow zoomIn">
+                              | <i class="fa fa-folder-o" aria-hidden="true"></i>
+                                
+                                    <a href="/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7%E5%92%8C%E4%B9%A0%E6%83%AF">编程技巧和习惯</a>
+                                
+                            </div>
+                            
+                            <div class="post-content  wow  slow zoomIn">
+                                <blockquote>
+                                <p>编程习惯 1.写功能前先准备好日志记录，查询的工作。这个非常重要，可以减少后期排查问题的时间，减少手足无措。
+2.模块化要提前考虑，方便后期修改。一定要减少复杂度，不要所有的东西全部放在一个方法中。
+3.写完功能测试最需要的是压力测试，这样能尽量减少上线之前功能在高并发下出现问题的几率，提高程序的健壮性。
+这些事情肯定会牺牲编程的时间，不过经过这几年的编程过程中发现按照上面的做法做，后期排查问题能 …</p>
+                                </blockquote>
+                                <br />
+                                <a href="https://timx.cn/post/code/">阅读全文&nbsp;<i class="fa fa-angle-double-right" ></i></a>
+                            </div>
+                        </article>
+                        <br />
+                        <hr class=" wow  slow fadeInUp" />
+                    
+                    <p class="pull-right2"><a href="/" class="fa fa-home" ></a></p>
+                    <p class="pull-right"><a href="#" class="fa fa-angle-double-up" ></a></p>
+                    <p class="pull-left"><a href="#" onclick="javascript:history.go(-1);return false;" class="fa fa-angle-double-left" ></a></p>
+                    
+
+
+
+
                 </div>
-                
-                        <div class="post-content animated slower fadeInLeftBig">
-                            <article>
-                            
-
-<h1 id="文本化">文本化</h1>
-
-<blockquote>
-<p><strong><font color="#18516f">设计将应用数据存储在永久存储器中的文件格式</font></strong><hr />
-<strong><font color="#18516f">在协作程序中（可能通过网络）传递数据和命令的应用协议</font></strong></p>
-</blockquote>
-
-<h2 id="数据文件元格式">数据文件元格式</h2>
-
-<blockquote>
-<p><strong><font color="#18516f">为了简化存储的序列化操作发展得来。</font></strong>
-<hr />
-DSV风格<br />
-RFC822格式<br />
-Cookie—Jar格式<br />
-Record—Jar格式<br />
-XML<br />
-WindowsINI格式<br />
-Unix文本文件格式的约定<br /></p>
-</blockquote>
-
-<h2 id="应用协议元格式">应用协议元格式</h2>
-
-<blockquote>
-<p><strong><font color="#18516f">简化网络间事物处理的序列化操作发展得来。</font></strong>
-<hr />
-HTTP<br />
-BEEP<br />
-XML—RPC，SOAP和Jabber<br /></p>
-</blockquote>
-
-<h1 id="透明性">透明性</h1>
-
-<h2 id="为透明性和可显性而编码">为透明性和可显性而编码</h2>
-
-<blockquote>
-<ul>
-<li>程序调用层次中最大的静态深度是多少？也就是说，不考虑递归，为了建立心理模型来理解代码的操作，人们将要调用多少层？如果大于四层，就要当心。</li>
-<li>代码是否具有强大、明显的不变性质？不变性质帮助人们推演代码和发现有问题的情况。</li>
-<li>每个API中的各个函数调用是否正交？或者是否存在太多特征标志和模式位，使得一个调用要完成多个任务？完全避免模式标志会导致混乱的API，里面包括太多几乎一模一样的函数，但是频繁使用模式标志更容易产错误（很多易忘并且易混的模式标记）。</li>
-<li>是否存在一些顺手可用的关键数据结构或全局唯一的记录器，捕获了系统的高层级状态？这个状态是否容易被形象化和检验，还是分布在数目众多的各个全局变量或对象中，而难以找到？</li>
-<li>程序的数据结构或分类和它们所代表的外部实体之间，是否存在清晰的一对一映射？</li>
-<li>是否容易找到给定函数的代码部分？不仅单个函数、模块、还有整个代码，需要花多少精力才能读懂？</li>
-<li>代码增加了特殊情况还是避免了特殊情况？每一个特殊情况可能对任何其他特殊情况产生影响；所有隐含的冲突都是BUG滋生的温床。然而更重要的是，特殊情况使得代码更难理解。</li>
-<li>代码中有多少（意义含糊的常量）？通过审查是否很容易查出实现代码中的限制（比如关键缓冲区的大小）？</li>
-</ul>
-</blockquote>
-
-<h2 id="透明性和避免过度保护">透明性和避免过度保护</h2>
-
-<blockquote>
-<p><strong><font color="#18516f">调试和探测开关的存在是良好程序的标志</font></strong></p>
-</blockquote>
-
-                            
-                            <br />
-                            <br />
-                            <br />
-                            <hr />
-                            
-                            
-                            <a href="https://timx.cn/post/unix_art_2/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;Unix编程艺术(二)<br /><br />
-                            
-                            
-                            <a href="https://timx.cn/post/unix_art_4/">下一页&nbsp;<i class="fa fa-angle-double-down" ></i></a>&nbsp;Unix编程艺术(四)
-                            
-                            <br />
-                            <br />
-                            <br />
-                            
-                            </article>
-                        </div>
-                        <p class="pull-right2"><a href="/" class="fa fa-home" ></a></p>
-                            <p class="pull-right"><a href="#" class="fa fa-angle-double-up" ></a></p>
-                            <p class="pull-left"><a href="#" onclick="javascript:history.go(-1);return false;" class="fa fa-angle-double-left" ></a></p>
-                
-                        
             </div>
+
             <div id="secondary" class="">
     <section class="widget wow slow zoomIn">
         
@@ -358,19 +295,6 @@ XML—RPC，SOAP和Jabber<br /></p>
   new WOW().init();
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-c.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-go.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-php.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-javascript.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.js"></script>
-<script type="text/javascript">
-  $('pre').addClass("line-numbers").css("white-space", "pre-wrap");
-  new WOW().init();
-</script>
 
 
 </body>

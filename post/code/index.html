@@ -8,19 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="shortcut icon" href="/img/favicon.ico" >
-    <title>C Primer Plus阅读学习(四) - 淡淡忧愁</title>
-    <meta property="og:title" content="C Primer Plus阅读学习(四) - 淡淡忧愁">
+    <title>编程习惯 - 淡淡忧愁</title>
+    <meta property="og:title" content="编程习惯 - 淡淡忧愁">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-08-15T10:15:30&#43;08:00">
+    <meta property="article:published_time" content="2018-08-24T13:42:53&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2018-08-15T10:15:30&#43;08:00">
+    <meta property="article:modified_time" content="2018-08-24T13:42:53&#43;08:00">
         
-    <meta name="description" content="C Primer Plus阅读学习(四)">
+    <meta name="description" content="编程习惯">
         
     <meta name="author" content="Tim Zhang">
-    <meta property="og:url" content="https://timx.cn/post/c_4/">
+    <meta property="og:url" content="https://timx.cn/post/code/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
     
@@ -74,12 +74,12 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;C Primer Plus阅读学习(四)</h1>
+                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;编程习惯</h1>
                         </header>
                         <date class="post-meta meta-date animated slower fadeInUp">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                            2018年8月15日
-                            10:15
+                            2018年8月24日
+                            13:42
                             
                         </date>
                         <div class="post-meta animated slower fadeInUp">
@@ -90,7 +90,7 @@
                         <div class="post-meta animated slower fadeInUp">
                          | <i class="fa fa-folder-o" aria-hidden="true"></i>
                             
-                                <a href="/categories/c%E8%AF%AD%E8%A8%80">c语言</a>
+                                <a href="/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7%E5%92%8C%E4%B9%A0%E6%83%AF">编程技巧和习惯</a>
                             
                         </div>
                         
@@ -107,148 +107,17 @@
                             <article>
                             
 
-<h1 id="运算符-表达式和语句">运算符、表达式和语句</h1>
+<h1 id="编程习惯">编程习惯</h1>
 
-<blockquote>
-<ul>
-<li>关键字：while、typedef</li>
-<li>运算符：=、-、*、/、%、++、&ndash;、（类型名）</li>
-<li>C语言的各种运算符，包括用于普通数学运算的运算符</li>
-<li>运算符优先级以及语句、表达式的含义</li>
-<li>while循环</li>
-<li>复合语句、自动类型转换和强制类型转换</li>
-<li>如何编写带有参数的函数</li>
-</ul>
-</blockquote>
+<p>1.写功能前先准备好日志记录，查询的工作。这个非常重要，可以减少后期排查问题的时间，减少手足无措。</p>
 
-<h2 id="运算符优先级-从高至低">运算符优先级（从高至低）</h2>
+<p>2.模块化要提前考虑，方便后期修改。一定要减少复杂度，不要所有的东西全部放在一个方法中。</p>
 
-<table>
-<thead>
-<tr>
-<th>运算符</th>
-<th>结合律</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>()</td>
-<td>从左往右</td>
-</tr>
-
-<tr>
-<td>+-(一元)</td>
-<td>从右往左</td>
-</tr>
-
-<tr>
-<td>*/</td>
-<td>从左往右</td>
-</tr>
-
-<tr>
-<td>+-(二元)</td>
-<td>从左往右</td>
-</tr>
-
-<tr>
-<td>=</td>
-<td>从右往左</td>
-</tr>
-</tbody>
-</table>
-
-<h2 id="sizeof运算符和size-t类型">sizeof运算符和size_t类型</h2>
-
-<blockquote>
-<p>size_t intsize;<br />
-intsize = sizeof(int)</p>
-</blockquote>
+<p>3.写完功能测试最需要的是压力测试，这样能尽量减少上线之前功能在高并发下出现问题的几率，提高程序的健壮性。</p>
 
 <hr />
 
-<blockquote>
-<p>typedef double real;<br />
-real deal;</p>
-</blockquote>
-
-<p>real就是double的别名。</p>
-
-<h2 id="不要自作聪明">不要自作聪明</h2>
-
-<blockquote>
-<ul>
-<li>如果一个变量出现在一个函数的多个参数中，不要对该变量使用递增或递减运算符</li>
-<li>如果一个变量多次出现在一个表达式中，不要对该变量使用递增或递减运算符</li>
-</ul>
-</blockquote>
-
-<h2 id="表达式和语句">表达式和语句</h2>
-
-<blockquote>
-<p>表达式由运算符和运算对象组成。最简单的表达式是一个单独的运算对象，以此为基础可以建立复杂的表达式。</p>
-</blockquote>
-
-<table>
-<thead>
-<tr>
-<th>表达式</th>
-<th>值</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td>-4+6</td>
-<td>2</td>
-</tr>
-
-<tr>
-<td>c=3+8</td>
-<td>11</td>
-</tr>
-
-<tr>
-<td>5&gt;3</td>
-<td>1</td>
-</tr>
-
-<tr>
-<td>6+(c=3+8)</td>
-<td>17</td>
-</tr>
-</tbody>
-</table>
-
-<blockquote>
-<p>语句是C程序的基本构建块。一条语句相当于一条完整的计算机指令。在C中，大部分语句都以分号结尾。</p>
-</blockquote>
-
-<h2 id="类型转换">类型转换</h2>
-
-<blockquote>
-<ul>
-<li>当类型转换出现在表达式时，无论是unsigned还是signed的char和short都会被自动转换成int，如有必要会被转换成unsigned int（如果short与int的大小相同，unsigned short就比int大。这种情况下，unsigned short会被转换成unsigned int）。在K&amp;R那时的C中，float会被自动转换成double（目前的C不是这样）。由于都是从较小类型转换为较大类型，所以这些转换被称为升级（promotion）。</li>
-<li>涉及两种类型的运算，两个值会被分别转换成两种类型的更高级别。</li>
-<li>类型的级别从高至低依次是long double、double、float、unsigned long long、long long、unsigned long、long、unsigned int、int。例外的情况是，当long和int的大小相同时，unsigned int比long的级别高。之所以short和char类型没有列出，是因为它们已经被升级到int或unsigned int。</li>
-<li>在赋值表达式语句中，计算的最终结果会被转换成被赋值变量的类型。这个过程可能导致类型升级或降级（demotion）。所谓降级，是指把一种类型转换成更低级别的类型。</li>
-<li>当作为函数参数传递时，char和short被转换成int，float被转换成double。函数原型会覆盖自动升级。</li>
-</ul>
-</blockquote>
-
-<p>类型升级通常都不会有什么问题，但是类型降级会导致真正的麻烦。原因很简单：较低类型可能放不下整个数字。例如，一个8位的char类型变量储存整数101没问题，但是存不下22334。<br/></p>
-
-<p>如果待转换的值与目标类型不匹配怎么办？这取决于转换涉及的类型。待赋值的值与目标类型不匹配时，规则如下。<hr /></p>
-
-<blockquote>
-<ul>
-<li>目标类型是无符号整型，且待赋的值是整数时，额外的位将被忽略。例如，如果目标类型是8位unsigned char，待赋的值是原始值求模256</li>
-<li>如果目标类型是一个有符号整型，且待赋的值是整数，结果因实现而异。3．如果目标类型是一个整型，且待赋的值是浮点数，该行为是未定义的。</li>
-</ul>
-</blockquote>
-
-<h2 id="带参数的函数">带参数的函数</h2>
+<p>这些事情肯定会牺牲编程的时间，不过经过这几年的编程过程中发现按照上面的做法做，后期排查问题能带来极大的便利，减少程序出错的几率。</p>
 
                             
                             <br />
@@ -257,10 +126,8 @@ real deal;</p>
                             <hr />
                             
                             
-                            <a href="https://timx.cn/post/c_3/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;C Primer Plus阅读学习(三)<br /><br />
+                            <a href="https://timx.cn/post/complicated/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;web高并发的理解和发现<br /><br />
                             
-                            
-                            <a href="https://timx.cn/post/c_5/">下一页&nbsp;<i class="fa fa-angle-double-down" ></i></a>&nbsp;C Primer Plus阅读学习(五)
                             
                             <br />
                             <br />

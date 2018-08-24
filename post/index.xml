@@ -6,10 +6,22 @@
     <description>Recent content in Posts on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Aug 2018 11:08:10 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 24 Aug 2018 13:42:53 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>编程习惯</title>
+      <link>https://timx.cn/post/code/</link>
+      <pubDate>Fri, 24 Aug 2018 13:42:53 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/code/</guid>
+      <description>编程习惯 1.写功能前先准备好日志记录，查询的工作。这个非常重要，可以减少后期排查问题的时间，减少手足无措。
+2.模块化要提前考虑，方便后期修改。一定要减少复杂度，不要所有的东西全部放在一个方法中。
+3.写完功能测试最需要的是压力测试，这样能尽量减少上线之前功能在高并发下出现问题的几率，提高程序的健壮性。
+这些事情肯定会牺牲编程的时间，不过经过这几年的编程过程中发现按照上面的做法做，后期排查问题能带来极大的便利，减少程序出错的几率。</description>
+    </item>
     
     <item>
       <title>web高并发的理解和发现</title>
