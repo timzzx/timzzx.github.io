@@ -6,10 +6,38 @@
     <description>Recent content on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 Aug 2018 13:42:53 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 29 Aug 2018 15:23:22 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>web高并发的理解和发现(二)</title>
+      <link>https://timx.cn/post/complicated_2/</link>
+      <pubDate>Wed, 29 Aug 2018 15:23:22 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/complicated_2/</guid>
+      <description>CAP理论 作为web开发人员必须需要知道理解CAP理论。
+ CAP理论：一个分布式系统最多只能同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance）这三项中的两项。
+ Consistency 一致性 一致性指“all nodes see the same data at the same time”，即所有节点在同一时间的数据完全一致。
+一致性是因为多个数据拷贝下并发读写才有的问题，因此理解时一定要注意结合考虑多个数据拷贝下并发读写的场景。
+对于一致性，可以分为从客户端和服务端两个不同的视角。
+客户端
+从客户端来看，一致性主要指的是多并发访问时更新过的数据如何获取的问题。
+服务端
+从服务端来看，则是更新如何分布到整个系统，以保证数据最终一致。
+对于一致性，可以分为强/弱/最终一致性三类
+从客户端角度，多进程并发访问时，更新过的数据在不同进程如何获取的不同策略，决定了不同的一致性。
+强一致性
+对于关系型数据库，要求更新过的数据能被后续的访问都能看到，这是强一致性。
+弱一致性
+如果能容忍后续的部分或者全部访问不到，则是弱一致性。
+最终一致性
+如果经过一段时间后要求能访问到更新后的数据，则是最终一致性。
+Availability 可用性 可用性指“Reads and writes always succeed”，即服务在正常响应时间内一直可用。
+好的可用性主要是指系统能够很好的为用户服务，不出现用户操作失败或者访问超时等用户体验不好的情况。可用性通常情况下可用性和分布式数据冗余，负载均衡等有着很大的关联。
+   可用性分类 可用水平（%） 年可容忍停机时间     容错可用性 99.9999 &amp;lt;1 min   极高可用性 99.999 &amp;lt;5 min   具有故障自动恢复能力的可用性 99.99 &amp;lt;53 min   高可用性 99.</description>
+    </item>
     
     <item>
       <title>编程习惯</title>
@@ -24,7 +52,7 @@
     </item>
     
     <item>
-      <title>web高并发的理解和发现</title>
+      <title>web高并发的理解和发现(一)</title>
       <link>https://timx.cn/post/complicated/</link>
       <pubDate>Wed, 22 Aug 2018 11:08:10 +0800</pubDate>
       
