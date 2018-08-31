@@ -8,19 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
     <link rel="shortcut icon" href="/img/favicon.ico" >
-    <title>Workerman写的geoip查询的HTTP服务 - 淡淡忧愁</title>
-    <meta property="og:title" content="Workerman写的geoip查询的HTTP服务 - 淡淡忧愁">
+    <title>php Curl遇到的坑 - 淡淡忧愁</title>
+    <meta property="og:title" content="php Curl遇到的坑 - 淡淡忧愁">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2018-08-09T12:13:23&#43;08:00">
+    <meta property="article:published_time" content="2018-08-31T10:49:44&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2018-08-09T12:13:23&#43;08:00">
+    <meta property="article:modified_time" content="2018-08-31T10:49:44&#43;08:00">
         
-    <meta name="description" content="Workerman写的geoip查询的HTTP服务">
+    <meta name="description" content="php Curl遇到的坑">
         
     <meta name="author" content="Tim Zhang">
-    <meta property="og:url" content="https://timx.cn/post/workerman_1/">
+    <meta property="og:url" content="https://timx.cn/post/code_2/">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
     
@@ -74,12 +74,12 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;Workerman写的geoip查询的HTTP服务</h1>
+                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;php Curl遇到的坑</h1>
                         </header>
                         <date class="post-meta meta-date animated slower fadeInUp">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                            2018年8月9日
-                            12:13
+                            2018年8月31日
+                            10:49
                             
                         </date>
                         <div class="post-meta animated slower fadeInUp">
@@ -90,7 +90,7 @@
                         <div class="post-meta animated slower fadeInUp">
                          | <i class="fa fa-folder-o" aria-hidden="true"></i>
                             
-                                <a href="/categories/workerman">workerman</a>
+                                <a href="/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7%E5%92%8C%E4%B9%A0%E6%83%AF">编程技巧和习惯</a>
                             
                         </div>
                         
@@ -107,38 +107,33 @@
                             <article>
                             
 
-<h1 id="geoip2">geoip2</h1>
+<h1 id="curl是什么">curl是什么</h1>
 
-<blockquote>
-<p>基于workerman的HTTP协议写的ip查询功能<br /></p>
-</blockquote>
+<p>curl 模拟浏览器请求，可以获取内容，支持浏览器类型，cookie和ip等。curl性能上也比file_get_contents高，所以一般获取api都用curl方式。</p>
 
-<h2 id="安装">安装</h2>
+<h2 id="curl在使用过程发现的问题">curl在使用过程发现的问题</h2>
 
-<ul>
-<li>git clone <a href="https://github.com/timzzx/geoip2.git">https://github.com/timzzx/geoip2.git</a></li>
-<li>cd geoip2</li>
-<li>composer install</li>
-<li>自己加入GeoLite2-City.mmdb</li>
-<li>php index.php</li>
-<li>浏览器访问<a href="http://127.0.0.1:2345/?ip=115.85.29.130">http://127.0.0.1:2345/?ip=115.85.29.130</a></li>
-<li>返回结果：</li>
-</ul>
+<p>首先，curl是网络访问，php不同项目通信时候使用curl来调用http，非常消耗性能。</p>
 
-<pre><code class="language-json">{
-    errno: 200,
-    isoCode: &quot;PH&quot;,
-    country_name: &quot;Philippines&quot;,
-    country_name_zh: &quot;菲律宾&quot;,
-    mostSpecificSubdivisionname: &quot;Metro Manila&quot;,
-    mostSpecificSubdivisionisoCode: &quot;00&quot;,
-    city_name: &quot;Las Pinas&quot;,
-    city_name_zh: null,
-    postal_code: &quot;1612&quot;,
-    latitude: 14.4506,
-    longitude: 120.9828
-}
-</code></pre>
+<p>例子1：前端有多个获取用户id的api，如果用户存在就直接返回用户id，不存在就用curl的方式调用一个单进程顺序处理注册用户写入数据库的http协议的api。</p>
+
+<p>问题来了：测试如果把创建用户当如前端的api中处理，100并发，10000人次 qps有300左右，出现的问题就是数据库有重复数据，然后把创建用户的功能抽取使用单进程模式顺序插入，前端api用curl的方式调用，100并发，10000人次 qps只有15左右。性能以数量级下降，需要解决。</p>
+
+<p>解决办法：把创建用户的http服务改成tcp协议的服务。前端api使用socket连接tcp。测试 100并发，10000人次 qps300左右。性能恢复。问题解决。</p>
+
+<p>思考：php调用curl非常消耗性能，如果内部服务通信建议使用tcp的方式。（curl为什么这么消耗性能暂时没有找到具体原因，待查）</p>
+
+<p>例子2：我们需要用curl来请求第三方的api，测试发现2000次访问有20几次失败。</p>
+
+<p>思考：由于第三方是跨地域的，延迟有200ms左右，有一定的丢包率，这种网络情况是没法避免的，还有本身我需要带证书访问https的一个api，这也有一定的连接失败的可能。那么我们解决这中网络问题首先要测试失败率千分之5以下公司能接受。那么我之前的测试失败率达到了百分之1以上了肯定不能接受，那么一定需要加上重连机制。</p>
+
+<p>继续测试：加上重连机制（一次重连）测试6000次，一次成功5970几次 重连成功30几次，失败0次。几次测试下来结果差不多，失败都是0次。</p>
+
+<p>那么，问题解决。</p>
+
+<p>再次在内网环境下测试，发现万次都没有失败的情况出现。</p>
+
+<p>再次思考：在跨机房跨地域的网络访问是有一定几率出现问题的。所以在涉及此类型问题时，一定要测试失败率，如果是自己的服务，尽量放在相同局域网内（很关键）。</p>
 
                             
                             <br />
@@ -147,10 +142,8 @@
                             <hr />
                             
                             
-                            <a href="https://timx.cn/post/unix_art_8/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;Unix编程艺术(八)<br /><br />
+                            <a href="https://timx.cn/post/complicated_2/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;web高并发的理解和发现(二)<br /><br />
                             
-                            
-                            <a href="https://timx.cn/booklist/">下一页&nbsp;<i class="fa fa-angle-double-down" ></i></a>&nbsp;学习书单
                             
                             <br />
                             <br />
