@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2018 10 on 淡淡忧愁</title>
+    <link>https://timx.cn/tags/2018-10/</link>
+    <description>Recent content in 2018 10 on 淡淡忧愁</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 11 Oct 2018 14:25:05 +0800</lastBuildDate>
+    
+	<atom:link href="https://timx.cn/tags/2018-10/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>C指针知识点收集</title>
+      <link>https://timx.cn/post/c_point/</link>
+      <pubDate>Thu, 11 Oct 2018 14:25:05 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_point/</guid>
+      <description>C指针知识点收集 1.C使用内存  静态/全局内存（静态声明的变量，全局变量也使用这部分内存。静态变量的作用域则局限在定义它们的函数内部） 自动内存（函数内部声明，只在函数被调用时才创建，只在函数内部调用。） 动态内存（内存分配在堆上，可以根据需要释放。）  2.C的动态内存分配实际上就是通过使用指针实现的。malloc和free函数分别用来分配和释放动态内存。动态内存分配可以实现变长数组和数据结构（如链表和队列）。 3.声明整数和一个整数指针 int num; int *pi;  4.星号两边的空白符无关紧要，下面声明都是等价的 int* pi; int * pi; int *pi; int*pi;  5.阅读声明 const int *pci;  倒过来读
+1.pci是一个变量 const int *pci;
+2.pci是一个指针变量 const int *pci;
+3.pci是一个指向整数的指针变量 const int *pci;
+4.pci是一指向整数常量的指针个变量 const int *pci;
+6.地址操作符&amp;amp;会返回操作数的地址。可以用这个操作符初始化pi指针 num = 0; pi = &amp;amp;num;  还可以这样初始化；
+int num; int *pi = &amp;amp;num;  7.虚拟内存和指针。程序使用的地址是虚拟地址。操作系统会在需要时把虚拟地址映射为物理内存地址。 8.用间接引用操作符解引指针。间接引用操作符（*）返回指针变量指向的值，一般称为解引指针 9.指向函数的指针 函数可以声明为指向函数。函数没有返回值。指针的名字叫foo
+void (*foo)();  10.</description>
+    </item>
+    
+  </channel>
+</rss>
