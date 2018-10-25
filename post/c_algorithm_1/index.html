@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="Cache-Control" content="public, max-age=7200" />
+    <meta name="generator" content="Hugo 0.42.2" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+    <link rel="shortcut icon" href="/img/favicon.ico" >
+    <title>数据结构和算法学习理解C语言实现(一) - 淡淡忧愁</title>
+    <meta property="og:title" content="数据结构和算法学习理解C语言实现(一) - 淡淡忧愁">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2018-10-18T13:51:03&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2018-10-18T13:51:03&#43;08:00">
+        
+    <meta name="description" content="数据结构和算法学习理解C语言实现(一)">
+        
+    <meta name="author" content="Tim Zhang">
+    <meta property="og:url" content="https://timx.cn/post/c_algorithm_1/">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/themes/prism-okaidia.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" />
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <img class="wow  zoomIn slow" src="/img/favicon.ico" />
+            <a href="https://timx.cn/"><img class="wow  zoomIn slow" src="/img/title.png" /></a>
+            <div class="site-name ">
+                <p class="description wow slow zoomIn">/模/清/组/分/简/吝/透/健/表/通/缄/补/经/生/优/多/扩/</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix wow slow zoomIn">
+                    <a class="current" href="https://timx.cn/"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;博客</a>
+                    
+                    <a  href="https://timx.cn/booklist/" title="学习书单">
+                        <i class="fa fa-bars" aria-hidden="true"></i>&nbsp;学习书单
+                    </a>
+                    
+                    <a  href="https://timx.cn/wall/" title="留言板">
+                        <i class="fa fa-bars" aria-hidden="true"></i>&nbsp;留言板
+                    </a>
+                    
+                    <a  href="https://timx.cn/about/" title="关于">
+                        <i class="fa fa-bars" aria-hidden="true"></i>&nbsp;关于
+                    </a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+            
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title animated slower flipInX"><i class="fa fa-file-text-o"></i>&nbsp;数据结构和算法学习理解C语言实现(一)</h1>
+                        </header>
+                        <date class="post-meta meta-date animated slower fadeInUp">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                            2018年10月18日
+                            13:51
+                            
+                        </date>
+                        <div class="post-meta animated slower fadeInUp">
+                            | <i class="fa fa-user-o" aria-hidden="true"></i>
+                            <a href="/about">Tim Zhang</a>
+                        </div>
+                        
+                        <div class="post-meta animated slower fadeInUp">
+                         | <i class="fa fa-folder-o" aria-hidden="true"></i>
+                            
+                                <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95">数据结构和算法</a>
+                            
+                        </div>
+                        
+                        <br />
+                        <div class="post-meta animated slower fadeInUp">
+                            <i class="fa fa-clock-o"></i>&nbsp;阅读时间7分钟
+                        </div>
+                        <br />
+                    </article>
+                    
+                </div>
+                
+                <aside>
+                    <div class="tablelist animated slower flipInX">
+                    <nav id="TableOfContents">
+<ul>
+<li><a href="#常用的算法思想">常用的算法思想</a>
+<ul>
+<li><a href="#枚举算法思想">枚举算法思想</a></li>
+<li><a href="#递推算法思想">递推算法思想</a></li>
+<li><a href="#递归算法思想">递归算法思想</a></li>
+<li><a href="#分治算法思想">分治算法思想</a></li>
+<li><a href="#贪心算法思想">贪心算法思想</a></li>
+<li><a href="#试探性算法思想">试探性算法思想</a></li>
+<li><a href="#迭代算法">迭代算法</a></li>
+<li><a href="#模拟算法思想">模拟算法思想</a></li>
+</ul></li>
+</ul>
+</nav>
+                    </div>
+                </aside>
+                 
+                        <div class="post-content animated slower fadeInLeftBig">
+                            <article>
+                            
+
+<h1 id="常用的算法思想">常用的算法思想</h1>
+
+<hr />
+
+<h2 id="枚举算法思想">枚举算法思想</h2>
+
+<hr />
+
+<p>将问题的所有可能的答案一一列举，然后根据条件判断此答案是否合适，保留合适的，丢弃不合适。在C语言中，枚举算法一般使用while循环实现。使用枚举算法解题的基本思路如下。</p>
+
+<ul>
+<li>确定枚举对象、枚举范围和判定条件。</li>
+<li>逐一列举可能的解，验证每个解是否是问题的解。</li>
+</ul>
+
+<p>枚举算法一般按照如下3个步骤进行。</p>
+
+<ul>
+<li>题解的可能范围，不能遗漏任何一个真正解，也要避免有重复。</li>
+<li>判断是否是真正解的方法。</li>
+<li>使可能解的范围降至最小，以便提高解决问题的效率。</li>
+</ul>
+
+<p>问题:公鸡每只5元，母鸡每只3元，小鸡3只一元。用100元钱买100只鸡，问公鸡、母鸡、小鸡各多少？</p>
+
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+
+int main()
+{
+    int x,y,z;//x:公鸡，y:母鸡，z:小鸡
+    for(x=0;x&lt;=20;x++)
+    {
+        for(y=0;y&lt;=33;y++)
+        {
+            z=100-x-y;
+            if(z%3==0 &amp;&amp; x*5+y*3+z/3==100)
+                printf(&quot;公鸡：%d,母鸡：%d,小鸡：%d\n&quot;, x,y,z);
+        }
+    }
+    getchar();
+    return 0;
+}
+</code></pre>
+
+<pre><code class="language-c">输出
++++++++++++++++++++++++
+公鸡：0,母鸡：25,小鸡：75
+公鸡：4,母鸡：18,小鸡：78
+公鸡：8,母鸡：11,小鸡：81
+公鸡：12,母鸡：4,小鸡：84
++++++++++++++++++++++++
+</code></pre>
+
+<h2 id="递推算法思想">递推算法思想</h2>
+
+<hr />
+
+<p>递推算法可以不断利用已有的信息推导出新的东西，在日常应用有两种递推算法。</p>
+
+<ul>
+<li>顺推法：从已知条件出发，逐步推算出要解决问题的方法。例如斐波那契数列就可以通过顺推法不断递推算出新的数据。</li>
+<li>逆推法：从已知的结果出发，用迭代表达式逐步推算出问题开始的条件，即顺推法的逆过程。</li>
+</ul>
+
+<p><strong><em>问题：</em></strong>斐波那契数列以兔子繁殖为例子而引入，所以又称为“兔子数列”。兔子在出生两个月后，就有繁殖能力，一对兔子每个月能生一对小兔子。如果所以兔子都不死，那么一年之后可以繁殖多少对兔子<br /></p>
+
+<p><strong><em>算法分析：</em></strong></p>
+
+<ul>
+<li>第一个月小兔子没有繁殖能力，所以还是一对。</li>
+<li>2个月后，一对小兔子生下一对新的小兔子，所以共有两对兔子。</li>
+<li>3个月以后，老兔子又生下一对，因为小兔子还没有繁殖能力，所以一共是3对。</li>
+</ul>
+
+<p>月数与兔子对数关系表</p>
+
+<table>
+<thead>
+<tr>
+<th>-</th>
+<th>-</th>
+<th>-</th>
+<th>-</th>
+<th>-</th>
+<th>-</th>
+<th>-</th>
+<th>-</th>
+<th>-</th>
+<th>-</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>月数：</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>&hellip;</td>
+</tr>
+
+<tr>
+<td>对数：</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>5</td>
+<td>8</td>
+<td>13</td>
+<td>21</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<hr />
+
+<p>对数：1,1,2,3,5,8··· ···构成了一个数列，这个数列有个十分明显的特点：前面相邻两项之和，构成了后一项。</p>
+
+<p><strong><em>由此可以得出具体算法如下所示：</em></strong></p>
+
+<p>第一个月兔子的总数是F1 = 1.</p>
+
+<p>第2个月的兔子总数是F2 = F0 + F1.</p>
+
+<p>第3个月的兔子总数是F3 = F1 + F2.</p>
+
+<p>····</p>
+
+<p>第n个月的兔子总数是Fn = F(n-1) + F(n-2).</p>
+
+<p>根据“斐波那契数列”的顺推算法分析，代码实现如下</p>
+
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#define MONTH 12
+
+int main(void)
+{
+    int i;
+    int fib[MONTH] = {1,1};
+
+    //计算
+    for(i = 2; i &lt; MONTH; i++)
+    {
+        fib[i] = fib[i-1] + fib[i-2];
+    }
+
+    //输出
+    for(i = 0; i &lt; MONTH; i++)
+    {
+        printf(&quot;第%d个月的兔子对数：%d\n&quot;, i+1, fib[i]);
+    }
+
+    getchar();
+    return 0;
+}
+
+</code></pre>
+
+<p>输出结果：</p>
+
+<pre><code class="language-C">第1个月兔子对数：1
+第2个月兔子对数：1
+第3个月兔子对数：2
+第4个月兔子对数：3
+第5个月兔子对数：5
+第6个月兔子对数：8
+第7个月兔子对数：13
+第8个月兔子对数：21
+第9个月兔子对数：34
+第10个月兔子对数：55
+第11个月兔子对数：89
+第12个月兔子对数：144
+</code></pre>
+
+<hr />
+
+<p><strong><em>问题描述</em></strong></p>
+
+<p>母亲为儿子4年的大学生活准备了一笔存款，方式是整存零取，规定儿子每个月底取下一个月的生活费。现在假设银行的年利息为1.71%，计算母亲最少需要存入多少钱？</p>
+
+<p><strong><em>算法分析</em></strong></p>
+
+<p>可以采用逆推法分析存钱和取钱的过程，因为按照月为周期取钱，所以需要将4年分为48个月，并分别对每个月进行计算。</p>
+
+<p>如果在第48个月后儿子大学毕业时连本带息取1000元。要求求出第47个月时候银行存款的钱数：</p>
+
+<p>第47月月末存款=1000/(1+0.0171/12);</p>
+
+<p>第46月月末存款=(第47月月末存款+1000)/(1+0.0171/12);</p>
+
+<p>第45月月末存款=(第46月月末存款+1000)/(1+0.0171/12);</p>
+
+<p>第44月月末存款=(第45月月末存款+1000)/(1+0.0171/12);</p>
+
+<p>··· ···</p>
+
+<p>第2月月末存款=(第3月月末存款+1000)/(1+0.0171/12);</p>
+
+<p>第1月月末存款=(第2月月末存款+1000)/(1+0.0171/12);</p>
+
+<p>代码如下：</p>
+
+<pre><code class="language-C">#include&lt;stdio.h&gt;
+#define MONTH 48
+
+int main(void)
+{
+    int i;
+    float money = 1000;
+
+    printf(&quot;第48个月存款：1000\n&quot;);
+
+    for(i = MONTH - 1; i &gt; 0; i--) {
+        money = (money + 1000) / (1+0.0171/12);
+        printf(&quot;第%d个月存款：%.2f\n&quot;, i, money);
+    }
+
+    getchar();
+    return 0;
+}
+
+</code></pre>
+
+<p>输出结果</p>
+
+<pre><code class="language-C">第48个月存款：1000
+第47个月存款：1997.15
+第46个月存款：2992.89
+第45个月存款：3987.21
+第44个月存款：4980.11
+第43个月存款：5971.60
+第42个月存款：6961.68
+第41个月存款：7950.35
+第40个月存款：8937.62
+第39个月存款：9923.47
+第38个月存款：10907.93
+第37个月存款：11890.99
+第36个月存款：12872.64
+第35个月存款：13852.90
+第34个月存款：14831.77
+第33个月存款：15809.24
+第32个月存款：16785.32
+第31个月存款：17760.01
+第30个月存款：18733.31
+第29个月存款：19705.23
+第28个月存款：20675.77
+第27个月存款：21644.93
+第26个月存款：22612.71
+第25个月存款：23579.11
+第24个月存款：24544.13
+第23个月存款：25507.78
+第22个月存款：26470.06
+第21个月存款：27430.97
+第20个月存款：28390.52
+第19个月存款：29348.69
+第18个月存款：30305.51
+第17个月存款：31260.96
+第16个月存款：32215.05
+第15个月存款：33167.79
+第14个月存款：34119.17
+第13个月存款：35069.20
+第12个月存款：36017.87
+第11个月存款：36965.20
+第10个月存款：37911.17
+第9个月存款：38855.80
+第8个月存款：39799.09
+第7个月存款：40741.03
+第6个月存款：41681.64
+第5个月存款：42620.90
+第4个月存款：43558.83
+第3个月存款：44495.43
+第2个月存款：45430.69
+第1个月存款：46364.62
+</code></pre>
+
+<h2 id="递归算法思想">递归算法思想</h2>
+
+<hr />
+
+<p>递归算法思想往往用函数的形式来体现，递归算法需要预先编写功能函数。</p>
+
+<p><strong><em>递归算法特点</em></strong></p>
+
+<ul>
+<li>递归过程一般通过函数或子过程来实现。</li>
+<li>递归算法在函数或子过程的内部，直接或者间接的调用自己的算法。</li>
+<li>递归算法实际上是把问题转化为规模缩小了的同类问题的子问题，然后再递归调用函数或过程来表示问题的解。</li>
+</ul>
+
+<p><strong><em>在使用递归算法时，应该注意如下4点。</em></strong></p>
+
+<ul>
+<li>递归是在过程或函数中调用自身的过程</li>
+<li>在使用递归策略时，必须有一个明确的递归结束条件，这叫做递归出口。</li>
+<li>递归算法通常显得很简洁，但是运行效率比较低，所以一般不提倡用递归算法设计程序。</li>
+<li>在递归调用过程中，系统用栈来存储每一层的返回点和局部量。如果递归次数过多，则容易造成栈溢出，所以一般不提倡用递归算法设计程序。</li>
+</ul>
+
+<p><strong><em>问题描述（汉诺塔）</em></strong></p>
+
+<p>寺院有三根柱子，第一根有64个盘子，从上往下盘子越来越大。方丈要求小和尚A1把这64个盘子全部移动到第三根柱子上。在移动的时候，始终只能小盘子压着大盘子，而且每次只能移动一个。</p>
+
+<p><strong><em>分析</em></strong></p>
+
+<p>汉诺塔的递归实现算法，将A中的圆盘借助B圆盘完全移动到C圆盘上，</p>
+
+<p>每次只能移动一个圆盘，并且每次移动时大盘不能放在小盘上面</p>
+
+<p>递归函数的伪算法为如下:</p>
+
+<p>if(n == 1)</p>
+
+<p>   直接将A柱子上的圆盘从A移动到C</p>
+
+<p>else</p>
+
+<p>   先将A柱子上的n-1个圆盘借助C柱子移动到B柱子上</p>
+
+<p>   直接将A柱子上的第n个圆盘移动到C柱子上</p>
+
+<p>   最后将B柱子上的n-1个圆盘借助A柱子移动到C柱子上</p>
+
+<p>该递归算法的时间复杂度为O（2的n次方)，当有n个圆盘时，需要移动圆盘2的n次方-1次</p>
+
+<p><strong><em>实现</em></strong></p>
+
+<pre><code class="language-C">
+#include&lt;stdio.h&gt;
+ 
+void move(int,char,char,char);
+ 
+int main()
+{
+    //A、B、C分别代表三个柱子
+    char ch1 = 'A';
+    char ch2 = 'B'; 
+    char ch3 = 'C'; 
+    
+    //n代表圆盘的个数
+    int n;
+    printf(&quot;请输入圆盘个数：&quot;);
+    scanf(&quot;%d&quot;,&amp;n);
+    move(n,ch1,ch2,ch3);
+    
+    return 0;
+}
+ 
+//将n个圆盘从x柱子借助y柱子移动到z柱子上
+void move(int n,char x,char y,char z)
+{
+    if(n == 1)
+        printf(&quot;圆盘编号%d：从%c移动到%c\n&quot;,n,x,z);
+    else
+    {
+        move(n-1,x,z,y);
+        printf(&quot;圆盘编号%d：从%c移动到%c\n&quot;,n,x,z);
+        move(n-1,y,x,z);
+    }
+}
+
+</code></pre>
+
+<p>输出结果</p>
+
+<pre><code class="language-C">请输入圆盘个数：5
+圆盘编号1：从A移动到C
+圆盘编号2：从A移动到B
+圆盘编号1：从C移动到B
+圆盘编号3：从A移动到C
+圆盘编号1：从B移动到A
+圆盘编号2：从B移动到C
+圆盘编号1：从A移动到C
+圆盘编号4：从A移动到B
+圆盘编号1：从C移动到B
+圆盘编号2：从C移动到A
+圆盘编号1：从B移动到A
+圆盘编号3：从C移动到B
+圆盘编号1：从A移动到C
+圆盘编号2：从A移动到B
+圆盘编号1：从C移动到B
+圆盘编号5：从A移动到C
+圆盘编号1：从B移动到A
+圆盘编号2：从B移动到C
+圆盘编号1：从A移动到C
+圆盘编号3：从B移动到A
+圆盘编号1：从C移动到B
+圆盘编号2：从C移动到A
+圆盘编号1：从B移动到A
+圆盘编号4：从B移动到C
+圆盘编号1：从A移动到C
+圆盘编号2：从A移动到B
+圆盘编号1：从C移动到B
+圆盘编号3：从A移动到C
+圆盘编号1：从B移动到A
+圆盘编号2：从B移动到C
+圆盘编号1：从A移动到C
+</code></pre>
+
+<p><strong><em>阶乘算法</em></strong></p>
+
+<p>阶乘是典型可以使用递归算法来计算的。</p>
+
+<p>代码如下</p>
+
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+
+int fact(int n);
+
+int main(void)
+{
+    int i;
+    printf(&quot;输入要计算阶乘的一个整数：&quot;);
+    scanf(&quot;%d&quot;, &amp;i);
+    printf(&quot;%d的阶乘结果为：%d\n&quot;, i ,fact(i));
+    getchar();
+    return 0;
+}
+
+int fact(int n)
+{
+    if(n &lt;= 1)
+        return 1;
+    else
+        return n*fact(n-1);
+}
+
+</code></pre>
+
+<p>输出结果</p>
+
+<pre><code class="language-C">请输入要计算阶乘的一个整数：5
+5的阶乘的结果为：120
+</code></pre>
+
+<h2 id="分治算法思想">分治算法思想</h2>
+
+<hr />
+
+<p>先把问题分解成几个较小的子问题，找到求出这几个子问题的解法后，再找到合适的方法，把它们组合成求整个大问题的解。如果这些子问题还是比较大，还可以继续再把它们分成几个更小的子问题，以此类推，直至可以直接求出解为止。这就是分治算法的基本思想。</p>
+
+<p><strong><em>使用分治算法解题的一般步骤如下</em></strong></p>
+
+<ul>
+<li>分解，将要解决的问题划分成若干个规模较小的同类问题。</li>
+<li>求解，当子问题划分得足够小时，用较简单的方法解决。</li>
+<li>合并，按照原问题的要求，将子问题的解逐层合并构成原问题的解。</li>
+</ul>
+
+<p><strong><em>问题描述</em></strong></p>
+
+<p>大数相乘，就是计算两个大数的积。</p>
+
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+#include &lt;ctype.h&gt;
+
+// 翻转data[start...end-1]
+void reverse_data( char *data, int start, int end  )
+{
+    char temp = '0';
+
+    assert( data != NULL &amp;&amp; start &lt; end );
+    while ( start &lt; end )
+    {
+        temp = data[start];
+        data[start] = data[--end];
+        data[end] = temp;
+        ++start;
+    }
+}
+
+/**&lt; 判断数据中数值的合法性，以及非空格字符的起始位置。
+ *  1. 是否均有正确的正负号，例如&quot;+123&quot;, &quot;-123&quot;等
+ *  2. 字符串中字符是否均是数字字符。
+ *  3. 字符串开始部分放入空格是合法的，例如，”  +123“等
+ *  4. 只有一个'.'标记
+ **&lt; 参数:
+ * @data: 表示传入字符;
+ * @nonspace_index:非空格起点
+ **&lt; 返回值：若数据是合法数值，则返回1；否则返回0；
+ */
+int check_logic( const char *data, int *nonspace_index )
+{
+    int flag = 1;
+    int start = 0;
+    int point_cnt = 0;
+
+    assert( data != NULL );
+    /* PS. if data is not space(' ', '\n'), isspace() return 0. */
+    for ( ; isspace( data[start] )!= 0
+            &amp;&amp; data[start] != '\0'; ++start );
+
+    // 判断数据是否为负数
+    *nonspace_index = start;
+    if ( data[start] == '-' || data[start] == '+' )
+    {
+        ++start;
+    }
+
+    /* PS. if ch is digit character, isdigit() return 1; otherwise return 0. */
+    for ( ; data[start] != '\0'; ++start )
+    {
+        if ( isdigit( data[start] ) || data[start] == '.' )
+        {
+            // 判断数据为小数的格式是否正确。
+            if ( data[start] == '.' &amp;&amp; point_cnt == 0 )
+            {
+                ++point_cnt;
+            }
+            else if ( point_cnt &gt; 1 )
+            {
+                break;
+            }
+        }
+    }
+
+    // 若小数点后面无数据，则不合法
+    if ( data[start] != '\0' )
+    {
+        flag = 0;
+    }
+
+    return flag;
+}
+
+/**&lt; notice: 传入到该函数的数据已经被翻转后的数值。即，最左边为个位，最右边为最高位
+ **&lt; return: 结果数据的长度。
+ */
+int compute_value( const char *lhs, int lhs_start_index,
+                   const char *rhs, int rhs_start_index,
+                   char *result )
+{
+    int i = 0, j = 0, res_i = 0;
+    int tmp_i = 0;
+    int carry = 0;
+
+    for ( i = lhs_start_index; lhs[i] != '\0'; ++i, ++tmp_i )
+    {
+        res_i = tmp_i;
+        carry = 0;
+
+        for ( j = rhs_start_index; rhs[j] != '\0'; ++j )
+        {
+            int tmp_lhs = lhs[i] - '0';
+            int tmp_rhs = rhs[j] - '0';
+            carry += ( result[res_i] - '0' );
+            carry += ( tmp_lhs * tmp_rhs );
+            result[res_i++] = ( carry % 10 + '0' );
+            carry /= 10;
+        }
+
+        while ( carry )
+        {
+            result[res_i++] = ( carry % 10 + '0' );
+            carry /= 10;
+        }
+    }
+    result[res_i] = '\0';
+
+    return res_i;
+}
+
+int has_point( char *data, int index, int *point_index )
+{
+    int start = index;
+
+    for ( ; data[start] != '\0'; ++start )
+    {
+        if ( data[start] == '.' )
+        {
+            *point_index = start;
+            break;
+        }
+    }
+
+    return ( data[start] != '\0' );
+}
+
+int is_neg( char *data, int *index )
+{
+    int flag = 0;
+    int start = *index;
+    if ( data[start] == '-' || data[start] == '+' )
+    {
+        if ( data[start] == '-' )
+            flag = 1;
+        ++start;
+    }
+
+    *index = start;
+    return flag;
+}
+
+void copy_c( char * dest, const char *src )
+{
+    while ( *src != '\0' )
+    {
+        if ( *src != '.' )
+            *dest++ = *src;
+        src++;
+    }
+}
+
+int compute_decimals( char *lhs, int lhs_point_index,
+                      char *rhs, int rhs_point_index,
+                      char *result  )
+{
+    int lhs_length = strlen( lhs );
+    int rhs_length = strlen( rhs );
+    int result_point_index = lhs_length + rhs_length;
+    int result_length = 0, i = 0;
+    char *tmp_lhs = NULL;
+    char *tmp_rhs = NULL;
+
+    // 计算在结果中放置小数点的位置，根据的是两个小数部分长度之和
+    // 例如，rhs = &quot;12.345&quot;, lhs = &quot;3.45&quot;, result = &quot;xxx.xxxxx&quot;
+    result_point_index -= ( lhs_point_index + rhs_point_index );
+
+    // 分配并拷贝
+    if ( lhs_point_index )
+    {
+        tmp_lhs = (char *)malloc( sizeof(char) * lhs_length );
+        assert( tmp_lhs != NULL );
+        copy_c( tmp_lhs, lhs );
+        tmp_lhs[lhs_length - 1] = '\0';
+    }
+    else
+    {
+        tmp_lhs = lhs;
+    }
+
+    if ( rhs_point_index )
+    {
+        tmp_rhs = (char *)malloc( sizeof(char) * rhs_length );
+        assert( tmp_rhs != NULL );
+        copy_c( tmp_rhs, rhs );
+        tmp_rhs[rhs_length - 1] = '\0';
+    }
+    else
+    {
+        tmp_rhs = rhs;
+    }
+
+    // tmp_lhs比lhs少一个小数点
+    reverse_data( tmp_lhs, 0, lhs_length - 1 );
+    reverse_data( tmp_rhs, 0, rhs_length - 1 );
+    result_length = compute_value( tmp_lhs, 0, tmp_rhs, 0, result );
+    for ( i = result_length; i &gt; result_point_index; --i )
+    {
+        result[i] = result[i - 1];
+    }
+
+    result[result_point_index] = '.';
+    ++result_length;
+    result[result_length] = '\0';
+
+    // 释放资源
+    if ( lhs_point_index )
+    {
+        free( tmp_lhs ), tmp_lhs = NULL;
+    }
+
+    if ( rhs_point_index )
+    {
+        free( tmp_rhs ), tmp_rhs = NULL;
+    }
+
+    return result_length;
+}
+
+// 返回结果数值的长度
+int big_number_multiply( char *lhs, char *rhs, char *result )
+{
+    int lhs_start_index = 0, lhs_point_index = 0;
+    int rhs_start_index = 0, rhs_point_index = 0;
+    int result_is_neg = 0;
+    int result_length = 0;
+
+    assert( lhs != NULL &amp;&amp; rhs != NULL &amp;&amp; result != NULL );
+    // 检查数据的合法性
+    if ( !(check_logic( lhs, &amp;lhs_start_index )
+            &amp;&amp; check_logic( rhs, &amp;rhs_start_index )) )
+    {
+        return -1;
+    }
+
+    // 检查数据是否为负数
+    result_is_neg = is_neg( lhs, &amp;lhs_start_index );
+    if ( is_neg( rhs, &amp;rhs_start_index) )
+    {
+        result_is_neg = result_is_neg == 1 ?  0 : 1;
+    }
+
+    // 检查是否两个数值中存在一个小数或两者都是小数
+    if ( !( has_point( lhs, lhs_start_index, &amp;lhs_point_index )
+            &amp;&amp; has_point( rhs, rhs_start_index, &amp;rhs_point_index ) ) )
+    {
+        reverse_data( lhs, lhs_start_index, strlen(lhs) );
+        reverse_data( rhs, rhs_start_index, strlen(rhs) );
+        result_length = compute_value( lhs, lhs_start_index,
+                                       rhs, rhs_start_index, result );
+        reverse_data( lhs, lhs_start_index, strlen(lhs) );
+        reverse_data( rhs, rhs_start_index, strlen(rhs) );
+    }
+    else // 一个数值中有小数部分
+    {
+        result_length = compute_decimals(
+                          lhs + lhs_start_index, lhs_point_index - lhs_start_index + 1,
+                          rhs + rhs_start_index, rhs_point_index - rhs_start_index + 1,
+                          result );
+    }
+    if ( result_is_neg )
+        result[result_length++] = '-';
+    reverse_data( result, 0, result_length );
+    result[result_length] = '\0';
+
+    return result_length;
+}
+
+int main()
+{
+    char lhs[] = &quot;-1.235&quot;;
+    char rhs[] = &quot;3.456&quot;;
+    char result[40];
+
+    memset( result, '0', sizeof(result) );
+
+    big_number_multiply( lhs, rhs, result );
+    printf( &quot;%s\n&quot;, result );
+    return 0;
+}
+</code></pre>
+
+<p><strong><em>问题描述</em></strong></p>
+
+<p>一年一度的欧洲冠军杯马上就要打响，在初赛阶段采用循环制，设共有n队参加，初赛共进行n-1天，每队要和其他各队进行一场比赛，然后按照最后积分选拔进入决赛的球队。要求每队每天只能进行一场比赛，并且不能轮空。请按照上述需求安排比赛日程，决定每天各队的对手。</p>
+
+<p><strong><em>算法分析</em></strong></p>
+
+<p>根据分治算法思路，将所有参赛队伍分为两半，则n队的比赛日程表可以通过n/2个队的比赛日程来决定。然后继续按照上述一分为二的方法对参赛队进行划分，直到只剩余2队时为止。</p>
+
+<p>假设n队的编号为1,2,3，··· ···，n，比赛日程表制作为一个二维表格，每行表示每队所对阵队的编号。</p>
+
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>第一天</th>
+<th>第二天</th>
+<th>第三天</th>
+<th>第四天</th>
+<th>第五天</th>
+<th>第六天</th>
+<th>第七天</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>1</td>
+<td>4</td>
+<td>3</td>
+<td>6</td>
+<td>5</td>
+<td>8</td>
+<td>7</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+<td>7</td>
+<td>8</td>
+<td>5</td>
+<td>6</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>5</td>
+<td>8</td>
+<td>7</td>
+<td>2</td>
+<td>1</td>
+<td>4</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>8</td>
+<td>5</td>
+<td>6</td>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+<p>根据上面的表分析，可以将复杂的问题分治而解。</p>
+
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>第1天</th>
+<th>第2天</th>
+<th>第3天</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>1</td>
+<td>4</td>
+<td>3</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+后面的等完全理解了再写
+</p>
+
+<h2 id="贪心算法思想">贪心算法思想</h2>
+
+<hr />
+
+<h2 id="试探性算法思想">试探性算法思想</h2>
+
+<hr />
+
+<h2 id="迭代算法">迭代算法</h2>
+
+<hr />
+
+<h2 id="模拟算法思想">模拟算法思想</h2>
+
+                            
+                            <br />
+                            <br />
+                            <br />
+                            <hr />
+                            
+                            
+                            <a href="https://timx.cn/post/c_point/">上一页&nbsp;<i class="fa fa-angle-double-up" ></i></a>&nbsp;C指针知识点收集<br /><br />
+                            
+                            
+                            <br />
+                            <br />
+                            <br />
+                            
+                            </article>
+                        </div>
+                        <p class="pull-right2"><a href="/" class="fa fa-home" ></a></p>
+                            <p class="pull-right"><a href="#" class="fa fa-angle-double-up" ></a></p>
+                            <p class="pull-left"><a href="#" onclick="javascript:history.go(-1);return false;" class="fa fa-angle-double-left" ></a></p>
+                
+                        
+            </div>
+            <div id="secondary" class="">
+    <section class="widget wow slow zoomIn">
+        
+<form id="search" method="POST" action="https://duckduckgo.com/">
+      
+      <input type="text" name="q" maxlength="255" placeholder="搜索...">
+      
+      <input type="hidden" name="sites" value="https://timx.cn/">
+      
+      <input type="hidden" name="kp" value="-2">
+      
+      <input type="hidden" name="kh" value="1">
+      
+      <input type="hidden" name="kl" value="wt-wt">
+      
+      <input type="hidden" name="kg" value="p">
+      
+      <input type="hidden" name="kaf" value="1">
+      
+      
+      <input type="hidden" name="k1" value="-1">
+
+      
+
+      
+      
+      <input type="hidden" name="k7" value="#ffffff">
+      
+      <input type="hidden" name="kj" value="#ffffff">
+      
+      <input type="hidden" name="ky" value="#eaeaea">
+      
+      <input type="hidden" name="kx" value="#6E7173">
+      
+      <input type="hidden" name="k8" value="#444">
+      
+      <input type="hidden" name="k9" value="#6E7173">
+      
+      <input type="hidden" name="kaa" value="#6E7173">
+      
+      <input type="hidden" name="kae" value="#6E7173">
+
+      
+      <input type="hidden" name="ko" value="1">
+      
+      <input type="hidden" name="kt" value="n">
+      
+      <input type="hidden" name="ka" value="g">
+      
+      <input type="hidden" name="ks" value="l">
+      
+      <input type="hidden" name="kv" value="1">
+
+      <button type="submit" class="submit fa fa-search"></button>
+</form>
+    </section>
+    <section class="widget wow slow zoomIn">
+        <div class="card">
+            <a href="https://github.com/timzzx">
+                <div class="card-image">
+                    <img class="lazy" src="/img/fj.jpg" data-original="/img/fj.jpg" />
+                </div>
+                <div class="card-body">
+                    <div class="card-title">
+                        <h3>
+                            Tim zhang
+                        </h3>
+                    </div>
+                    <div class="card-date">
+                        <time>
+                        </time>
+                    </div>
+                    
+                    <div class="card-exceprt">
+                        <p>
+                            
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+    <section class="widget wow slow zoomIn">
+        <div id="calendar" class="calendar"></div>
+    </section>
+    <section class="widget wow slow zoomIn">
+        <h3 class="widget-title" ><i class="fa fa-folder-o"></i>&nbsp;分类</h3>
+        <ul class="widget-list">
+            
+            <li class="fa fa-angle-right">
+                <a href="/categories/c%E8%AF%AD%E8%A8%80">c语言 (8)</a>
+            </li><br />
+            
+            <li class="fa fa-angle-right">
+                <a href="/categories/http">http (6)</a>
+            </li><br />
+            
+            <li class="fa fa-angle-right">
+                <a href="/categories/markdown">markdown (1)</a>
+            </li><br />
+            
+            <li class="fa fa-angle-right">
+                <a href="/categories/tcp/ip">tcp/ip (11)</a>
+            </li><br />
+            
+            <li class="fa fa-angle-right">
+                <a href="/categories/unix">unix (8)</a>
+            </li><br />
+            
+            <li class="fa fa-angle-right">
+                <a href="/categories/workerman">workerman (1)</a>
+            </li><br />
+            
+            <li class="fa fa-angle-right">
+                <a href="/categories/%E5%85%B6%E4%BB%96">其他 (1)</a>
+            </li><br />
+            
+            <li class="fa fa-angle-right">
+                <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95">数据结构和算法 (1)</a>
+            </li><br />
+            
+            <li class="fa fa-angle-right">
+                <a href="/categories/%E6%A8%A1%E6%9D%BF">模板 (1)</a>
+            </li><br />
+            
+            <li class="fa fa-angle-right">
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7%E5%92%8C%E4%B9%A0%E6%83%AF">编程技巧和习惯 (2)</a>
+            </li><br />
+            
+            <li class="fa fa-angle-right">
+                <a href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91">高并发 (2)</a>
+            </li><br />
+            
+        </ul>
+    </section>
+    <section class="widget wow slow zoomIn">
+        <h3 class="widget-title"><i class="fa fa-calendar-check-o"></i>&nbsp;归档</h3>
+        <ul class="widget-list">
+            
+            <li class="fa fa-angle-right">
+                <a href="/tags/2018-10">2018-10 (2)</a>
+            </li><br />
+            
+            <li class="fa fa-angle-right">
+                <a href="/tags/2018-7">2018-7 (19)</a>
+            </li><br />
+            
+            <li class="fa fa-angle-right">
+                <a href="/tags/2018-8">2018-8 (21)</a>
+            </li><br />
+            
+        </ul>
+    </section>
+    
+
+    <section class="widget wow slow zoomIn">
+        <h3 class="widget-title"><i class="fa fa-file-o"></i>&nbsp;其它</h3>
+        <ul class="widget-list">
+            <li class="fa fa-angle-right"><a href="/index.xml">&nbsp;本站RSS</a></li>
+        </ul><br />
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container wow  slow flipInX">
+        &copy; 2018 <a rel="nofollow" href="https://timx.cn/">淡淡忧愁</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io">Hugo</a>.
+        <a rel="nofollow noreferer noopener" href="https://github.com/timzzx/maupassant-hugo">Theme</a> based on <a rel="nofollow noreferer noopener" href="https://github.com/pagecho/maupassant">maupassant</a>.
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="/js/all.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script type="text/javascript">
+  new WOW().init();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-go.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-php.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/normalize-whitespace/prism-normalize-whitespace.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script type="text/javascript">
+  $('pre').addClass("line-numbers").css("white-space", "pre-wrap");
+  new WOW().init();
+</script>
+
+
+</body>
+</html>

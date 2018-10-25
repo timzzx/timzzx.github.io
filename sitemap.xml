@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://timx.cn/post/c_algorithm_1/</loc>
+    <lastmod>2018-10-18T13:51:03+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://timx.cn/post/c_point/</loc>
     <lastmod>2018-10-11T14:25:05+08:00</lastmod>
   </url>
@@ -224,7 +229,7 @@
   
   <url>
     <loc>https://timx.cn/tags/2018-10/</loc>
-    <lastmod>2018-10-11T14:25:05+08:00</lastmod>
+    <lastmod>2018-10-18T13:51:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -265,13 +270,13 @@
   
   <url>
     <loc>https://timx.cn/post/</loc>
-    <lastmod>2018-10-11T14:25:05+08:00</lastmod>
+    <lastmod>2018-10-18T13:51:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://timx.cn/tags/</loc>
-    <lastmod>2018-10-11T14:25:05+08:00</lastmod>
+    <lastmod>2018-10-18T13:51:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -300,6 +305,12 @@
   </url>
   
   <url>
+    <loc>https://timx.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2018-10-18T13:51:03+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://timx.cn/categories/%E6%A8%A1%E6%9D%BF/</loc>
     <lastmod>2018-07-11T11:05:03+08:00</lastmod>
     <priority>0</priority>
@@ -307,7 +318,7 @@
   
   <url>
     <loc>https://timx.cn/</loc>
-    <lastmod>2018-10-11T14:25:05+08:00</lastmod>
+    <lastmod>2018-10-18T13:51:03+08:00</lastmod>
     <priority>0</priority>
   </url>
   
