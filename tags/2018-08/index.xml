@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>2018 08 on 淡淡忧愁</title>
+    <link>https://timx.cn/tags/2018-08/</link>
+    <description>Recent content in 2018 08 on 淡淡忧愁</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 31 Aug 2018 10:49:44 +0800</lastBuildDate>
+    
+	<atom:link href="https://timx.cn/tags/2018-08/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>php Curl遇到的坑</title>
+      <link>https://timx.cn/post/code_2/</link>
+      <pubDate>Fri, 31 Aug 2018 10:49:44 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/code_2/</guid>
+      <description>curl是什么 curl 模拟浏览器请求，可以获取内容，支持浏览器类型，cookie和ip等。curl性能上也比file_get_contents高，所以一般获取api都用curl方式。
+curl在使用过程发现的问题 首先，curl是网络访问，php不同项目通信时候使用curl来调用http，非常消耗性能。
+例子1：前端有多个获取用户id的api，如果用户存在就直接返回用户id，不存在就用curl的方式调用一个单进程顺序处理注册用户写入数据库的http协议的api。
+问题来了：测试如果把创建用户当如前端的api中处理，100并发，10000人次 qps有300左右，出现的问题就是数据库有重复数据，然后把创建用户的功能抽取使用单进程模式顺序插入，前端api用curl的方式调用，100并发，10000人次 qps只有15左右。性能以数量级下降，需要解决。
+解决办法：把创建用户的http服务改成tcp协议的服务。前端api使用socket连接tcp。测试 100并发，10000人次 qps300左右。性能恢复。问题解决。
+思考：php调用curl非常消耗性能，如果内部服务通信建议使用tcp的方式。（curl为什么这么消耗性能暂时没有找到具体原因，待查）
+例子2：我们需要用curl来请求第三方的api，测试发现2000次访问有20几次失败。
+思考：由于第三方是跨地域的，延迟有200ms左右，有一定的丢包率，这种网络情况是没法避免的，还有本身我需要带证书访问https的一个api，这也有一定的连接失败的可能。那么我们解决这中网络问题首先要测试失败率千分之5以下公司能接受。那么我之前的测试失败率达到了百分之1以上了肯定不能接受，那么一定需要加上重连机制。
+继续测试：加上重连机制（一次重连）测试6000次，一次成功5970几次 重连成功30几次，失败0次。几次测试下来结果差不多，失败都是0次。
+那么，问题解决。
+再次在内网环境下测试，发现万次都没有失败的情况出现。
+再次思考：在跨机房跨地域的网络访问是有一定几率出现问题的。所以在涉及此类型问题时，一定要测试失败率，如果是自己的服务，尽量放在相同局域网内（很关键）。</description>
+    </item>
+    
+    <item>
+      <title>web高并发的理解和发现(二)</title>
+      <link>https://timx.cn/post/complicated_2/</link>
+      <pubDate>Wed, 29 Aug 2018 15:23:22 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/complicated_2/</guid>
+      <description>CAP理论 作为web开发人员必须需要知道理解CAP理论。
+ CAP理论：一个分布式系统最多只能同时满足一致性（Consistency）、可用性（Availability）和分区容错性（Partition tolerance）这三项中的两项。
+ Consistency 一致性 一致性指“all nodes see the same data at the same time”，即所有节点在同一时间的数据完全一致。
+一致性是因为多个数据拷贝下并发读写才有的问题，因此理解时一定要注意结合考虑多个数据拷贝下并发读写的场景。
+对于一致性，可以分为从客户端和服务端两个不同的视角。
+客户端
+从客户端来看，一致性主要指的是多并发访问时更新过的数据如何获取的问题。
+服务端
+从服务端来看，则是更新如何分布到整个系统，以保证数据最终一致。
+对于一致性，可以分为强/弱/最终一致性三类
+从客户端角度，多进程并发访问时，更新过的数据在不同进程如何获取的不同策略，决定了不同的一致性。
+强一致性
+对于关系型数据库，要求更新过的数据能被后续的访问都能看到，这是强一致性。
+弱一致性
+如果能容忍后续的部分或者全部访问不到，则是弱一致性。
+最终一致性
+如果经过一段时间后要求能访问到更新后的数据，则是最终一致性。
+Availability 可用性 可用性指“Reads and writes always succeed”，即服务在正常响应时间内一直可用。
+好的可用性主要是指系统能够很好的为用户服务，不出现用户操作失败或者访问超时等用户体验不好的情况。可用性通常情况下可用性和分布式数据冗余，负载均衡等有着很大的关联。
+   可用性分类 可用水平（%） 年可容忍停机时间     容错可用性 99.9999 &amp;lt;1 min   极高可用性 99.999 &amp;lt;5 min   具有故障自动恢复能力的可用性 99.99 &amp;lt;53 min   高可用性 99.</description>
+    </item>
+    
+    <item>
+      <title>编程习惯</title>
+      <link>https://timx.cn/post/code/</link>
+      <pubDate>Fri, 24 Aug 2018 13:42:53 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/code/</guid>
+      <description>编程习惯 1.写功能前先准备好日志记录，查询的工作。这个非常重要，可以减少后期排查问题的时间，减少手足无措。
+2.模块化要提前考虑，方便后期修改。一定要减少复杂度，不要所有的东西全部放在一个方法中。
+3.写完功能测试最需要的是压力测试，这样能尽量减少上线之前功能在高并发下出现问题的几率，提高程序的健壮性。
+这些事情肯定会牺牲编程的时间，不过经过这几年的编程过程中发现按照上面的做法做，后期排查问题能带来极大的便利，减少程序出错的几率。</description>
+    </item>
+    
+    <item>
+      <title>web高并发的理解和发现(一)</title>
+      <link>https://timx.cn/post/complicated/</link>
+      <pubDate>Wed, 22 Aug 2018 11:08:10 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/complicated/</guid>
+      <description>高并发的理解 发现问题  这几天登录服务器上线，发现注册新用户数据库有多条记录！！
+ 跟踪分析问题   查询nginx的访问日志发现有相同的请求同时请求。 查看代码逻辑发现创建新用户时，先查询mysql是否有相同的用户udid。如果有，那么直接返回用户主键id。没有就插入一条数据。 逻辑非常简单，也没有用上缓存。   本地重现   ab创建注册接口。10个用户并发，100个人次。 ab发现数据库出现了重复数据。概率90%以上。   上网查询解决方案 redis缓存   用户访问注册接口。 先访问缓存如果有用户id就直接返回用户id 没有就插入redis缓存一条，然后再访问数据库查询是否存在，不存在就插入mysql，再更新缓存。    本地测试ab创建注册接口。10个用户并发，100个人次。没有发现重复数据
+直到ab 60个用户并发，200人次再次出现重复数据，复现80%左右。
+没有完美解决
+ 还是redis缓存  直接用redis做防护层，控制相同udid一秒内只能一次，其他返回失败。 本地测试ab创建注册接口。10个用户并发，100个人次。没有发现重复数据
+直到ab 60个用户并发，200人次再次出现重复数据，复现80%左右。 没有完美解决
+ 使用文件锁或者redis锁  这个没有实现测试，思考时，我不打算用代码层做阻塞用户的操作！！！
+ 使用队列  让注册用户的并发串行化。使用延迟插入。可以解决。
+队列带来异步的问题。需要客户端配合。
+ mysql的唯一索引  这个可以解决但是会有报错返回对客户端不友好，不合适。
+ 使用mysql InnoDB的悲观锁  查询时候进行行锁，然后再插入。最后提交。
+ab创建注册接口。10个用户并发，100个人次。没有发现重复数据
+直到ab 60个用户并发，200人次没有出现重复数据。
+本地完美解决。
+ 网上解决方案思考。 利用redis做缓存还是不能完美解决并发的问题，只能解决一部分。如果使用redis集群提高处理速度和延迟，买更好的机器。可以降低并发出问题的几率，但不完美，不可扩展。 利用mysql悲观锁可以解决但是会让mysql性能下降，并且代码逻辑不严谨有产生死锁的可能。所以mysql的悲观锁也不是一个好的解决方案。
+询问其他人 游戏服务器他们的处理是用单进程单线程来解决。</description>
+    </item>
+    
+    <item>
+      <title>C Primer Plus阅读学习(七)</title>
+      <link>https://timx.cn/post/c_7/</link>
+      <pubDate>Fri, 17 Aug 2018 11:48:10 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_7/</guid>
+      <description>数组和指针   关键字：static 运算符：&amp;amp;、*、（一元） 如何创建并初始化数组 指针（在已学过的基础上）、指针和数组的关系 编写处理数组的函数 二维数组   数组 数组由数据类型相同的一系列元素组成。需要使用数组时候，通过声明数组告诉编译器数组中内含多少元素和这些元素的类型。编译器根据这些信息正确的创建数组。
+int main(void) { float candy[365]; /* 内含365个float类型元素的数组 */ char code[12]; /* 内含12个char类型元素的数组 */ int states[50]; /* 内含50个int类型元素的数组 */ ... }  初始化数组 指定初始化（C99） int arr[6] = {[5] = 212}; //把arr[5]初始化为212 对于一般的初始化，在初始化一个元素后，未初始化的元素都会设置为0.
+数组边界 在使用数组时，要防止数组下标超出边界。也就是说，必须确保下标是有效的值
+编译器不会检查数组下标是否使用得当。在C标准中，使用越界下标的结果是未定义的。这意味着程序看上去可以运行，但是运行结果很奇怪，或异常中止。
+指定数组的大小 多维数组 初始化二维数组 其他多维数组 可以把一维数组想象成一行数据，把二维数组想象成数据表，把三维数组想象成一叠数据表。
+通常，处理三维数组要使用3重嵌套循环，处理四维数组要使用4重嵌套循环。对于其他多维数组，以此类推。
+指针和数组 指针提供一种以符号形式使用地址的方法。因为计算机的硬件指令非常依赖地址，指针在某种程度上把程序员想要传达的指令以更接近机器的方式表达。因此，在使用指针的程序更有效率。尤其是，指针能有效的处理数组。数组表示法其实是在变相的使用指针。
+flizny == &amp;amp;flizny[0]; //数组名是该数组首元素的地址
+flizny和&amp;amp;flizny[0]都表示数组首元素的内存地址（&amp;amp;是地址运算符）。两者都是常量，在程序的运行过程中，不会改变。但是，可以把它们赋值给指针变量，然后可以修改指针变量的值。
+ 指针的值是它所指向对象的地址。地址的表示方式依赖于计算机内部的硬件。许多计算机都是按字节编址，意思是内存中的每个字节都按顺序编号。这里，一个较大对象的地址（如double类型的变量）通常是该对象第一个字节的地址。 在指针前面使用*运算符可以得到该指针所指向对象的值。 指针加1，指针的值递增它所指向类型的大小（以字节为单位）  dataes + 2 == &amp;amp;dates[2] // 相同的地址 *(dates+2) == dates[2] // 相同的值</description>
+    </item>
+    
+    <item>
+      <title>C Primer Plus阅读学习(六)</title>
+      <link>https://timx.cn/post/c_6/</link>
+      <pubDate>Thu, 16 Aug 2018 14:53:06 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_6/</guid>
+      <description>字符输入/输出和输入验证   更详细得介绍输入、输出以及缓冲输入和无缓冲输入的区别 如何通过键盘模拟文件结尾条件 如何使用重定向把程序和文件相连接 创建更友好的用户界面   函数   关键字：return 运算符：*（一元）、&amp;amp;（一元） 函数及其定义方式 如何使用参数和返回值 如何把指针变量用作函数参数 函数类型 ANSI C原型 递归    函数是完成特定任务的独立程序代码单元。语法规则定义了函数的结构和使用方式。
+ 函数类型  声明函数时必须声明函数的类型。带返回值的函数类型应该与其返回值类型相同，而没有返回值的函数应声明void类型。如果没有声明函数的类型。 类型声明是函数定义的一部分。要记住，函数类型指的是返回值的类型，不是函数参数的类型。
+ 递归  C允许函数调用它自己，这种调用过程称为递归。递归有时候年以捉摸，有时候却很方便实用。结束递归是使用递归的难点，如果递归代码中没有终止递归的条件测试部分，一个调用自己的函数会无限递归。可以使用循环的地方通常都可以使用递归。有时用循环解决问题比较好，但有时用递归更好。递归的方案更简洁，但效率却没有循环高。
+ 尾递归  最简单的递归形式是把递归调用置于函数的末尾，即正好在return语句之前。这种形式的递归被称为尾递归，因为递归调用在函数的末尾。尾递归是最简单的递归形式，因为它相当于循环。
+ 递归的优缺点  递归既有优点也有缺点。优点是递归为某些编程问题提供了最简单的解决方案。缺点是一些递归算法会快速消耗计算机的内存资源。另外，递归不方便阅读和维护。
+ 查询地址：&amp;amp;运算符  指针是C语言最重要的概念之一，用于存储变量的地址。前面使用的scanf()函数中就使用地址作为参数。
+ 指针简介  指针？什么是指针？从根本上看，指针是一个值为农村地址的变量（或数据对象）。正如char类型变量的值是字符，int类型变量是整数，指针变量的值是地址。在C语言中，指针有许多用法。
+ 间接运算符：* 地址运算符：&amp;amp;
+一般注解：
+后跟一个变量名时，&amp;amp;给出该变量的地址。
+示例：
+&amp;amp;nurse表示变量nurse的地址。
+地址运算符：*
+一般注解：
+后跟一个指针名或地址时，*给出储存在指针指向地址上的值。
+示例：
+nurse=22；
+ptr = &amp;amp;nurse； //指向nurse的指针
+val = *ptr； //把ptr指向的地址上的值赋给val</description>
+    </item>
+    
+    <item>
+      <title>C Primer Plus阅读学习(五)</title>
+      <link>https://timx.cn/post/c_5/</link>
+      <pubDate>Thu, 16 Aug 2018 13:11:30 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_5/</guid>
+      <description>C控制语句：循环   关键字：for、while、do while 运算符：&amp;lt;、&amp;gt;、&amp;gt;=、&amp;lt;=、!=、==、+=、*=、-=、/=、%= 函数：fabs() C语言3种循环：for、while、do while 使用关系运算符构建控制循环的表达式 其他运算符 循环常用的数组 编写有返回值的函数   一门语言应该提供3中形式的程序流
+ 执行语句序列 如果满足某些条件就重复执行语句序列（循环） 通过测试选择执行哪一个语句序列（分支）  while循环 while( expression ) statement
+终止while循环  while循环有一点非常重要：在构建while循环时，必须让测试表达式的值有变化，表达式最终要为假。否则，循环就不会终止。
+ for循环 for循环把3个行为（初始化、测试和更新）组合在一处。
+C控制语句：分支和跳转   关键字：if、else、switch、continue、break、case、default、goto 运算符：&amp;amp;&amp;amp;、||、?: 函数：getchar()、putchar()、ctype.h系列 如何使用if和if else语句，如何嵌套它们 在更复杂的测试表达式中用逻辑运算符组合关系表达式 C的条件运算符 switch语句 break、continue和goto语句 使用C的字符I/O函数：getchar()和putchar() ctype.h头文件提供的字符分析函数系列   ctype.h头文件中的字符测试函数
+   函数名 如果是下列参数时，返回值为真     isalnum() 字母数字（字母或数字）   isalpha() 字母   isblank() 标准的空白字符（空格、水平制表符或换行符）或任何其他本地化指定为空白的字符   iscntrl() 控制字符，如Ctrl+B   isdigit() 数字   isgraph() 除空格之外的任意可打印字符   islower() 小写字母   isprint() 可打印字符   ispunct() 标点符号（除空格或字母数字字符以外的任何可打印字符）   isspace() 空白字符（空格、换行符、换页符、回车符、垂直制表符、水平制表符或其他本地化定义的字符）   isupper() 大写字母   isxdigit() 十六进制数字符    ctype.</description>
+    </item>
+    
+    <item>
+      <title>C Primer Plus阅读学习(四)</title>
+      <link>https://timx.cn/post/c_4/</link>
+      <pubDate>Wed, 15 Aug 2018 10:15:30 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_4/</guid>
+      <description>运算符、表达式和语句   关键字：while、typedef 运算符：=、-、*、/、%、++、&amp;ndash;、（类型名） C语言的各种运算符，包括用于普通数学运算的运算符 运算符优先级以及语句、表达式的含义 while循环 复合语句、自动类型转换和强制类型转换 如何编写带有参数的函数   运算符优先级（从高至低）    运算符 结合律     () 从左往右   +-(一元) 从右往左   */ 从左往右   +-(二元) 从左往右   = 从右往左    sizeof运算符和size_t类型  size_t intsize;
+intsize = sizeof(int)
+  typedef double real;
+real deal;
+ real就是double的别名。
+不要自作聪明   如果一个变量出现在一个函数的多个参数中，不要对该变量使用递增或递减运算符 如果一个变量多次出现在一个表达式中，不要对该变量使用递增或递减运算符   表达式和语句  表达式由运算符和运算对象组成。最简单的表达式是一个单独的运算对象，以此为基础可以建立复杂的表达式。</description>
+    </item>
+    
+    <item>
+      <title>C Primer Plus阅读学习(三)</title>
+      <link>https://timx.cn/post/c_3/</link>
+      <pubDate>Tue, 14 Aug 2018 16:31:02 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_3/</guid>
+      <description>字符串和格式化输入/输出   函数 strlen() 关键字 const 字符串 如何创建、存储字符串 如何使用strlen()函数获取字符串的长度 用C预处理器指令#define和ANSIC的const修饰符创建符号常量   #include &amp;lt;stdio.h&amp;gt; #include &amp;lt;string.h&amp;gt; //提供 strlen() 函数 的 原型 #define DENSITY 62.4 //人体密度（单位：磅/立方英尺） int main() { float weight,volume; int size,letters; char name[40]; //name是一个可容纳40个字符的数组 printf(&amp;quot;Hi! What&#39; s your first name?\n&amp;quot;); scanf(&amp;quot;%s&amp;quot;, name); printf(&amp;quot;%s, what&#39;s your weight in pounds?\n&amp;quot;, name); scanf(&amp;quot;%f&amp;quot;, &amp;amp;weight); size = sizeof name; letters = strlen(name); volume = weight / DENSITY; printf(&amp;quot;Well, %s, your volume is %2.</description>
+    </item>
+    
+    <item>
+      <title>C Primer Plus阅读学习(二)</title>
+      <link>https://timx.cn/post/c_2/</link>
+      <pubDate>Sat, 11 Aug 2018 13:46:01 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_2/</guid>
+      <description>数据与C 接上一篇
+整数  整数是没有小数部分的数。计算机以二进制数字存储整数。
+比如整数7以二进制写诗111，要在8位字节中存储数字，需要把前五位都设置成0，后3位设置成1.00000111字长8位-----2²2¹2º------421整数7
+ 浮点数  在一个值后面加上一个小数点，该值就成为一个浮点值。所以，7是整数，7.00是浮点数。 + 整数没有小数部分，浮点数有小数部分。 + 浮点数可以表示的范围比整数大。 + 对于一些算数运算（如，两个很大的数相减），浮点数损失的精度更多。 + 因为在任何区间内（如1.0到2.0之间）都存在无穷多个实数，所以计算机的浮点数不能表示区间内所有的值。浮点数通常只是实际值的近似值。 + 过去，浮点运算比整数运算慢。不过，现在许多CPU都包含浮点处理器，缩小了速度上的差距。
+ C语言基本类型  整数类型 int类型 short int类型简写short long int或者long。与int类似，long是由符号类型。 long long int或long long unsigned int或unsigned只用于非负值的场合。   字符char类型  char类型用于存储字符（字母或标点符号），但是从技术层面看，char是整数类型。
+计算机使用数字编码来处理字符，即用特定的整数表示特定的字符。
+ 转义序列    转义序列 含义     \a 警报（ANSI C）   \b 退格   \f 换页   \n 换行   \r 回车   \t 水平制表符   \v 垂直制表符   \ 反斜杠（\）   \&amp;rsquo; 单引号   \&amp;rdquo; 双引号   \?</description>
+    </item>
+    
+    <item>
+      <title>C Primer Plus阅读学习(一)</title>
+      <link>https://timx.cn/post/c_1/</link>
+      <pubDate>Fri, 10 Aug 2018 14:25:05 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_1/</guid>
+      <description>C 语言概述 多个函数实例 /* two_ func. c -- 一个文件中包含两个函数 */ #include &amp;lt;stdio.h&amp;gt; void butler(void); /* ANSI/ISO C函数原型 */ int main(void) { printf(&amp;quot;I will summon the butler function.\ n&amp;quot;); butler(); printf(&amp;quot;Yes.Bring me some tea and writeable DVDs.\ n&amp;quot;); return 0; } void butler(void) /* 函数 定义 开始 */ { printf(&amp;quot;You rang,sir?\ n&amp;quot;); }  关键字和保留标识符    &amp;mdash; &amp;mdash; &amp;mdash; &amp;mdash;     auto extern short while   break float signed _Alignas   case for sizeof _Alignof   char goto static _Atomic   const if struct _Bool   continue inline switch _Complex   default int typedef _Generic   do long union _Imaginary   double register unsigned _Noreturn   else restrict void _Static_assert   enum return volatile _Thread_local    数据与C C语言的数据类型关键字    最初K&amp;amp;R给出的关键字 C90标准添加的关键字 C99标准添加的关键字     int signed _Bool   long void _Complex   short  _Imaginary   unsigned     char     float     double      通过这些关键字创建的类型，按计算机的储存方式可分为两大基本类型：整数类型和浮点数类型。</description>
+    </item>
+    
+    <item>
+      <title>Workerman写的geoip查询的HTTP服务</title>
+      <link>https://timx.cn/post/workerman_1/</link>
+      <pubDate>Thu, 09 Aug 2018 12:13:23 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/workerman_1/</guid>
+      <description> geoip2  基于workerman的HTTP协议写的ip查询功能
+ 安装  git clone https://github.com/timzzx/geoip2.git cd geoip2 composer install 自己加入GeoLite2-City.mmdb php index.php 浏览器访问http://127.0.0.1:2345/?ip=115.85.29.130 返回结果：  { errno: 200, isoCode: &amp;quot;PH&amp;quot;, country_name: &amp;quot;Philippines&amp;quot;, country_name_zh: &amp;quot;菲律宾&amp;quot;, mostSpecificSubdivisionname: &amp;quot;Metro Manila&amp;quot;, mostSpecificSubdivisionisoCode: &amp;quot;00&amp;quot;, city_name: &amp;quot;Las Pinas&amp;quot;, city_name_zh: null, postal_code: &amp;quot;1612&amp;quot;, latitude: 14.4506, longitude: 120.9828 }  </description>
+    </item>
+    
+    <item>
+      <title>Unix编程艺术(八)</title>
+      <link>https://timx.cn/post/unix_art_8/</link>
+      <pubDate>Wed, 08 Aug 2018 15:37:45 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/unix_art_8/</guid>
+      <description>重用：论不要重新发明轮子  透明性是重用的关键
+从重用到开源
+ 可移植性 文档：向网络世界阐释代码 开放源码：在Unix新社区中编程  源码公开 尽早发布，经常发布 给贡献以表扬  未来：危机与机遇 附录：无根的根：无名师的Unix心传 无名师与万行码  无名师曾对来访的程序员说：“Unix传统上认为，一行shell脚本胜过万行C程序。”
+这个程序员自以为对C极其精通，说：“这不可能。UNIX内核正是用C实现的。”
+无名师回道：“确是如此。不过，UNIX传统上认为，一行shell脚本胜过万行C程序。“
+程序员颇为沮丧：”但是在C中我们可领会到尊者Ritchie的智慧。我们与操作系统和机器合而为一，可以获取无与伦比的性能。”
+无名师回道：“诚如你言。不过，Unix传统上认为，一行shell脚本胜过万行C程序。”
+程序员冷笑着想愤然离去。无名师向学生Nubi颔首示意，Nubi在黑板上写下一行shell脚本，问道：“尊敬的程序员，看看这行管道，用纯C实现，是不是要一万行C代码？”
+程序员沉吟念诵。最终他承认如此。
+“你需要多长时间来实现和调试那个C程序？”Nubi问道。
+“很长”，来访的程序员承认。“但傻子才会干这个而不去完成更有价值的任务。”
+“那么谁更了解Unix传统？”无名师问道。“是写一万行代码的，还是看到任务的无谓而不去编码的？”
+听到此，程序员眼中一亮。
+ 无名师与脚本狂  无名师和学生吃早饭时，从黑客大陆来了个陌生访客。
+“Ihear y00 are very l33t,”他说。“Pl33z teach m3 all y00 know”。（我听说你很牛，请把你会的都教给我。）
+无名师的学生面面相觑，都没听懂这类粗鄙言语。无名师微笑道：“你想弄懂Unix？”
+“I want to b3 a wizard hax0r”，陌生人回答，“and 0wn ever3one&amp;rsquo;s b0xen。”（我想当个顶尖黑客，能掌握所有人的机器。）
+“我不教这个”，无名师答道。
+陌生人很激动。“D00d， y00 r nothing but a p0ser。”，他说。“If y00 n00 anything, y00 wud t33ch m3。”（哥们儿，敢情你没真本事啊，你要知道点儿东西就教给我了。）
+“有条路，”无名师说，“可以将你带入真知。”他在纸上写了个IP地址。“黑掉这台机器，这对你来说应该不费什么力气，它的管理员不称职。回来后告诉我你发现了什么。“</description>
+    </item>
+    
+    <item>
+      <title>Unix编程艺术(七)</title>
+      <link>https://timx.cn/post/unix_art_7/</link>
+      <pubDate>Wed, 08 Aug 2018 10:41:31 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/unix_art_7/</guid>
+      <description> 优化  关于性能优化，最重要就是如何知道何时不去优化。最有效的优化往往是优化之外的其他事情，比如清晰干净的设计
+ 什么也别做，就站在那儿  别去优化一个工作中的系统，集中精力将时间复杂度或空间复杂度从指数级降到对数或常数集。
+另一个建设性的“无为”方式就是不写代码。
+ 先估量，后优化  有真凭实据证明应用程序运行缓慢，这时候（仅当此时）才可以考虑优化代码。但付诸实施前，要先估量。善用性能剖析程序
+ 非定域性之害  最有效的代码优化方法就是保持代码短小简单
+ 吞吐量和延迟  避免协议的往返，经验法则是尽可能低的时延设计，和忽略带宽成本，带宽问题可以在开发后期通过一些技巧，比如现场压缩协议来解决。
+三种常规策略来减少时延+ 对可以共享启动开销的事务进行批处理 + 允许事务重叠 + 缓存
+ 批操作 重叠操 缓存操作结果 复杂度：尽可能简单、但别简单过了头  复杂度的三个来源 代码规模：一般就是代码的函数。 实现复杂度：程序员为了理解一个程序从而建立其思维模型并调试该程序的困难程度。 接口复杂度：主要是和用户接口的复杂度，比如用户界面，功能，操作等。   
+ 面对上面三个复杂度比较陷入三个陷阱： manularty（人力尺度）陷阱：主要是为了避免接口复杂度，而把许多底层人物抛给用户。 blivet（硬撑）陷阱：主要是为了避免代码量复杂度，而使用极端晦涩复杂的算法。 adhocity（过专用）陷阱：为了避免实现复杂度，不采用统一但是有些复杂的方案，而对每个问题都编写重复，专用的代码。   </description>
+    </item>
+    
+    <item>
+      <title>Unix编程艺术(六)</title>
+      <link>https://timx.cn/post/unix_art_6/</link>
+      <pubDate>Tue, 07 Aug 2018 17:41:14 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/unix_art_6/</guid>
+      <description> Unix环境下的用户接口设计模式  在Unix接口设计的传统中，涉足两个主题。一个与其他程序通讯方式的前瞻性设计；另一个是最小立异原则
+ 最小立异原则  最小立异原则：“少来标新立异”是所有设计中的通用原则，且并非仅局限于软件设计。
+如果有可能，尽量允许用户将接口功能委派给熟悉的程序来完成。
+不能委派，那就效仿。目的减少用户在使用时必须学习的复杂过程。
+ 接口设计评估  简洁、表现力、易用、透明和脚本化能力。&amp;nbsp;能自动完成重复的任务
+ Unix接口设计模式  1.过滤器模式 过滤器程序接受标准输入的数据，转换成某种格式后，再将结果发送到标准输出端。过滤器不是交互的，也许会查询启动环境，并且通常由命令行选项控制，但是并不要求用户在输入流中输入命令或给出反馈。
+例子grep(1)
+定义过滤器的原则 牢记Postel原则：宽进严出。 过滤时，不需要的信息也决不丢弃。 在过滤时，绝不增加无用数据。  2.Cantrip模式 没有输入，没有输出，只被调用一次，产生退出状态数值。程序只能由启动条件控制，程序非常具有脚本能力。
+例子clear(1) 3.源模式
+类似过滤器程序，不需要输入，它的输出只能在启动条件中控制。
+例子ls(1)、ps(1)、who(1)
+4.接收器模式
+类似过滤器程序，只接纳标准输入而不发送任何东西到标准输出。它对输入端数据的作用行为只能在启动条件中控制。（这种用的比较少） 例子mail(1)
+5.编译器模式
+类似编译器程序既无标准输出也无标准输入，它们会将错误信息发送到标准错误端。
+6.ed模式
+最简单的交互设计模式
+例子gdb(1)
+7.Roguelike模式
+一种游戏发展而来的模式
+例子vi
+8.“引擎和接口分离”模式
+MVC模式
+9.CLI服务器模式
+类似PHP
+10.基于语言的接口模式
+配置（微语言）模式
+ 多价程序模式  多价程序（polyvalent，多角色程序）特征  程序的应用定义域逻辑封存在一个文档化的API库中，该库可被其它程序链接。程序同外部的接口逻辑是一个基于库的薄胶合层。或者有几个不同风格的UI层，每一个层都可以链接该库。 一种UI方式是cantrip，类似编译器或以批处理方式执行交互命令的CLI模式。 一种UI方式是GUI，可直接链接到核心库，或者作为一个独立进程来驱动CLI接口。 一种UI方式是脚本接口，使用现代的通用脚本语言，如Perl、Python或Tcl。 额外可选的一种UI方式是使用curses(3)的roguelike式接口。   </description>
+    </item>
+    
+    <item>
+      <title>Unix编程艺术(五)</title>
+      <link>https://timx.cn/post/unix_art_5/</link>
+      <pubDate>Mon, 06 Aug 2018 15:00:31 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/unix_art_5/</guid>
+      <description> Unix配置  经验法则： 提高适应能力，除非这样做会产生超过0.7秒的延迟。0.7秒是一个魔数，人们几乎察觉不到少于0.7秒的启动延迟。 用户不应该看到优化开关。让程序经济运行时设计者的任务，不是用户的任务。与提高界面复杂度成本相比，让用户从优化开关来获取那点儿性能收益，换来界面复杂度的提升，往往得不偿失。 能用脚本包装器或简单管道实现的任务，就不要用配置开关实现。能简单利用其它程序来完成的任务，就不要增加本程序的复杂度。    增加配置是要考虑的问题： 能省掉这个功能吗？为什么在加厚手册之外还要加重用户负担？ 能否用某种无伤大雅的方式改变程序的常规行为从而无需这个选项？ 这个选项是否花哨没用？是否应该少考虑用户界面的可配置性而多考虑正确性？ 这个选项附加的行为是否应该用一个独立的程序来代替？  增加不必要的选项会产生很多不良后果。其中最严重的后果是对测试覆盖率的影响。
+ unix命令行选项    &amp;nbsp;&amp;nbsp;参数 说明     -a all : 全部，所有 (ls , lsattr , uname) archive : 存档 (cp , rsync) append : 附加 (tar -A , 7z)   -b blocksize : 块大小，带参数 (du , df) batch : 批处理模式 (交互模式的程序通常拥有此选项，如 top -b)   -c commands : 执行命令，带参数 (bash , ksh , python) create : 创建 (tar)   -d debug : 调试 delete : 删除 directory : 目录 (ls)   -e execute : 执行，带参数 (xterm , perl) edit : 编辑 exclude : 排除   -f force : 强制，不经确认(cp , rm ,mv) file : 文件，带参数 (tar) configuration file : 指定配置文件(有些守护进程拥有此选项，如 ssh , lighttpd)   -g    -h &amp;ndash;help : 帮助 human readable : 人性化显示(ls , du , df) headers : 头部   -i interactive : 交互模式，提示(rm , mv) include : 包含   -k keep : 保留 kill   -l long listing format : 长格式(ls) list : 列表 load : 读取 (gcc , emacs)   -m message : 消息 (cvs) manual : 手册 (whereis) create home : 创建 home 目录 (usermod , useradd)   -n number : 行号、编号 (cat , head , tail , pstree , lspci) no : (useradd , make)   -o output : 输出 (cc , sort) options : 选项 (mount)   -p port : 端口，带参数 (很多网络工具拥有此选项，如 ssh , lftp ) protocol : 协议，带参数 passwd : 密码，带参数   -q quiet : 静默   -r reverse : 反转 recursive : 递归 (cp , rm , chmod -R)   -s silent : 安静 size : 大小，带参数 subject   -t tag type : 类型 (mount)   -u user : 用户名、UID，带参数   -v verbose : 冗长 version : 版本   -w width : 宽度 warning : 警告   -x exclude : 排除 (tar , zip)   -y yes   -z zip : 启用压缩 (bzip , tar , zcat , zip , cvs)    </description>
+    </item>
+    
+    <item>
+      <title>Unix编程艺术(四)</title>
+      <link>https://timx.cn/post/unix_art_4/</link>
+      <pubDate>Sat, 04 Aug 2018 15:08:20 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/unix_art_4/</guid>
+      <description> 多道程序设计：分离进程为独立的功能  实现子进程方式： 降低进程生成的开销。 提供方法（shellout、I/O重定向、管道、消息传递和套接字）简化进程间通信。 提倡使用能由管道和套接字传递的简单、透明的文本数据格式。   UNIX IPC 方法的分类 把任务转给专门的程序 管道、重定向和过滤器  管道依赖的约定，每个程序一开始有两个I/O数据流可用：标准输入和标准输出。许多程序都可写作过滤器，从标准输入顺序读取数据，并且只向标准输出写数据。
+ 包装器 安全性包装器和Bernstein链 从进程 对等进程间通信   临时文件 最古老的IPC技法。 信号 Unix的信号是一种软终端形式：每个信号都对接收进程产生默认作用。 系统守护程序和常规信号 套接字 封装网络数据访问的方法 共享内存   要避免的问题和方法 废弃的UnixIPC方法 远程过程调用 线程——恐吓或威胁  线程增加了复杂度，线程程序可移植性差
+ 在设计层次上的进程划分  第一个要注意的是，临时文件、交互性更强的主/从进程关系、套接字、RPC和其它一些双向IPC方法在某种程度上是等价的——————它们都只不过是程序在生命期内交换程序的方法。我们通过使用套接字或共享内存在这种复杂方法所完成的任务，大多数都可以通过使用临时文件作为信箱和通知信号这种简单的方法来完成。差别很小，主要体现在程序如何建立通信、何时何地完成信息的列集和散集、可能产生何种缓冲问题，以及如何保证获取信息的原子性。
+ </description>
+    </item>
+    
+    <item>
+      <title>Unix编程艺术(三)</title>
+      <link>https://timx.cn/post/unix_art_3/</link>
+      <pubDate>Fri, 03 Aug 2018 15:08:36 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/unix_art_3/</guid>
+      <description> 文本化  设计将应用数据存储在永久存储器中的文件格式在协作程序中（可能通过网络）传递数据和命令的应用协议
+ 数据文件元格式  为了简化存储的序列化操作发展得来。 DSV风格
+RFC822格式
+Cookie—Jar格式
+Record—Jar格式
+XML
+WindowsINI格式
+Unix文本文件格式的约定
+ 应用协议元格式  简化网络间事物处理的序列化操作发展得来。 HTTP
+BEEP
+XML—RPC，SOAP和Jabber
+ 透明性 为透明性和可显性而编码   程序调用层次中最大的静态深度是多少？也就是说，不考虑递归，为了建立心理模型来理解代码的操作，人们将要调用多少层？如果大于四层，就要当心。 代码是否具有强大、明显的不变性质？不变性质帮助人们推演代码和发现有问题的情况。 每个API中的各个函数调用是否正交？或者是否存在太多特征标志和模式位，使得一个调用要完成多个任务？完全避免模式标志会导致混乱的API，里面包括太多几乎一模一样的函数，但是频繁使用模式标志更容易产错误（很多易忘并且易混的模式标记）。 是否存在一些顺手可用的关键数据结构或全局唯一的记录器，捕获了系统的高层级状态？这个状态是否容易被形象化和检验，还是分布在数目众多的各个全局变量或对象中，而难以找到？ 程序的数据结构或分类和它们所代表的外部实体之间，是否存在清晰的一对一映射？ 是否容易找到给定函数的代码部分？不仅单个函数、模块、还有整个代码，需要花多少精力才能读懂？ 代码增加了特殊情况还是避免了特殊情况？每一个特殊情况可能对任何其他特殊情况产生影响；所有隐含的冲突都是BUG滋生的温床。然而更重要的是，特殊情况使得代码更难理解。 代码中有多少（意义含糊的常量）？通过审查是否很容易查出实现代码中的限制（比如关键缓冲区的大小）？   透明性和避免过度保护  调试和探测开关的存在是良好程序的标志
+ </description>
+    </item>
+    
+    <item>
+      <title>Unix编程艺术(二)</title>
+      <link>https://timx.cn/post/unix_art_2/</link>
+      <pubDate>Fri, 03 Aug 2018 10:20:36 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/unix_art_2/</guid>
+      <description> 模块性  保持清晰，保持简洁
+Unix 重视模块化、正交性和紧凑性问题。
+ 封装与最佳模块大小   封装良好的模块不会过多的向外部暴露自身的细节，不会直接调用其他模块的实现码，也不会胡乱共享全局数据。 模块之间通过应用程序编写的接口（API）— 一组严密、定义良好的程序调用和数据结构来通信。 API在模块间扮演双重角色。在实现层面，作为模块间的滞塞点组织各自的内部细节被相邻模块知晓；在设计层面，API真正定义了整个体系。 模块最佳的物理行数在400-800行。   紧凑性  一个设计是否能装进人脑中的特性紧凑也不意味着“小巧”。即使一个设计良好的系统，对有经验的用户来说没什么特异之处、“一眼”就能看懂，但仍然可能包含很多部分。—Ken Arnold
+ 正交性  只做好一件事。纯粹的正交设计中，任何操作均无副作用：每个动作只改变一件事，不会影响其他。
+ SPOT原则  Don&amp;rsquo;t Repeat Yourself !任何一个知识点在系统内都应当有一个唯一、明确、权威的表述。这个原则也叫“真理的单点性（Single Point of Truth）”或者SPOT原则。
+ 软件层次设计  自底向上从具体到抽象，从问题确定具体操作向上进行。
+  自顶向下从抽象到具体，从最高层面描述整个项目的规格说明或应用逻辑开始，向下进行，直到各个具体操作。
+ 模块式编码 以下问题，有助于提高代码的模块性
+  有多少全局变量  全局变量对模块化是毒药，很容易使各模块轻率、混乱的互相泄露信息  单个模块的大小是否在“最佳范围”内？  “不，很多都超过”，就可能产生长期的维护问题。 不知道自己或合作者的最佳范围是多少，那么保持最佳范围的下限-400行。  模块内的单个函数是不是太大了？  与其说这是一个行数问题，不如说是一个内部复杂度问题。如果不能用一句话来简单描述一个函数与其调用程序之间的约定，这个函数可能太大了.  代码是不是有内部API 可作为单元向其他人描述的函数调用集合数据结构集，并且每个单元都封装某一层次函数，不受其他代码的影响？ API的入口点是不是超过七个？有没有类有七个以上的方法？数据结构的成员是不是超过七个？ 整个项目中每个模块的入口点数量如何分布？是不是不均匀？   </description>
+    </item>
+    
+    <item>
+      <title>Unix编程艺术(一)</title>
+      <link>https://timx.cn/post/unix_art_1/</link>
+      <pubDate>Thu, 02 Aug 2018 16:47:52 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/unix_art_1/</guid>
+      <description>UNIX哲学   原则1：你无法判断程序会在什么地方耗费运行时间。瓶颈经常出现在想不到的地方，所以别急与胡乱这个地方改代码，除非你已经证实那儿就是瓶颈所在。 原则2：估量。在你没对代码进行估量，特别是没找到最耗时的那部分之前，别去优化速度。 原则3：花哨的算法在n很小时通常很慢，而n通常很小。花哨算法的常数复杂度很大。除非你确定n总是很大，否则不要用花哨算法（即使n很大，也优先考虑原则2）。 原则4：花哨的算法比简单算法更容易出bug、更难实现。尽量使用简单的算法配合简单的数据结构。（拿不准就穷举） 原则5：数据压倒一切。如果已经选择了正确的数据结构并且把一切都组织得井井有条，正确的算法也就不言自明。编程的核心是数据结构，而不是算法。 原则6：没有原则6。   从整体来说，可以概括为：   模块原则：使用简洁的接口拼合简单的部件。 清晰原则：清晰胜于机巧。 组合原则：设计时考虑拼接组合。 分离原则：策略同机制分离，接口同引擎分离。 简洁原则：设计要简洁，复杂度能低则低。 吝啬原则：除非确无它法，不要编写庞大的程序。 透明性原则：设计要可见，以便审查和调试。 健壮原则：健壮源于透明与简洁。 表示原则：把知识叠入数据以求逻辑质朴而健壮。 通俗原则：接口设计避免标新立异。 缄默原则：如果一个程序没什么好说的，就沉默。 补救原则：出现异常时，马上退出并给出足够错误信息。 经济原则：宁花机器一分，不花程序员一秒。 生成原则：避免手工hack，尽量编写程序去生成程序。 优化原则：雕琢前先要有原型，跑之前先学会走。 多样原则：决不相信所谓“不二法门”的断言。 扩展原则：设计着眼未来，未来总比预想来得快。   UNIX “KISS” 原则  Keep It Simple , Stupid ! 简单就是美 !
+ 应用哲学   只要可行，一切都应该做成与来源和目标无关的过滤器。 数据流应尽可能文本化（这样可以使用标准工具来查看和过滤）。 数据库部署和应用协议应尽可能文本化（让人可以阅读和编辑）。 复杂的前端（用户界面）和后端应该泾渭分明。 如果可能，用C编写前，先用解释性语言搭建原型。 当且仅当只用一门语言编程会提高程序复杂度时，混用语言编程才比单一语言编程来得好。 宽收严发（对接收的东西要包容，对输出的东西要严格）。 过滤时，不需要丢弃的信息决不丢。 小就是美。在确保完成任务的基础上，程序功能尽可能少。   Unix哲学与其他哲学的比较 不同的操作系统相关的设计和编程风格可以追溯的三个源头   操作系统设计者的意图。 成本和编程环境的限制对设计的均衡影响。 文化随机漂移，传统无非就是先入为主。   操作系统的风格元素  Unix &amp;ldquo;一切皆文件&amp;rdquo; 模型及在此基础上建立的管道概念</description>
+    </item>
+    
+    <item>
+      <title>HTTP学习理解(六)</title>
+      <link>https://timx.cn/post/http_6/</link>
+      <pubDate>Wed, 01 Aug 2018 13:49:27 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/http_6/</guid>
+      <description>HTTP 的缺点 到现在为止， 我们已了解到 HTTP 具有相当优秀和方便的一面，然而 HTTP 并非只有好的一面，事物皆具两面性，它也是有不足之处的。
+HTTP 主要有这些不足，例举如下。
+ 通信使用明文（不加密），内容可能会被窃听 不验证通信方的身份， 因此有可能遭遇伪装 无法证明报文的完整性， 所以有可能已遭篡改  这些问题不仅在 HTTP 上出现， 其他未加密的协议中也会存在这类问题。
+除此之外，HTTP 本身还有很多缺点。而且，还有像某些特定的 Web 服务器和特定的 Web 浏览器在实际应用中存在的不足（也可以说成是脆弱性或安全漏洞），另外，用 Java 和 PHP 等编程语言开发的 Web 应用也可能存在安全漏洞。</description>
+    </item>
+    
+  </channel>
+</rss>

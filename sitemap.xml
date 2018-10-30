@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://timx.cn/post/c_algorithm_3/</loc>
+    <lastmod>2018-10-30T14:35:43+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://timx.cn/post/c_algorithm_2/</loc>
     <lastmod>2018-10-25T14:07:37+08:00</lastmod>
   </url>
@@ -233,20 +238,26 @@
   </url>
   
   <url>
+    <loc>https://timx.cn/tags/2018-07/</loc>
+    <lastmod>2018-07-31T14:08:30+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://timx.cn/tags/2018-08/</loc>
+    <lastmod>2018-08-31T10:49:44+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://timx.cn/tags/2018-10/</loc>
     <lastmod>2018-10-25T14:07:37+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://timx.cn/tags/2018-7/</loc>
-    <lastmod>2018-07-31T14:08:30+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://timx.cn/tags/2018-8/</loc>
-    <lastmod>2018-08-31T10:49:44+08:00</lastmod>
+    <loc>https://timx.cn/tags/2018-11/</loc>
+    <lastmod>2018-10-30T14:35:43+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -275,13 +286,13 @@
   
   <url>
     <loc>https://timx.cn/post/</loc>
-    <lastmod>2018-10-25T14:07:37+08:00</lastmod>
+    <lastmod>2018-10-30T14:35:43+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://timx.cn/tags/</loc>
-    <lastmod>2018-10-25T14:07:37+08:00</lastmod>
+    <lastmod>2018-07-31T14:08:30+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -311,7 +322,7 @@
   
   <url>
     <loc>https://timx.cn/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2018-10-25T14:07:37+08:00</lastmod>
+    <lastmod>2018-10-30T14:35:43+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -323,7 +334,7 @@
   
   <url>
     <loc>https://timx.cn/</loc>
-    <lastmod>2018-10-25T14:07:37+08:00</lastmod>
+    <lastmod>2018-10-30T14:35:43+08:00</lastmod>
     <priority>0</priority>
   </url>
   
