@@ -6,10 +6,40 @@
     <description>Recent content in 2018 11 on 淡淡忧愁</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 30 Oct 2018 14:35:43 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 01 Nov 2018 11:12:30 +0800</lastBuildDate>
     
 	<atom:link href="https://timx.cn/tags/2018-11/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>数据结构和算法学习理解C语言实现(四)</title>
+      <link>https://timx.cn/post/c_algorithm_4/</link>
+      <pubDate>Thu, 01 Nov 2018 11:12:30 +0800</pubDate>
+      
+      <guid>https://timx.cn/post/c_algorithm_4/</guid>
+      <description>图 图是一种比较复杂的数据结构，这是一种网状结构，并且任何数据都可以用图来表示
+图的相关概念
+1）有向图
+如果图G中的每条边都是有方向的，则称G为有向图。在有向图中，一条有向边是由两个顶点组成的有序对，有序对通常用尖括号表示。有向边也被称为弧，将边的始点称为弧尾，将边的终点称为弧头。
+2）无向图
+如果图中的每条边都是没有方向的，这种图被称为无向图。无向图中的边都是顶点的无序对，通常用圆括号来表示无序对。
+3）顶点
+通常将图中的数据元素称为顶点，通常用v来表示顶点的集合。
+4）完全图
+如果无向图中的任意两个顶点之间都存在着一条边，则将此无向图称为无向完全图。如果有向图中的任意两个顶点之间都存在着方向相反的两条弧，则将此有向图称为有向完全图。
+结论：包含n个顶点的无向完全图有n(n-1)/2条边，包含n个顶点的有向完全图有n(n-1)条边。
+5）稠密图和稀疏图
+当一个图接近完全图时便称为稠密图，反之将含有较少的边数（即当e&amp;lt;&amp;lt;n(n/2)）的图称为稀疏图。
+6）权和网
+图中每一条边（弧）都可以有一个相关的数值，将这种与边相关的数值称为权。权能够表示从一个顶点到另一个顶点的距离或花费的代价。边上带有权的图称为带权图，也称作网。
+7）子图
+假设存在两个图 G=( V， E) 和 G&amp;rsquo;=( V&amp;rsquo;， E&amp;rsquo; )，如果V&amp;rsquo;是V的子集（ 即 V&amp;rsquo;⊆ V），并且E&amp;rsquo;是E的子集（即E&amp;rsquo; ⊆ E），则称G&amp;rsquo;是G的子图。
+8）邻接点
+在无向图 G ＝( V， E) 中，如果边( vi， vj) ∈ E，则称顶点vi和vj互为邻接 点（ adjacent）；边( vi， vj) 依附于顶点 vi 和 vj， 即 vi 和 vj 相关联。
+9） 顶点的度
+顶点的度是指与顶点相关联的边的数量。在有向图中，以顶点 vi 为弧尾的弧的值称为顶点 vi 的出度，以顶点 vi 为弧头的弧的值称为顶点vi的入度，顶点 vi 的入度与出度的和是顶点 vi 的度。
+10）路径</description>
+    </item>
     
     <item>
       <title>数据结构和算法学习理解C语言实现(三)</title>
